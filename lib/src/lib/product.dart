@@ -1,18 +1,26 @@
+import 'package:coinbase_dart/src/custom_json_converters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part '../part/product.g.dart';
+part 'product.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
+//@_StringToDoubleConverter()
 class Product {
   final String? id;
   final String? displayName;
   final String? baseCurrency;
   final String? quoteCurrency;
+  @StringToDoubleConverter()
   final double? baseIncrement;
+  @StringToDoubleConverter()
   final double? quoteIncrement;
+  @StringToDoubleConverter()
   final double? baseMinSize;
+  @StringToDoubleConverter()
   final double? baseMaxSize;
+  @StringToDoubleConverter()
   final double? minMarketFunds;
+  @StringToDoubleConverter()
   final double? maxMarketFunds;
   final String? status;
   final String? statusMessage;

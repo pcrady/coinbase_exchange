@@ -1,14 +1,20 @@
+import 'package:coinbase_dart/src/custom_json_converters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part '../part/ticker.g.dart';
+part 'ticker.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Ticker {
  final int? tradeId;
+ @StringToDoubleConverter()
  final double? price;
+ @StringToDoubleConverter()
  final double? size;
+ @StringToDoubleConverter()
  final double? bid;
+ @StringToDoubleConverter()
  final double? ask;
+ @StringToDoubleConverter()
  final double? volume;
  final DateTime? time;
 

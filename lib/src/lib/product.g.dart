@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../lib/product.dart';
+part of 'product.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -12,12 +12,18 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     displayName: json['display_name'] as String?,
     baseCurrency: json['base_currency'] as String?,
     quoteCurrency: json['quote_currency'] as String?,
-    baseIncrement: (json['base_increment'] as num?)?.toDouble(),
-    quoteIncrement: (json['quote_increment'] as num?)?.toDouble(),
-    baseMinSize: (json['base_min_size'] as num?)?.toDouble(),
-    baseMaxSize: (json['base_max_size'] as num?)?.toDouble(),
-    minMarketFunds: (json['min_market_funds'] as num?)?.toDouble(),
-    maxMarketFunds: (json['max_market_funds'] as num?)?.toDouble(),
+    baseIncrement: const StringToDoubleConverter()
+        .fromJson(json['base_increment'] as String?),
+    quoteIncrement: const StringToDoubleConverter()
+        .fromJson(json['quote_increment'] as String?),
+    baseMinSize: const StringToDoubleConverter()
+        .fromJson(json['base_min_size'] as String?),
+    baseMaxSize: const StringToDoubleConverter()
+        .fromJson(json['base_max_size'] as String?),
+    minMarketFunds: const StringToDoubleConverter()
+        .fromJson(json['min_market_funds'] as String?),
+    maxMarketFunds: const StringToDoubleConverter()
+        .fromJson(json['max_market_funds'] as String?),
     status: json['status'] as String?,
     statusMessage: json['status_message'] as String?,
     cancelOnly: json['cancel_only'] as bool?,
@@ -32,12 +38,18 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'display_name': instance.displayName,
       'base_currency': instance.baseCurrency,
       'quote_currency': instance.quoteCurrency,
-      'base_increment': instance.baseIncrement,
-      'quote_increment': instance.quoteIncrement,
-      'base_min_size': instance.baseMinSize,
-      'base_max_size': instance.baseMaxSize,
-      'min_market_funds': instance.minMarketFunds,
-      'max_market_funds': instance.maxMarketFunds,
+      'base_increment':
+          const StringToDoubleConverter().toJson(instance.baseIncrement),
+      'quote_increment':
+          const StringToDoubleConverter().toJson(instance.quoteIncrement),
+      'base_min_size':
+          const StringToDoubleConverter().toJson(instance.baseMinSize),
+      'base_max_size':
+          const StringToDoubleConverter().toJson(instance.baseMaxSize),
+      'min_market_funds':
+          const StringToDoubleConverter().toJson(instance.minMarketFunds),
+      'max_market_funds':
+          const StringToDoubleConverter().toJson(instance.maxMarketFunds),
       'status': instance.status,
       'status_message': instance.statusMessage,
       'cancel_only': instance.cancelOnly,

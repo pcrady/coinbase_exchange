@@ -1,7 +1,8 @@
 import 'package:coinbase_dart/src/coinbase_enums.dart';
+import 'package:coinbase_dart/src/custom_json_converters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part '../part/trade.g.dart';
+part 'trade.g.dart';
 
 
 
@@ -9,7 +10,9 @@ part '../part/trade.g.dart';
 class Trade {
   final DateTime? time;
   final int? tradeId;
+  @StringToDoubleConverter()
   final double? price;
+  @StringToDoubleConverter()
   final double? size;
   final Side? side;
 

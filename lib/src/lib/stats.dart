@@ -1,13 +1,19 @@
+import 'package:coinbase_dart/src/custom_json_converters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part '../part/stats.g.dart';
+part 'stats.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Stats {
+  @StringToDoubleConverter()
   final double? open;
+  @StringToDoubleConverter()
   final double? high;
+  @StringToDoubleConverter()
   final double? low;
+  @StringToDoubleConverter()
   final double? volume;
+  @StringToDoubleConverter()
   @JsonKey(name: 'volume_30day')
   final double? volume30Day;
 

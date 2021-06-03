@@ -56,7 +56,12 @@ class PublicClient {
 
   //TODO look at streams for level 3
   getProductOrderBook(String productId, {Level? level}) async {
-
+    http.Response response = await _get(
+      '/products/$productId/book',
+      queryParameters: {'level': level != null ? level.value().toString() : '1'},
+    );
+    Map<String, dynamic> body = Map<String, dynamic>.from(json.decode(response.body));
+    return null;//Product.fromJson(body);
   }
 
   Future<Ticker> getProductTicker(String productId) async {

@@ -10,33 +10,33 @@ void main() {
   String defaultProductId = 'BTC-USD';
   String secondaryDefaultProductId = 'BTC';
 
-  test('getProducts()', () async {
+  test('getProducts', () async {
     List<Product> products = await publicClient.getProducts();
     expect(products.every((product) => product.id != null), true);
   });
 
-  test('getSingleProduct()', () async {
+  test('getSingleProduct', () async {
     Product product = await publicClient.getSingleProduct(defaultProductId);
     expect(product.id != null, true);
   });
 
   // TODO
-  test('getOrderBook()', () async {
+  test('getOrderBook', () async {
     expect(true, true);
   });
 
-  test('getProductTicker()', () async {
+  test('getProductTicker', () async {
     Ticker ticker = await publicClient.getProductTicker(defaultProductId);
     expect(ticker.tradeId is int, true);
   });
 
   //TODO test paginated trades
-  test('getTrades()', () async {
+  test('getTrades', () async {
     List<Trade> trades = await publicClient.getTrades(defaultProductId);
     expect(trades.every((trade) => trade.tradeId != null), true);
   });
 
-  test('getHistoricRates()', () async {
+  test('getHistoricRates', () async {
     List<Candle> candles = await publicClient.getHistoricRates(
       defaultProductId,
       DateTime.parse('2012-02-26 12:00:00'),
@@ -46,22 +46,22 @@ void main() {
     expect(candles.every((candle) => candle.time != null), true);
   });
 
-  test('get24HourStats()', () async {
+  test('get24HourStats', () async {
     Stats stats = await publicClient.get24HourStats(defaultProductId);
     expect(stats.low is double, true);
   });
 
-  test('getCurrencies()', () async {
+  test('getCurrencies', () async {
     List<Currency> currencies = await publicClient.getCurrencies();
     expect(currencies.every((currency) => currency.id != null), true);
   });
 
-  test('getCurrency()', () async {
+  test('getCurrency', () async {
     Currency currency = await publicClient.getCurrency(secondaryDefaultProductId);
     expect(currency.id != null, true);
   });
 
-  test('getTime()', () async {
+  test('getTime', () async {
     DateTime? time = await publicClient.getTime();
     expect(time != null, true);
   });

@@ -1,4 +1,5 @@
 import 'package:coinbase_dart/coinbase_dart.dart';
+import 'package:coinbase_dart/src/lib/order_book.dart';
 import 'package:test/test.dart';
 
 // flutter pub run build_runner build
@@ -6,9 +7,9 @@ import 'package:test/test.dart';
 // pub run test --chain-stack-traces test/coinbase_dart_test.dart
 
 void main() {
-  PublicClient publicClient = PublicClient(apiAuthority: 'api-public.sandbox.pro.coinbase.com');
-  String defaultProductId = 'BTC-USD';
-  String secondaryDefaultProductId = 'BTC';
+  CoinbasePublicClient publicClient = CoinbasePublicClient(
+    apiAuthority: 'api-public.sandbox.pro.coinbase.com',
+  );
 
   test('getProducts', () async {
     List<Product> products = await publicClient.getProducts();
@@ -16,38 +17,37 @@ void main() {
   });
 
   test('getSingleProduct', () async {
-    Product product = await publicClient.getSingleProduct(defaultProductId);
+    Product product = await publicClient.getSingleProduct();
     expect(product.id != null, true);
   });
 
-  // TODO
   test('getOrderBook', () async {
-    expect(true, true);
+    OrderBook orderBook = await publicClient.getProductOrderBook();
+    expect(orderBook.sequence != null, true);
   });
 
   test('getProductTicker', () async {
-    Ticker ticker = await publicClient.getProductTicker(defaultProductId);
+    Ticker ticker = await publicClient.getProductTicker();
     expect(ticker.tradeId is int, true);
   });
 
   //TODO test paginated trades
   test('getTrades', () async {
-    List<Trade> trades = await publicClient.getTrades(defaultProductId);
+    List<Trade> trades = await publicClient.getTrades();
     expect(trades.every((trade) => trade.tradeId != null), true);
   });
 
   test('getHistoricRates', () async {
     List<Candle> candles = await publicClient.getHistoricRates(
-      defaultProductId,
-      DateTime.parse('2012-02-26 12:00:00'),
-      DateTime.parse('2012-02-27 12:00:00'),
-      Granularity.sixHours,
+      start: DateTime.parse('2012-02-26 12:00:00'),
+      end: DateTime.parse('2012-02-27 12:00:00'),
+      granularity: CoinbaseGranularity.sixHours,
     );
     expect(candles.every((candle) => candle.time != null), true);
   });
 
   test('get24HourStats', () async {
-    Stats stats = await publicClient.get24HourStats(defaultProductId);
+    Stats stats = await publicClient.get24HourStats();
     expect(stats.low is double, true);
   });
 
@@ -57,7 +57,7 @@ void main() {
   });
 
   test('getCurrency', () async {
-    Currency currency = await publicClient.getCurrency(secondaryDefaultProductId);
+    Currency currency = await publicClient.getCurrency();
     expect(currency.id != null, true);
   });
 

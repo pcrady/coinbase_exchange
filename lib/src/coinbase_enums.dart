@@ -1,18 +1,18 @@
-enum Level {
+enum CoinbaseLevel {
   one,
   two,
   three,
 }
 
-extension Value on Level {
+extension Value on CoinbaseLevel {
   int value() {
-    if (this == Level.one) return 1;
-    if (this == Level.two) return 2;
+    if (this == CoinbaseLevel.one) return 1;
+    if (this == CoinbaseLevel.two) return 2;
     else return 3;
   }
 }
 
-enum Granularity {
+enum CoinbaseGranularity {
   oneMinute,
   fiveMinutes,
   fifteenMinutes,
@@ -21,18 +21,18 @@ enum Granularity {
   oneDay,
 }
 
-extension Seconds on Granularity {
+extension Seconds on CoinbaseGranularity {
   int seconds() {
-    if (this == Granularity.oneMinute) return 60;
-    if (this == Granularity.fiveMinutes) return 300;
-    if (this == Granularity.fifteenMinutes) return 900;
-    if (this == Granularity.oneHour) return 3600;
-    if (this == Granularity.sixHours) return 21600;
+    if (this == CoinbaseGranularity.oneMinute) return 60;
+    if (this == CoinbaseGranularity.fiveMinutes) return 300;
+    if (this == CoinbaseGranularity.fifteenMinutes) return 900;
+    if (this == CoinbaseGranularity.oneHour) return 3600;
+    if (this == CoinbaseGranularity.sixHours) return 21600;
     else return 86400;
   }
 }
 
-enum Side {
+enum CoinbaseSide {
   buy,
   sell,
 }

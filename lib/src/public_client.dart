@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:coinbase_dart/src/coinbase_enums.dart';
 import 'package:coinbase_dart/src/lib/candle.dart';
 import 'package:coinbase_dart/src/lib/currency.dart';
+import 'package:coinbase_dart/src/lib/order_book.dart';
 import 'package:coinbase_dart/src/lib/product.dart';
 import 'package:coinbase_dart/src/lib/stats.dart';
 import 'package:coinbase_dart/src/lib/ticker.dart';
@@ -10,18 +11,16 @@ import 'package:http/http.dart' as http;
 
 const DEFAULT_TIMEOUT = 10 * 1000; // 10 sec
 
-class PublicClient {
+class CoinbasePublicClient {
   String apiAuthority;
   String webSocketAuthority;
-  String productID;
-  int timeOut;
+  static const String defaultProductId = 'BTC-USD';
+  static const String defaultCurrencyId = 'BTC';
   int apiLimit = 100;
 
-  PublicClient({
+  CoinbasePublicClient({
     this.apiAuthority = 'api.pro.coinbase.com',
     this.webSocketAuthority = 'wss://ws-feed.pro.coinbase.com',
-    this.productID = 'BTC-USD',
-    this.timeOut = DEFAULT_TIMEOUT,
   });
 
   Map<String, String> _addHeaders(Map<String, String>? additionalHeaders) {
@@ -48,41 +47,43 @@ class PublicClient {
     return body.map((product) => Product.fromJson(product)).toList();
   }
 
-  Future<Product> getSingleProduct(String productId) async {
+  Future<Product> getSingleProduct({String productId = defaultProductId}) async {
     http.Response response = await _get('/products/$productId');
     Map<String, dynamic> body = Map<String, dynamic>.from(json.decode(response.body));
     return Product.fromJson(body);
   }
 
-  //TODO look at streams for level 3
-  getProductOrderBook(String productId, {Level? level}) async {
+  Future<OrderBook> getProductOrderBook({
+    String productId = defaultProductId,
+    CoinbaseLevel? level,
+  }) async {
     http.Response response = await _get(
       '/products/$productId/book',
       queryParameters: {'level': level != null ? level.value().toString() : '1'},
     );
     Map<String, dynamic> body = Map<String, dynamic>.from(json.decode(response.body));
-    return null;//Product.fromJson(body);
+    return OrderBook.fromJson(body);
   }
 
-  Future<Ticker> getProductTicker(String productId) async {
+  Future<Ticker> getProductTicker({String productId = defaultProductId}) async {
     http.Response response = await _get('/products/$productId/ticker');
     Map<String, dynamic> ticker = Map<String, dynamic>.from(json.decode(response.body));
     return Ticker.fromJson(ticker);
   }
 
   //TODO pagination from response headers
-  Future<List<Trade>> getTrades(String productId) async {
+  Future<List<Trade>> getTrades({String productId = defaultProductId}) async {
     http.Response response = await _get('/products/$productId/trades');
     List<Map<String, dynamic>> body = List<Map<String, dynamic>>.from(json.decode(response.body));
     return body.map((product) => Trade.fromJson(product)).toList();
   }
 
-  Future<List<Candle>> getHistoricRates(
-    String productId,
-    DateTime start,
-    DateTime end,
-    Granularity granularity,
-  ) async {
+  Future<List<Candle>> getHistoricRates({
+    String productId = defaultProductId,
+    required DateTime start,
+    required DateTime end,
+    required CoinbaseGranularity granularity,
+  }) async {
     http.Response response = await _get(
       '/products/$productId/candles',
       queryParameters: {
@@ -95,7 +96,7 @@ class PublicClient {
     return body.map((candle) => Candle.fromList(candle)).toList();
   }
 
-  Future<Stats> get24HourStats(String productId) async {
+  Future<Stats> get24HourStats({String productId = defaultProductId}) async {
     http.Response response = await _get('/products/$productId/stats');
     Map<String, dynamic> body = json.decode(response.body);
     return Stats.fromJson(body);
@@ -107,7 +108,7 @@ class PublicClient {
     return body.map((currencies) => Currency.fromJson(currencies)).toList();
   }
 
-  Future<Currency> getCurrency(String currencyId) async {
+  Future<Currency> getCurrency({String currencyId = defaultCurrencyId}) async {
     http.Response response = await _get('/currencies/$currencyId');
     Map<String, dynamic> body = json.decode(response.body);
     return Currency.fromJson(body);

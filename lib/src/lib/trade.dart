@@ -14,7 +14,7 @@ class Trade {
   final double? price;
   @StringToDoubleConverter()
   final double? size;
-  final Side? side;
+  final CoinbaseSide? side;
 
   Trade({
     this.time,

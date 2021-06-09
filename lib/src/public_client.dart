@@ -7,16 +7,16 @@ import 'package:coinbase_dart/src/lib/product.dart';
 import 'package:coinbase_dart/src/lib/stats.dart';
 import 'package:coinbase_dart/src/lib/ticker.dart';
 import 'package:coinbase_dart/src/lib/trade.dart';
+import 'package:coinbase_dart/src/lib/tradeList.dart';
 import 'package:http/http.dart' as http;
-
-const DEFAULT_TIMEOUT = 10 * 1000; // 10 sec
+import 'package:logger/logger.dart';
 
 class CoinbasePublicClient {
   String apiAuthority;
   String webSocketAuthority;
   static const String defaultProductId = 'BTC-USD';
   static const String defaultCurrencyId = 'BTC';
-  int apiLimit = 100;
+  Logger _logger = Logger();
 
   CoinbasePublicClient({
     this.apiAuthority = 'api.pro.coinbase.com',
@@ -38,44 +38,75 @@ class CoinbasePublicClient {
       Map<String, dynamic>? queryParameters,
     }) async {
     Uri url = Uri.https(apiAuthority, path, queryParameters);
-    return http.get(url, headers: _addHeaders(headers));
+    var response = await http.get(url, headers: _addHeaders(headers));
+
+    if (response.statusCode == 429) {
+      await Future.delayed(Duration(seconds: 1));
+      return _get(path, headers: headers, queryParameters: queryParameters);
+    }
+
+    return response;
   }
 
+  List<Map<String, dynamic>> _listDecode(String body) => List<Map<String, dynamic>>.from(json.decode(body));
+
+  Map<String, dynamic> _mapDecode(String body) => Map<String, dynamic>.from(json.decode(body));
+
   Future<List<Product>> getProducts() async {
-    http.Response response = await _get('/products');
-    List<Map<String, dynamic>> body = List<Map<String, dynamic>>.from(json.decode(response.body));
-    return body.map((product) => Product.fromJson(product)).toList();
+    var response = await _get('/products');
+    return _listDecode(response.body).map((product) => Product.fromJson(product)).toList();
   }
 
   Future<Product> getSingleProduct({String productId = defaultProductId}) async {
-    http.Response response = await _get('/products/$productId');
-    Map<String, dynamic> body = Map<String, dynamic>.from(json.decode(response.body));
-    return Product.fromJson(body);
+    var response = await _get('/products/$productId');
+    return Product.fromJson(_mapDecode(response.body));
   }
 
   Future<OrderBook> getProductOrderBook({
     String productId = defaultProductId,
     CoinbaseLevel? level,
   }) async {
-    http.Response response = await _get(
+    Map<String, dynamic> queryParameters = {};
+    if (level != null) queryParameters['level'] = level.value().toString();
+
+    var response = await _get(
       '/products/$productId/book',
-      queryParameters: {'level': level != null ? level.value().toString() : '1'},
+      queryParameters: queryParameters,
     );
-    Map<String, dynamic> body = Map<String, dynamic>.from(json.decode(response.body));
-    return OrderBook.fromJson(body);
+    return OrderBook.fromJson(_mapDecode(response.body));
   }
 
   Future<Ticker> getProductTicker({String productId = defaultProductId}) async {
-    http.Response response = await _get('/products/$productId/ticker');
-    Map<String, dynamic> ticker = Map<String, dynamic>.from(json.decode(response.body));
-    return Ticker.fromJson(ticker);
+    var response = await _get('/products/$productId/ticker');
+    return Ticker.fromJson(_mapDecode(response.body));
   }
 
-  //TODO pagination from response headers
-  Future<List<Trade>> getTrades({String productId = defaultProductId}) async {
-    http.Response response = await _get('/products/$productId/trades');
-    List<Map<String, dynamic>> body = List<Map<String, dynamic>>.from(json.decode(response.body));
-    return body.map((product) => Trade.fromJson(product)).toList();
+  Future<TradeList> getTrades({
+    String productId = defaultProductId,
+    int? before,
+    int? after,
+    int? limit,
+  }) async {
+    Map<String, dynamic> queryParameters = {};
+    if (before != null) queryParameters['before'] = before.toString();
+    if (after != null) queryParameters['after'] = after.toString();
+    if (limit != null) queryParameters['limit'] = limit.toString();
+
+    var response = await _get(
+      '/products/$productId/trades',
+      queryParameters: queryParameters,
+    );
+
+    String? beforeString = response.headers['cb-before'];
+    String? afterString = response.headers['cb-after'];
+    int? beforeInt = beforeString == null ? null : int.parse(beforeString);
+    int? afterInt = afterString == null ? null : int.parse(afterString);
+
+    return TradeList(
+      before: beforeInt,
+      after: afterInt,
+      trades: _listDecode(response.body).map((product) => Trade.fromJson(product)).toList(),
+    );
   }
 
   Future<List<Candle>> getHistoricRates({
@@ -84,7 +115,7 @@ class CoinbasePublicClient {
     required DateTime end,
     required CoinbaseGranularity granularity,
   }) async {
-    http.Response response = await _get(
+    var response = await _get(
       '/products/$productId/candles',
       queryParameters: {
         'start': start.toIso8601String(),
@@ -97,26 +128,22 @@ class CoinbasePublicClient {
   }
 
   Future<Stats> get24HourStats({String productId = defaultProductId}) async {
-    http.Response response = await _get('/products/$productId/stats');
-    Map<String, dynamic> body = json.decode(response.body);
-    return Stats.fromJson(body);
+    var response = await _get('/products/$productId/stats');
+    return Stats.fromJson(_mapDecode(response.body));
   }
 
   Future<List<Currency>> getCurrencies() async {
-    http.Response response = await _get('/currencies');
-    List<Map<String, dynamic>> body = List<Map<String, dynamic>>.from(json.decode(response.body));
-    return body.map((currencies) => Currency.fromJson(currencies)).toList();
+    var response = await _get('/currencies');
+    return _listDecode(response.body).map((currencies) => Currency.fromJson(currencies)).toList();
   }
 
   Future<Currency> getCurrency({String currencyId = defaultCurrencyId}) async {
-    http.Response response = await _get('/currencies/$currencyId');
-    Map<String, dynamic> body = json.decode(response.body);
-    return Currency.fromJson(body);
+    var response = await _get('/currencies/$currencyId');
+    return Currency.fromJson(_mapDecode(response.body));
   }
 
   Future<DateTime?> getTime() async {
-    http.Response response = await _get('/time');
-    Map<String, dynamic> body = json.decode(response.body);
-    return DateTime.parse(body['iso'] as String);
+    var response = await _get('/time');
+    return DateTime.parse(_mapDecode(response.body)['iso'] as String);
   }
 }

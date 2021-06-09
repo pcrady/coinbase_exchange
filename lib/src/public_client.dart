@@ -13,14 +13,12 @@ import 'package:logger/logger.dart';
 
 class CoinbasePublicClient {
   String apiAuthority;
-  String webSocketAuthority;
   static const String defaultProductId = 'BTC-USD';
   static const String defaultCurrencyId = 'BTC';
   Logger _logger = Logger();
 
   CoinbasePublicClient({
     this.apiAuthority = 'api.pro.coinbase.com',
-    this.webSocketAuthority = 'wss://ws-feed.pro.coinbase.com',
   });
 
   Map<String, String> _addHeaders(Map<String, String>? additionalHeaders) {

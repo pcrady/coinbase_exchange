@@ -36,3 +36,25 @@ enum CoinbaseSide {
   buy,
   sell,
 }
+
+enum CoinbaseChannel {
+  heartBeat,
+  status,
+  ticker,
+  level2,
+  user,
+  matches,
+  full,
+}
+
+extension Channel on CoinbaseChannel {
+  String channel() {
+    if (this == CoinbaseChannel.heartBeat) return 'heartbeat';
+    if (this == CoinbaseChannel.status) return 'status';
+    if (this == CoinbaseChannel.ticker) return 'ticker';
+    if (this == CoinbaseChannel.level2) return 'level2';
+    if (this == CoinbaseChannel.user) return 'user';
+    if (this == CoinbaseChannel.matches) return 'matches';
+    else return 'full';
+  }
+}

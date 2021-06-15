@@ -19,6 +19,7 @@ Currency _$CurrencyFromJson(Map<String, dynamic> json) {
     details: json['details'] == null
         ? null
         : CurrencyDetails.fromJson(json['details'] as Map<String, dynamic>),
+    statusMessage: json['status_message'] as String?,
   );
 }
 
@@ -31,4 +32,5 @@ Map<String, dynamic> _$CurrencyToJson(Currency instance) => <String, dynamic>{
           const StringToDoubleConverter().toJson(instance.maxPrecision),
       'convertible_to': instance.convertibleTo,
       'details': instance.details?.toJson(),
+      'status_message': instance.statusMessage,
     };

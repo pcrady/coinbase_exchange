@@ -1,19 +1,25 @@
 import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/src/lib/order_book.dart';
 import 'package:coinbase_dart/src/lib/tradeList.dart';
+import 'package:coinbase_dart/src/websocket_client.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 
 // flutter pub run build_runner build
 // flutter pub run test test/coinbase_dart_test.dart
 // pub run test --chain-stack-traces test/coinbase_dart_test.dart
+// dart --enable-asserts //to get Logger to work in terminal
 
 void main() {
   Logger _logger = Logger();
 
   CoinbasePublicClient publicClient = CoinbasePublicClient(
-    apiAuthority: 'api-public.sandbox.pro.coinbase.com',
+    sandbox: true,
   );
+
+  group('Websocket Feed', () {
+
+  });
 
   group('Market Data', () {
     test('getProducts', () async {

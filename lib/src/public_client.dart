@@ -1,24 +1,25 @@
 import 'dart:convert';
+import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/src/coinbase_enums.dart';
 import 'package:coinbase_dart/src/lib/candle.dart';
 import 'package:coinbase_dart/src/lib/currency.dart';
 import 'package:coinbase_dart/src/lib/order_book.dart';
 import 'package:coinbase_dart/src/lib/product.dart';
 import 'package:coinbase_dart/src/lib/stats.dart';
-import 'package:coinbase_dart/src/lib/ticker.dart';
 import 'package:coinbase_dart/src/lib/trade.dart';
 import 'package:coinbase_dart/src/lib/tradeList.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 
 class CoinbasePublicClient {
-  String apiAuthority;
   static const String defaultProductId = 'BTC-USD';
   static const String defaultCurrencyId = 'BTC';
-  Logger _logger = Logger();
+  static const String apiAuthority = 'api.pro.coinbase.com';
+  static const String sandboxApiAuthority = 'api-public.sandbox.pro.coinbase.com';
+  final bool sandbox;
 
   CoinbasePublicClient({
-    this.apiAuthority = 'api.pro.coinbase.com',
+    this.sandbox = false,
   });
 
   Map<String, String> _addHeaders(Map<String, String>? additionalHeaders) {
@@ -35,7 +36,7 @@ class CoinbasePublicClient {
       Map<String, String>? headers,
       Map<String, dynamic>? queryParameters,
     }) async {
-    Uri url = Uri.https(apiAuthority, path, queryParameters);
+    Uri url = Uri.https(sandbox ? sandboxApiAuthority : apiAuthority, path, queryParameters);
     var response = await http.get(url, headers: _addHeaders(headers));
 
     if (response.statusCode == 429) {

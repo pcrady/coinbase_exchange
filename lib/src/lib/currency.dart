@@ -15,6 +15,7 @@ class Currency {
   final double? maxPrecision;
   final List? convertibleTo;
   final CurrencyDetails? details;
+  final String? statusMessage;
 
   Currency({
     this.id,
@@ -23,7 +24,8 @@ class Currency {
     this.status,
     this.maxPrecision,
     this.convertibleTo,
-    this.details
+    this.details,
+    this.statusMessage,
   });
 
   factory Currency.fromJson(Map<String, dynamic> json) => _$CurrencyFromJson(json);

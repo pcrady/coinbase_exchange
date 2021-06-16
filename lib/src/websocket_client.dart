@@ -1,4 +1,10 @@
+import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/src/coinbase_enums.dart';
+import 'package:coinbase_dart/src/lib/heartbeat.dart';
+import 'package:coinbase_dart/src/lib/snapshot.dart';
+import 'package:coinbase_dart/src/lib/status.dart';
+import 'package:coinbase_dart/src/lib/stream_ticker.dart';
+import 'package:coinbase_dart/src/lib/subscribed_channel.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:logger/logger.dart';
 import 'dart:convert';
@@ -45,6 +51,43 @@ class CoinbaseWebsocketClient {
     return json.encode(request);
   }
 
+  dynamic _sortEvent(Map<String, dynamic> event) {
+    String? type = event['type'];
+    if (type == 'heartbeat') {
+      return Heartbeat.fromJson(event);
+    } else if (type == 'status') {
+      return Status.fromJson(event);
+    } else if (type == 'ticker') {
+      return StreamTicker.fromJson(event);
+    } else if (type == 'snapshot') {
+      return Snapshot.fromJson(event);
+    } else if (type == 'l2update') {
+      return 'TODO';
+    } else if (type == 'user') { //UNSURE
+
+    } else if (type == 'matches') { //UNSURE
+
+    } else if (type == 'received') {
+
+    } else if (type == 'open') {
+
+    } else if (type == 'done') {
+
+    } else if (type == 'match') {
+
+    } else if (type == 'change') {
+
+    } else if (type == 'activate') {
+
+    } else if (type == 'subscriptions') {
+      List<SubscribedChannel> channels = [];
+      event['channels'].forEach((channel) => channels.add(SubscribedChannel.fromJson(channel)));
+      return channels;
+    } else if (type == 'error') {
+      return event['message'];
+    }
+  }
+
   void connect() {
     _channel = WebSocketChannel.connect(Uri.parse(webSocketAuthority));
   }
@@ -53,7 +96,7 @@ class CoinbaseWebsocketClient {
     await _channel?.sink.close();
   }
 
-  Stream<Map>? subscribe({
+  Stream<dynamic>? subscribe({
     List<CoinbaseChannel>? channels,
     List<String>? productIds,
     Map<CoinbaseChannel, List<String>?>? channelProductIdMap,
@@ -65,7 +108,9 @@ class CoinbaseWebsocketClient {
       channelProductIdMap: channelProductIdMap,
     );
     _channel?.sink.add(request);
-    return _channel?.stream.asBroadcastStream().map((event) => jsonDecode(event));
+    return _channel?.stream.asBroadcastStream()
+      .map((event) => jsonDecode(event))
+      .map((event) => _sortEvent(event));
   }
 }
 

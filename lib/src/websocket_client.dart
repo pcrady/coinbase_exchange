@@ -52,6 +52,8 @@ class CoinbaseWebsocketClient {
     return json.encode(request);
   }
 
+  //TODO make events a subclass of Event or whatever
+  // IMpliments type and tojson and fromJson
   dynamic _sortEvent(Map<String, dynamic> event) {
     String? type = event['type'];
     if (type == 'heartbeat') {
@@ -64,10 +66,6 @@ class CoinbaseWebsocketClient {
       return Snapshot.fromJson(event);
     } else if (type == 'l2update') {
       return L2update.fromJson(event);
-    } else if (type == 'user') { //UNSURE
-
-    } else if (type == 'matches') { //UNSURE
-
     } else if (type == 'received') {
 
     } else if (type == 'open') {
@@ -90,7 +88,7 @@ class CoinbaseWebsocketClient {
   }
 
   void connect() {
-    _channel = WebSocketChannel.connect(Uri.parse(webSocketAuthority));
+    _channel = WebSocketChannel.connect(Uri.parse(sandbox ? sandboxWebSocketAuthority : webSocketAuthority));
   }
 
   Future<void> close() async {

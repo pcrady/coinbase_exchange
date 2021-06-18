@@ -1,10 +1,9 @@
-
-//TODO actually make this explicit instead of shitty touple things
+import 'package:tuple/tuple.dart';
 
 class Snapshot {
   final String? productId;
-  final List<List<double>>? bids;
-  final List<List<double>>? asks;
+  final List<Tuple2<double, double>>? bids;
+  final List<Tuple2<double, double>>? asks;
 
   Snapshot({
     this.productId,
@@ -13,24 +12,15 @@ class Snapshot {
   });
 
   factory Snapshot.fromJson(Map<String, dynamic> json) {
-    List<List<double>> bidsDouble = [];
+    List<Tuple2<double, double>> bidsDouble = [];
     for (List bid in json['bids']) {
-      List<double> bidDouble = [];
-      for (String numStr in bid) {
-        double numDub = double.parse(numStr);
-        bidDouble.add(numDub);
-      }
+      Tuple2<double, double> bidDouble = Tuple2(double.parse(bid[0]), double.parse(bid[1]));
       bidsDouble.add(bidDouble);
     }
 
-
-    List<List<double>> asksDouble = [];
+    List<Tuple2<double, double>> asksDouble = [];
     for (List ask in json['asks']) {
-      List<double> askDouble = [];
-      for (String numStr in ask) {
-        double numDub = double.parse(numStr);
-        askDouble.add(numDub);
-      }
+      Tuple2<double, double> askDouble = Tuple2(double.parse(ask[0]), double.parse(ask[1]));
       asksDouble.add(askDouble);
     }
 
@@ -44,8 +34,8 @@ class Snapshot {
   Map<String, dynamic> toJson() {
     return {
       'product_id': productId,
-      'bids': bids,
-      'asks': asks,
+      'bids': bids?.map((tuple) => tuple.toList()).toList(),
+      'asks': asks?.map((tuple) => tuple.toList()).toList(),
     };
   }
 }

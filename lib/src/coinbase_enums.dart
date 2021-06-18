@@ -37,6 +37,13 @@ enum CoinbaseSide {
   sell,
 }
 
+extension Side on CoinbaseSide {
+  String side() {
+    if (this == CoinbaseSide.buy) return 'buy';
+    else return 'sell';
+  }
+}
+
 enum CoinbaseChannel {
   heartBeat,
   status,

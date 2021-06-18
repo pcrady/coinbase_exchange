@@ -1,3 +1,5 @@
+import 'package:coinbase_dart/coinbase_dart.dart';
+import 'package:tuple/tuple.dart';
 
 ///
 /// The changes property of l2updates is an array
@@ -9,7 +11,7 @@
 ///
 class L2update {
   String? productId;
-  List? changes;
+  List<Tuple3<CoinbaseSide, double, double>>? changes;
   DateTime? time;
 
   L2update({
@@ -19,9 +21,13 @@ class L2update {
   });
 
   factory L2update.fromJson(Map<String, dynamic> json) {
-    List _changes = [];
+    List<Tuple3<CoinbaseSide, double, double>> _changes = [];
     for (var change in json['changes']) {
-      List _change = [change[0], double.parse(change[1]), double.parse(change[2])];
+      var _change = Tuple3(
+        change[0] == 'buy' ? CoinbaseSide.buy : CoinbaseSide.sell,
+        double.parse(change[1]),
+        double.parse(change[2]),
+      );
       _changes.add(_change);
     }
 
@@ -35,7 +41,12 @@ class L2update {
   Map<String, dynamic> toJson() {
     return {
       'product_id': productId,
-      'changes': changes,
+      'changes': changes?.map((tuple) {
+        var list = tuple.toList();
+        CoinbaseSide side = list[0];
+        list[0] = side.side();
+        return list;
+      }).toList(),
       'time': time?.toIso8601String(),
     };
   }

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'parts/heartbeat.g.dart';
+part 'heartbeat.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Heartbeat {

@@ -2,12 +2,12 @@ import 'package:coinbase_dart/src/models/currency.dart';
 import 'package:coinbase_dart/src/models/product.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'parts/status.g.dart';
+part 'status.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Status {
-  List<Product?>? products;
-  List<Currency?>? currencies;
+  final List<Product?>? products;
+  final List<Currency?>? currencies;
 
   Status({
     this.currencies,

@@ -1,9 +1,9 @@
 import 'package:coinbase_dart/src/models/trade.dart';
 
 class TradeList {
-  int? before;
-  int? after;
-  List<Trade> trades;
+  final int? before;
+  final int? after;
+  final List<Trade> trades;
 
   TradeList({
     required this.trades,

@@ -44,6 +44,20 @@ extension Side on CoinbaseSide {
   }
 }
 
+enum CoinbaseOrderType {
+  limit,
+  market,
+  stop,
+}
+
+extension OrderType on CoinbaseOrderType {
+  String orderType() {
+    if (this == CoinbaseOrderType.limit) return 'limit';
+    if (this == CoinbaseOrderType.market) return 'market';
+    else return 'stop';
+  }
+}
+
 enum CoinbaseChannel {
   heartBeat,
   status,
@@ -63,5 +77,16 @@ extension Channel on CoinbaseChannel {
     if (this == CoinbaseChannel.user) return 'user';
     if (this == CoinbaseChannel.matches) return 'matches';
     else return 'full';
+  }
+}
+
+enum CoinbaseReason {
+  filled,
+  canceled,
+}
+
+extension Reason on CoinbaseReason {
+  String reason() {
+    return this == CoinbaseReason.filled ? 'filled' : 'canceled';
   }
 }

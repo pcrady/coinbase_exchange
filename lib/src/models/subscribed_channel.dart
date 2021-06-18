@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'parts/subscribed_channel.g.dart';
+part 'subscribed_channel.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class SubscribedChannel {

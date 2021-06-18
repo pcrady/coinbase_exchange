@@ -10,9 +10,9 @@ import 'package:tuple/tuple.dart';
 /// A size of "0" indicates the price level can be removed.
 ///
 class L2update {
-  String? productId;
-  List<Tuple3<CoinbaseSide, double, double>>? changes;
-  DateTime? time;
+  final String? productId;
+  final List<Tuple3<CoinbaseSide, double, double>>? changes;
+  final DateTime? time;
 
   L2update({
     this.productId,

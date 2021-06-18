@@ -1,14 +1,14 @@
 import 'package:coinbase_dart/src/models/subscribed_channel.dart';
 
-class Channels {
-  List<SubscribedChannel>? channels;
+class Subscriptions {
+  final List<SubscribedChannel>? channels;
 
-  Channels({this.channels});
+  Subscriptions({this.channels});
 
-  factory Channels.fromJson(Map<String, dynamic> json) {
+  factory Subscriptions.fromJson(Map<String, dynamic> json) {
     List<SubscribedChannel> subscribedChannels = [];
     json['channels'].forEach((channel) => subscribedChannels.add(SubscribedChannel.fromJson(channel)));
-    return Channels(
+    return Subscriptions(
       channels: subscribedChannels,
     );
   }

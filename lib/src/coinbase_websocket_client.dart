@@ -73,7 +73,7 @@ class CoinbaseWebsocketClient {
     } else if (type == 'change') {
     } else if (type == 'activate') {
     } else if (type == 'subscriptions') {
-      return Channels.fromJson(event);
+      return Subscriptions.fromJson(event);
     } else if (type == 'error') {
       return event['message'];
     } else {
@@ -115,9 +115,9 @@ void main() {
     productIds: ['ETH-USD'],
     channels: [
       CoinbaseChannel.heartBeat,
-      CoinbaseChannel.status,
-      CoinbaseChannel.ticker,
-      CoinbaseChannel.level2,
+      //CoinbaseChannel.status,
+      //CoinbaseChannel.ticker,
+      //CoinbaseChannel.level2,
     ],
   );
   int i = 0;

@@ -1,5 +1,5 @@
 library coinbase_dart;
-export 'package:coinbase_dart/src/public_client.dart';
+export 'package:coinbase_dart/src/coinbase_rest_client.dart';
 export 'package:coinbase_dart/src/authenticated_client.dart';
 
 export 'package:coinbase_dart/src/lib/candle.dart';

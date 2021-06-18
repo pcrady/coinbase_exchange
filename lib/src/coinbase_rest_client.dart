@@ -11,14 +11,14 @@ import 'package:coinbase_dart/src/lib/tradeList.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 
-class CoinbasePublicClient {
+class CoinbaseRestClient {
   static const String defaultProductId = 'BTC-USD';
   static const String defaultCurrencyId = 'BTC';
   static const String apiAuthority = 'api.pro.coinbase.com';
   static const String sandboxApiAuthority = 'api-public.sandbox.pro.coinbase.com';
   final bool sandbox;
 
-  CoinbasePublicClient({
+  CoinbaseRestClient({
     this.sandbox = false,
   });
 

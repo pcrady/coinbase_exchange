@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'subscribed_channel.dart';
+part of '../subscribed_channel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

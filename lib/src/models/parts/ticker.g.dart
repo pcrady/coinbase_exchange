@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ticker.dart';
+part of '../ticker.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

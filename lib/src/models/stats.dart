@@ -1,7 +1,7 @@
 import 'package:coinbase_dart/src/lib/custom_json_converters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'stats.g.dart';
+part 'parts/stats.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Stats {

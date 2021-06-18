@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'stream_ticker.dart';
+part of '../stream_ticker.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

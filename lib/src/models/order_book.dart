@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'order_book.g.dart';
+part 'parts/order_book.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class OrderBook {

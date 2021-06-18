@@ -2,7 +2,7 @@ import 'package:coinbase_dart/src/lib/coinbase_enums.dart';
 import 'package:coinbase_dart/src/lib/custom_json_converters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'trade.g.dart';
+part 'parts/trade.g.dart';
 
 
 

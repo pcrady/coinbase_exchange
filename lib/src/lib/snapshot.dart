@@ -35,9 +35,17 @@ class Snapshot {
     }
 
     return Snapshot(
-      productId: json['product_id'],
+      productId: json['product_id'] as String?,
       bids: bidsDouble,
       asks: asksDouble,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'product_id': productId,
+      'bids': bids,
+      'asks': asks,
+    };
   }
 }

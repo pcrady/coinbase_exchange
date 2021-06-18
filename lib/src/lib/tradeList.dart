@@ -10,4 +10,12 @@ class TradeList {
     this.before,
     this.after
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'trades': trades.map((e) => e.toJson()),
+      'before': before,
+      'after': after,
+    };
+  }
 }

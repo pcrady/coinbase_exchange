@@ -1,10 +1,11 @@
 import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/src/coinbase_enums.dart';
+import 'package:coinbase_dart/src/lib/channels.dart';
 import 'package:coinbase_dart/src/lib/heartbeat.dart';
+import 'package:coinbase_dart/src/lib/l2update.dart';
 import 'package:coinbase_dart/src/lib/snapshot.dart';
 import 'package:coinbase_dart/src/lib/status.dart';
 import 'package:coinbase_dart/src/lib/stream_ticker.dart';
-import 'package:coinbase_dart/src/lib/subscribed_channel.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:logger/logger.dart';
 import 'dart:convert';
@@ -62,7 +63,7 @@ class CoinbaseWebsocketClient {
     } else if (type == 'snapshot') {
       return Snapshot.fromJson(event);
     } else if (type == 'l2update') {
-      return 'TODO';
+      return L2update.fromJson(event);
     } else if (type == 'user') { //UNSURE
 
     } else if (type == 'matches') { //UNSURE
@@ -80,11 +81,11 @@ class CoinbaseWebsocketClient {
     } else if (type == 'activate') {
 
     } else if (type == 'subscriptions') {
-      List<SubscribedChannel> channels = [];
-      event['channels'].forEach((channel) => channels.add(SubscribedChannel.fromJson(channel)));
-      return channels;
+      return Channels.fromJson(event);
     } else if (type == 'error') {
       return event['message'];
+    } else {
+      return event;
     }
   }
 
@@ -122,12 +123,18 @@ void main() {
   coinbaseWebsocketClient.connect();
   var stream = coinbaseWebsocketClient.subscribe(
     productIds: ['ETH-USD'],
-    channels: [CoinbaseChannel.level2],
+    channels: [
+      CoinbaseChannel.heartBeat,
+      CoinbaseChannel.status,
+      CoinbaseChannel.ticker,
+      CoinbaseChannel.level2,
+    ],
   );
   int i = 0;
   stream?.listen((event) {
-    if (i <= 10) {
-      _logger.i(event);
+    if (i <= 30) {
+
+      _logger.i(event.toJson());
       i++;
     } else {
       coinbaseWebsocketClient.close();

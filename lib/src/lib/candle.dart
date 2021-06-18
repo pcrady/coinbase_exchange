@@ -26,4 +26,15 @@ class Candle {
       volume: (bucket[5] as num).toDouble(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'time': time?.toIso8601String(),
+      'low': low,
+      'high': high,
+      'open': open,
+      'close': close,
+      'volume': volume,
+    };
+  }
 }

@@ -1,11 +1,11 @@
 import 'package:coinbase_dart/coinbase_dart.dart';
-import 'package:coinbase_dart/src/coinbase_enums.dart';
-import 'package:coinbase_dart/src/lib/channels.dart';
-import 'package:coinbase_dart/src/lib/heartbeat.dart';
-import 'package:coinbase_dart/src/lib/l2update.dart';
-import 'package:coinbase_dart/src/lib/snapshot.dart';
-import 'package:coinbase_dart/src/lib/status.dart';
-import 'package:coinbase_dart/src/lib/stream_ticker.dart';
+import 'package:coinbase_dart/src/lib/coinbase_enums.dart';
+import 'package:coinbase_dart/src/models/channels.dart';
+import 'package:coinbase_dart/src/models/heartbeat.dart';
+import 'package:coinbase_dart/src/models/l2update.dart';
+import 'package:coinbase_dart/src/models/snapshot.dart';
+import 'package:coinbase_dart/src/models/status.dart';
+import 'package:coinbase_dart/src/models/stream_ticker.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:logger/logger.dart';
 import 'dart:convert';
@@ -53,7 +53,7 @@ class CoinbaseWebsocketClient {
   }
 
   //TODO make events a subclass of Event or whatever
-  // IMpliments type and tojson and fromJson
+  //TODO Impliments type and tojson and fromJson
   dynamic _sortEvent(Map<String, dynamic> event) {
     String? type = event['type'];
     if (type == 'heartbeat') {
@@ -67,17 +67,11 @@ class CoinbaseWebsocketClient {
     } else if (type == 'l2update') {
       return L2update.fromJson(event);
     } else if (type == 'received') {
-
     } else if (type == 'open') {
-
     } else if (type == 'done') {
-
     } else if (type == 'match') {
-
     } else if (type == 'change') {
-
     } else if (type == 'activate') {
-
     } else if (type == 'subscriptions') {
       return Channels.fromJson(event);
     } else if (type == 'error') {
@@ -107,9 +101,7 @@ class CoinbaseWebsocketClient {
       channelProductIdMap: channelProductIdMap,
     );
     _channel?.sink.add(request);
-    return _channel?.stream.asBroadcastStream()
-      .map((event) => jsonDecode(event))
-      .map((event) => _sortEvent(event));
+    return _channel?.stream.asBroadcastStream().map((event) => jsonDecode(event)).map((event) => _sortEvent(event));
   }
 }
 
@@ -131,7 +123,6 @@ void main() {
   int i = 0;
   stream?.listen((event) {
     if (i <= 30) {
-
       _logger.i(event.toJson());
       i++;
     } else {
@@ -139,4 +130,3 @@ void main() {
     }
   });
 }
-

@@ -1,7 +1,4 @@
 import 'package:coinbase_dart/coinbase_dart.dart';
-import 'package:coinbase_dart/src/lib/order_book.dart';
-import 'package:coinbase_dart/src/lib/tradeList.dart';
-import 'package:coinbase_dart/src/coinbase_websocket_client.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 

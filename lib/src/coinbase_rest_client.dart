@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'package:coinbase_dart/coinbase_dart.dart';
-import 'package:coinbase_dart/src/coinbase_enums.dart';
-import 'package:coinbase_dart/src/lib/candle.dart';
-import 'package:coinbase_dart/src/lib/currency.dart';
-import 'package:coinbase_dart/src/lib/order_book.dart';
-import 'package:coinbase_dart/src/lib/product.dart';
-import 'package:coinbase_dart/src/lib/stats.dart';
-import 'package:coinbase_dart/src/lib/trade.dart';
-import 'package:coinbase_dart/src/lib/tradeList.dart';
+import 'package:coinbase_dart/src/lib/coinbase_enums.dart';
+import 'package:coinbase_dart/src/models/candle.dart';
+import 'package:coinbase_dart/src/models/currency.dart';
+import 'package:coinbase_dart/src/models/order_book.dart';
+import 'package:coinbase_dart/src/models/product.dart';
+import 'package:coinbase_dart/src/models/stats.dart';
+import 'package:coinbase_dart/src/models/ticker.dart';
+import 'package:coinbase_dart/src/models/trade.dart';
+import 'package:coinbase_dart/src/models/trade_list.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 
@@ -33,9 +34,9 @@ class CoinbaseRestClient {
 
   Future<http.Response> _get(
     String path, {
-      Map<String, String>? headers,
-      Map<String, dynamic>? queryParameters,
-    }) async {
+    Map<String, String>? headers,
+    Map<String, dynamic>? queryParameters,
+  }) async {
     Uri url = Uri.https(sandbox ? sandboxApiAuthority : apiAuthority, path, queryParameters);
     var response = await http.get(url, headers: _addHeaders(headers));
 

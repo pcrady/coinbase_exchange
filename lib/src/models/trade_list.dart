@@ -1,4 +1,4 @@
-import 'package:coinbase_dart/src/lib/trade.dart';
+import 'package:coinbase_dart/src/models/trade.dart';
 
 class TradeList {
   int? before;

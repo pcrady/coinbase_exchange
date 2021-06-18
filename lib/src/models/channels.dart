@@ -1,4 +1,4 @@
-import 'package:coinbase_dart/src/lib/subscribed_channel.dart';
+import 'package:coinbase_dart/src/models/subscribed_channel.dart';
 
 class Channels {
   List<SubscribedChannel>? channels;

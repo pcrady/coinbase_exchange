@@ -10,11 +10,13 @@ import 'package:tuple/tuple.dart';
 /// A size of "0" indicates the price level can be removed.
 ///
 class L2update {
+  final String? type;
   final String? productId;
   final List<Tuple3<CoinbaseSide, double, double>>? changes;
   final DateTime? time;
 
   L2update({
+    this.type,
     this.productId,
     this.changes,
     this.time,
@@ -32,6 +34,7 @@ class L2update {
     }
 
     return L2update(
+      type: json['type'] as String?,
       productId: json['product_id'] as String?,
       time: json['time'] == null ? null : DateTime.parse(json['time'] as String),
       changes: _changes,
@@ -40,6 +43,7 @@ class L2update {
 
   Map<String, dynamic> toJson() {
     return {
+      'type': type,
       'product_id': productId,
       'changes': changes?.map((tuple) {
         var list = tuple.toList();

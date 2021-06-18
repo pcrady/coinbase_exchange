@@ -5,6 +5,7 @@ part 'ticker.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Ticker {
+ final String? type;
  final int? tradeId;
  @StringToDoubleConverter()
  final double? price;
@@ -19,6 +20,7 @@ class Ticker {
  final DateTime? time;
 
  Ticker({
+  this.type,
   this.tradeId,
   this.price,
   this.size,

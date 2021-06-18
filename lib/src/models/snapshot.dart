@@ -1,11 +1,13 @@
 import 'package:tuple/tuple.dart';
 
 class Snapshot {
+  final String? type;
   final String? productId;
   final List<Tuple2<double, double>>? bids;
   final List<Tuple2<double, double>>? asks;
 
   Snapshot({
+    this.type,
     this.productId,
     this.bids,
     this.asks,
@@ -25,6 +27,7 @@ class Snapshot {
     }
 
     return Snapshot(
+      type: json['type'] as String?,
       productId: json['product_id'] as String?,
       bids: bidsDouble,
       asks: asksDouble,
@@ -33,6 +36,7 @@ class Snapshot {
 
   Map<String, dynamic> toJson() {
     return {
+      'type': type,
       'product_id': productId,
       'bids': bids?.map((tuple) => tuple.toList()).toList(),
       'asks': asks?.map((tuple) => tuple.toList()).toList(),

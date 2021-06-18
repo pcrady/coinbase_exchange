@@ -4,12 +4,14 @@ part 'heartbeat.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Heartbeat {
+  final String? type;
   final int? sequence;
   final int? lastTradeId;
   final String? productId;
   final DateTime? time;
 
   Heartbeat({
+    this.type,
     this.sequence,
     this.lastTradeId,
     this.productId,

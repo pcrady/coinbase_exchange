@@ -1,8 +1,14 @@
 import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/src/lib/coinbase_enums.dart';
+import 'package:coinbase_dart/src/models/activate.dart';
+import 'package:coinbase_dart/src/models/change.dart';
 import 'package:coinbase_dart/src/models/channels.dart';
+import 'package:coinbase_dart/src/models/done.dart';
 import 'package:coinbase_dart/src/models/heartbeat.dart';
 import 'package:coinbase_dart/src/models/l2update.dart';
+import 'package:coinbase_dart/src/models/match.dart';
+import 'package:coinbase_dart/src/models/open.dart';
+import 'package:coinbase_dart/src/models/received.dart';
 import 'package:coinbase_dart/src/models/snapshot.dart';
 import 'package:coinbase_dart/src/models/status.dart';
 import 'package:coinbase_dart/src/models/stream_ticker.dart';
@@ -52,8 +58,6 @@ class CoinbaseWebsocketClient {
     return json.encode(request);
   }
 
-  //TODO make events a subclass of Event or whatever
-  //TODO Impliments type and tojson and fromJson
   dynamic _sortEvent(Map<String, dynamic> event) {
     String? type = event['type'];
     if (type == 'heartbeat') {
@@ -67,11 +71,17 @@ class CoinbaseWebsocketClient {
     } else if (type == 'l2update') {
       return L2update.fromJson(event);
     } else if (type == 'received') {
+      return Received.fromJson(event);
     } else if (type == 'open') {
+      return Open.fromJson(event);
     } else if (type == 'done') {
+      return Done.fromJson(event);
     } else if (type == 'match') {
+      return Match.fromJson(event);
     } else if (type == 'change') {
+      return Change.fromJson(event);
     } else if (type == 'activate') {
+      return Activate.fromJson(event);
     } else if (type == 'subscriptions') {
       return Subscriptions.fromJson(event);
     } else if (type == 'error') {
@@ -114,7 +124,8 @@ void main() {
   var stream = coinbaseWebsocketClient.subscribe(
     productIds: ['ETH-USD'],
     channels: [
-      CoinbaseChannel.heartBeat,
+      CoinbaseChannel.full
+      //CoinbaseChannel.heartBeat,
       //CoinbaseChannel.status,
       //CoinbaseChannel.ticker,
       //CoinbaseChannel.level2,
@@ -122,7 +133,7 @@ void main() {
   );
   int i = 0;
   stream?.listen((event) {
-    if (i <= 30) {
+    if (i <= 400) {
       _logger.i(event.toJson());
       i++;
     } else {

@@ -6,10 +6,12 @@ part 'status.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Status {
+  final String? type;
   final List<Product?>? products;
   final List<Currency?>? currencies;
 
   Status({
+    this.type,
     this.currencies,
     this.products,
   });

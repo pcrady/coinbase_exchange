@@ -50,6 +50,11 @@ enum CoinbaseOrderType {
   stop,
 }
 
+enum Action {
+  subscribe,
+  unsubscribe,
+}
+
 extension OrderType on CoinbaseOrderType {
   String orderType() {
     if (this == CoinbaseOrderType.limit) return 'limit';

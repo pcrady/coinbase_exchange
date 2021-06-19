@@ -99,13 +99,14 @@ class CoinbaseWebsocketClient {
     await _channel?.sink.close();
   }
 
-  Stream<dynamic>? subscribe({
+  Stream<dynamic>? _manageSubscriptions({
+    required Action action,
     List<CoinbaseChannel>? channels,
     List<String>? productIds,
     Map<CoinbaseChannel, List<String>?>? channelProductIdMap,
   }) {
     String request = _buildRequest(
-      type: 'subscribe',
+      type: action == Action.subscribe ? 'subscribe' : 'unsubscribe',
       channels: channels,
       productIds: productIds,
       channelProductIdMap: channelProductIdMap,
@@ -113,31 +114,30 @@ class CoinbaseWebsocketClient {
     _channel?.sink.add(request);
     return _channel?.stream.asBroadcastStream().map((event) => jsonDecode(event)).map((event) => _sortEvent(event));
   }
-}
 
-void main() {
-  Logger _logger = Logger(
-    printer: PrettyPrinter(methodCount: 0),
-  );
-  var coinbaseWebsocketClient = CoinbaseWebsocketClient();
-  coinbaseWebsocketClient.connect();
-  var stream = coinbaseWebsocketClient.subscribe(
-    productIds: ['ETH-USD'],
-    channels: [
-      CoinbaseChannel.full
-      //CoinbaseChannel.heartBeat,
-      //CoinbaseChannel.status,
-      //CoinbaseChannel.ticker,
-      //CoinbaseChannel.level2,
-    ],
-  );
-  int i = 0;
-  stream?.listen((event) {
-    if (i <= 400) {
-      _logger.i(event.toJson());
-      i++;
-    } else {
-      coinbaseWebsocketClient.close();
-    }
-  });
+  Stream<dynamic>? subscribe({
+    List<CoinbaseChannel>? channels,
+    List<String>? productIds,
+    Map<CoinbaseChannel, List<String>?>? channelProductIdMap,
+  }) {
+    return _manageSubscriptions(
+      action: Action.subscribe,
+      channels: channels,
+      productIds: productIds,
+      channelProductIdMap: channelProductIdMap,
+    );
+  }
+
+  Stream<dynamic>? unSubscribe({
+    List<CoinbaseChannel>? channels,
+    List<String>? productIds,
+    Map<CoinbaseChannel, List<String>?>? channelProductIdMap,
+  }) {
+    return _manageSubscriptions(
+      action: Action.unsubscribe,
+      channels: channels,
+      productIds: productIds,
+      channelProductIdMap: channelProductIdMap,
+    );
+  }
 }

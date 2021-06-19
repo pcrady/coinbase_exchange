@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:coinbase_dart/coinbase_dart.dart';
+import 'package:coinbase_dart/src/models/channels.dart';
+import 'package:coinbase_dart/src/models/heartbeat.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 
@@ -7,15 +11,30 @@ import 'package:test/test.dart';
 // pub run test --chain-stack-traces test/coinbase_dart_test.dart
 // dart --enable-asserts //to get Logger to work in terminal
 
+// TODO actually learn how to test
+
 void main() {
   Logger _logger = Logger();
 
-  CoinbaseRestClient publicClient = CoinbaseRestClient(
-    sandbox: true,
-  );
+  CoinbaseRestClient publicClient = CoinbaseRestClient(sandbox: true);
+  CoinbaseWebsocketClient wsClient = CoinbaseWebsocketClient(sandbox: false);
+  Stream<dynamic>? stream;
 
   group('Websocket Feed', () {
+    test('Subscription Response', () async {
+      wsClient.connect();
+      stream = wsClient.subscribe(
+        productIds: ['ETH-USD'],
+        channels: [
+          CoinbaseChannel.heartBeat,
+        ],
+      );
 
+      stream?.listen((event) {
+        expect(event is Subscriptions, true);
+        wsClient.close();
+      });
+    });
   });
 
   group('Market Data', () {

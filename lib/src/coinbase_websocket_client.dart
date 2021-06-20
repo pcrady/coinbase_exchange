@@ -26,6 +26,8 @@ class CoinbaseWebsocketClient {
     this.sandbox = false,
   });
 
+  String get _authority => sandbox ? sandboxWebSocketAuthority : webSocketAuthority;
+
   String _buildRequest({
     String? type,
     Map<CoinbaseChannel, List<String>?>? channelProductIdMap,
@@ -92,7 +94,7 @@ class CoinbaseWebsocketClient {
   }
 
   void connect() {
-    _channel = WebSocketChannel.connect(Uri.parse(sandbox ? sandboxWebSocketAuthority : webSocketAuthority));
+    _channel = WebSocketChannel.connect(Uri.parse(_authority));
   }
 
   Future<void> close() async {

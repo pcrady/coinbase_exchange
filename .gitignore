@@ -1,3 +1,6 @@
+./lib/secrets.dart
+
+
 # Miscellaneous
 *.class
 *.log

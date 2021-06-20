@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/src/lib/coinbase_enums.dart';
 import 'package:coinbase_dart/src/models/candle.dart';
@@ -9,6 +10,7 @@ import 'package:coinbase_dart/src/models/stats.dart';
 import 'package:coinbase_dart/src/models/ticker.dart';
 import 'package:coinbase_dart/src/models/trade.dart';
 import 'package:coinbase_dart/src/models/trade_list.dart';
+import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 
@@ -18,18 +20,74 @@ class CoinbaseRestClient {
   static const String apiAuthority = 'api.pro.coinbase.com';
   static const String sandboxApiAuthority = 'api-public.sandbox.pro.coinbase.com';
   final bool sandbox;
+  String? apiKey;
+  String? secretKey;
+  String? passphrase;
 
   CoinbaseRestClient({
     this.sandbox = false,
+    this.apiKey,
+    this.secretKey,
+    this.passphrase,
   });
 
-  Map<String, String> _addHeaders(Map<String, String>? additionalHeaders) {
+  String get _authority => sandbox ? sandboxApiAuthority : apiAuthority;
+
+  String _calculateSignature({
+    required String method,
+    required String requestPath,
+    required Map<String, dynamic> body,
+    required String timestamp,
+  }) {
+    method = method.toUpperCase();
+    String bodyString = jsonEncode(body);
+
+    String preHashMessage = timestamp + method + requestPath + bodyString;
+    List<int> preHashMessageByes = utf8.encode(preHashMessage);
+    List<int> hmacKey = base64.decode(secretKey ?? '');
+
+    Hmac hmac =  Hmac(sha256, hmacKey);
+    Digest digest = hmac.convert(preHashMessageByes);
+    return base64.encode(digest.bytes);
+  }
+
+  Map<String, String> _addHeaders({
+    String? method,
+    String? requestPath,
+    Map<String, dynamic>? body,
+    Map<String, String>? additionalHeaders,
+  }) {
     Map<String, String> headers = {
       'User-Agent': 'coinbase-pro-node-client',
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      ...?additionalHeaders,
     };
-    return additionalHeaders == null ? headers : {...headers, ...additionalHeaders};
+
+    if (apiKey == null
+      || secretKey == null
+      || passphrase == null
+      || method == null
+      || requestPath == null
+      || body == null) return headers;
+
+    String timestamp = (DateTime.now().millisecondsSinceEpoch * 0.001).toString();
+    String signature = _calculateSignature(
+      method: method,
+      requestPath: requestPath,
+      body: body,
+      timestamp: timestamp,
+    );
+
+    headers = {
+      ...headers,
+      'CB-ACCESS-KEY': apiKey ?? '',
+      'CB-ACCESS-PASSPHRASE': passphrase ?? '',
+      'CB-ACCESS-TIMESTAMP': timestamp,
+      'CB-ACCESS-SIGN': signature,
+    };
+
+    return headers;
   }
 
   Future<http.Response> _get(
@@ -37,8 +95,8 @@ class CoinbaseRestClient {
     Map<String, String>? headers,
     Map<String, dynamic>? queryParameters,
   }) async {
-    Uri url = Uri.https(sandbox ? sandboxApiAuthority : apiAuthority, path, queryParameters);
-    var response = await http.get(url, headers: _addHeaders(headers));
+    Uri url = Uri.https(_authority, path, queryParameters);
+    var response = await http.get(url, headers: _addHeaders(additionalHeaders: headers));
 
     if (response.statusCode == 429) {
       await Future.delayed(Duration(seconds: 1));

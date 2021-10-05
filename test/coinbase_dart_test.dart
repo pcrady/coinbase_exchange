@@ -31,7 +31,7 @@ void main() {
 
   // a better test would be to subscribe to everything and verify that you eventually
   // recieve at least one of each response.
-  group('Websocket Feed', () {
+ /* group('Websocket Feed', () {
     test('Subscription Response', () async {
       wsClient.connect();
       stream = wsClient.subscribe(
@@ -48,7 +48,7 @@ void main() {
         wsClient.close();
       });
     });
-  });
+  });*/
 
 
   group('Authenticated tests', () {
@@ -70,7 +70,7 @@ void main() {
       expect(true, true);
     });
 
-    /*test('getAccountLedger', () async {
+    test('getAccountLedger', () async {
       await accountsClient.getAccountLedger(accountId: accountId);
       expect(true, true);
     });
@@ -78,7 +78,7 @@ void main() {
     test('getAccountTransfers', () async {
       await accountsClient.getAccountTransfers(accountId: accountId);
       expect(true, true);
-    });*/
+    });
   });
 
   /*

@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart';
 
 abstract class CoinbaseRestClient {
+  Logger _logger = Logger();
   static const String defaultProductId = 'BTC-USD';
   static const String defaultCurrencyId = 'BTC';
   static const String apiAuthority = 'api.pro.coinbase.com';
@@ -62,6 +64,7 @@ abstract class CoinbaseRestClient {
     return base64.encode(digest.bytes);
   }
 
+  // Note request path includes query parameters
   Map<String, String> _addHeaders({
     String? method,
     String? requestPath,
@@ -103,14 +106,14 @@ abstract class CoinbaseRestClient {
   Future<http.Response> get({
     required String path,
     Map<String, String>? headers,
-    Map<String, dynamic>? queryParameters,
+    Map<String, String>? queryParameters,
   }) async {
     Uri url = Uri.https(_authority, path, queryParameters);
     var response = await http.get(
       url,
       headers: _addHeaders(
         method: 'GET',
-        requestPath: path,
+        requestPath: queryParameters != null ? '${url.path}?${url.query}' : url.path,
         additionalHeaders: headers,
       ),
     );

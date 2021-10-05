@@ -69,10 +69,10 @@ class AccountsClient extends CoinbaseRestClient {
     DateTime? after,
     int? limit,
   }) async {
-    Map<String, dynamic> queryParameters = {};
+    Map<String, String> queryParameters = {};
     if (before != null) queryParameters['before'] = before.toIso8601String();
     if (after != null) queryParameters['after'] = after.toIso8601String();
-    if (limit != null) queryParameters['limit'] = limit;
+    if (limit != null) queryParameters['limit'] = limit.toString();
 
     var response = await get(
       path: '/accounts/$accountId/holds',
@@ -85,8 +85,8 @@ class AccountsClient extends CoinbaseRestClient {
     }
 
     return Paginator(
-      before: DateTime.parse(response.headers['CB-BEFORE']!),
-      after: DateTime.parse(response.headers['CB-AFTER']!),
+      before: response.headers.containsKey('CB-BEFORE') ? DateTime.parse(response.headers['CB-BEFORE']!) : null,
+      after: response.headers.containsKey('CB-AFTER') ? DateTime.parse(response.headers['CB-AFTER']!) : null,
       elements: listDecode(response.body).map((hold) => Hold.fromJson(hold)).toList(),
     );
   }
@@ -106,27 +106,28 @@ class AccountsClient extends CoinbaseRestClient {
     DateTime? after,
     int? limit,
   }) async {
+    Map<String, String> queryParameters = {};
+    if (startDate != null) queryParameters['start_date'] = startDate.toIso8601String();
+    if (endDate != null) queryParameters['end_date'] = endDate.toIso8601String();
+    if (before != null) queryParameters['before'] = before.toIso8601String();
+    if (after != null) queryParameters['after'] = after.toIso8601String();
+    if (limit != null) queryParameters['limit'] = limit.toString();
+
     var response = await get(
       path: '/accounts/$accountId/ledger',
-      queryParameters: {
-        'start_date': startDate?.toIso8601String(),
-        'end_date': endDate?.toIso8601String(),
-        'before': before?.toIso8601String(),
-        'after': after?.toIso8601String(),
-        'limit': limit,
-      },
+      queryParameters: queryParameters,
     );
     if (response.statusCode != 200) {
       throw response;
     }
     return Paginator(
-      before: DateTime.parse(response.headers['CB-BEFORE']!),
-      after: DateTime.parse(response.headers['CB-AFTER']!),
+      before: response.headers.containsKey('CB-BEFORE') ? DateTime.parse(response.headers['CB-BEFORE']!) : null,
+      after: response.headers.containsKey('CB-AFTER') ? DateTime.parse(response.headers['CB-AFTER']!) : null,
       elements: listDecode(response.body).map((hold) => LedgerEntry.fromJson(hold)).toList(),
     );
   }
 
-  /// Get a single account's transfersA
+  /// Get a single account's transfers
   ///
   /// Lists past withdrawals and deposits for an account.
   ///
@@ -138,21 +139,22 @@ class AccountsClient extends CoinbaseRestClient {
     int? limit,
     CoinbaseTransferType? transferType,
   }) async {
+    Map<String, String> queryParameters = {};
+    if (before != null) queryParameters['before'] = before.toIso8601String();
+    if (after != null) queryParameters['after'] = after.toIso8601String();
+    if (limit != null) queryParameters['limit'] = limit.toString();
+    if (transferType != null) queryParameters['type'] = transferType.transferType();
+
     var response = await get(
       path: '/accounts/$accountId/transfers',
-      queryParameters: {
-        'before': before?.toIso8601String(),
-        'after': after?.toIso8601String(),
-        'limit': limit,
-        'type': transferType != null ? transferType.transferType() : null,
-      },
+      queryParameters: queryParameters,
     );
     if (response.statusCode != 200) {
       throw response;
     }
     return Paginator(
-      before: DateTime.parse(response.headers['CB-BEFORE']!),
-      after: DateTime.parse(response.headers['CB-AFTER']!),
+      before: response.headers.containsKey('CB-BEFORE') ? DateTime.parse(response.headers['CB-BEFORE']!) : null,
+      after: response.headers.containsKey('CB-AFTER') ? DateTime.parse(response.headers['CB-AFTER']!) : null,
       elements: listDecode(response.body).map((hold) => Transfer.fromJson(hold)).toList(),
     );
   }

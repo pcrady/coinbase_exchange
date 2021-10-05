@@ -8,6 +8,7 @@ part of 'ticker.dart';
 
 Ticker _$TickerFromJson(Map<String, dynamic> json) {
   return Ticker(
+    type: json['type'] as String?,
     tradeId: json['trade_id'] as int?,
     price: const StringToDoubleConverter().fromJson(json['price'] as String?),
     size: const StringToDoubleConverter().fromJson(json['size'] as String?),
@@ -19,6 +20,7 @@ Ticker _$TickerFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$TickerToJson(Ticker instance) => <String, dynamic>{
+      'type': instance.type,
       'trade_id': instance.tradeId,
       'price': const StringToDoubleConverter().toJson(instance.price),
       'size': const StringToDoubleConverter().toJson(instance.size),

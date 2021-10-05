@@ -8,6 +8,7 @@ part of 'heartbeat.dart';
 
 Heartbeat _$HeartbeatFromJson(Map<String, dynamic> json) {
   return Heartbeat(
+    type: json['type'] as String?,
     sequence: json['sequence'] as int?,
     lastTradeId: json['last_trade_id'] as int?,
     productId: json['product_id'] as String?,
@@ -16,6 +17,7 @@ Heartbeat _$HeartbeatFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$HeartbeatToJson(Heartbeat instance) => <String, dynamic>{
+      'type': instance.type,
       'sequence': instance.sequence,
       'last_trade_id': instance.lastTradeId,
       'product_id': instance.productId,

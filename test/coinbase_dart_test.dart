@@ -1,8 +1,11 @@
-import 'dart:math';
+import 'dart:developer';
 
 import 'package:coinbase_dart/coinbase_dart.dart';
+import 'package:coinbase_dart/secrets.dart';
+import 'package:coinbase_dart/src/models/account.dart';
 import 'package:coinbase_dart/src/models/channels.dart';
 import 'package:coinbase_dart/src/models/heartbeat.dart';
+import 'package:coinbase_dart/src/rest_clients/accounts.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 
@@ -16,10 +19,18 @@ import 'package:test/test.dart';
 void main() {
   Logger _logger = Logger();
 
-  CoinbaseRestClient publicClient = CoinbaseRestClient(sandbox: true);
+  AccountsClient accountsClient = AccountsClient(
+    sandbox: false,
+    secretKey: Secrets.secretKey,
+    passphrase: Secrets.passphrase,
+    apiKey: Secrets.apiKey,
+  );
   CoinbaseWebsocketClient wsClient = CoinbaseWebsocketClient(sandbox: false);
   Stream<dynamic>? stream;
 
+
+  // a better test would be to subscribe to everything and verify that you eventually
+  // recieve at least one of each response.
   group('Websocket Feed', () {
     test('Subscription Response', () async {
       wsClient.connect();
@@ -31,12 +42,46 @@ void main() {
       );
 
       stream?.listen((event) {
+        // The first event is always a subscriptions event which tells you which channels you have subscribed to.
+        // After the first event it is up to you to manually sort events from the stream.
         expect(event is Subscriptions, true);
         wsClient.close();
       });
     });
   });
 
+
+  group('Authenticated tests', () {
+    late String accountId;
+
+    test('listAccounts', () async {
+      List<Account> accounts = await accountsClient.listAccounts();
+      accountId = accounts.first.id!;
+      expect(accounts.length != 0, true);
+    });
+
+    test('getAccount', () async {
+      var account = await accountsClient.getAccount(accountId: accountId);
+      expect(account.currency != null, true);
+    });
+
+    test('getHolds', () async {
+      var accounts = await accountsClient.getHolds(accountId: accountId);
+      expect(true, true);
+    });
+
+    /*test('getAccountLedger', () async {
+      await accountsClient.getAccountLedger(accountId: accountId);
+      expect(true, true);
+    });
+
+    test('getAccountTransfers', () async {
+      await accountsClient.getAccountTransfers(accountId: accountId);
+      expect(true, true);
+    });*/
+  });
+
+  /*
   group('Market Data', () {
     test('getProducts', () async {
       List<Product> products = await publicClient.getProducts();
@@ -122,5 +167,5 @@ void main() {
       DateTime? time = await publicClient.getTime();
       expect(time != null, true);
     });
-  });
+  });*/
 }

@@ -95,3 +95,15 @@ extension Reason on CoinbaseReason {
     return this == CoinbaseReason.filled ? 'filled' : 'canceled';
   }
 }
+
+enum CoinbaseTransferType {
+  withdrawal,
+  deposit,
+}
+
+extension TransferType on CoinbaseTransferType {
+  String transferType() {
+    if (this == CoinbaseTransferType.withdrawal) return 'withdrawal';
+    else return 'deposit';
+  }
+}

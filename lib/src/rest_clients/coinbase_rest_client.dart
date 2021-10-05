@@ -1,20 +1,8 @@
 import 'dart:convert';
-import 'dart:typed_data';
-import 'package:coinbase_dart/coinbase_dart.dart';
-import 'package:coinbase_dart/src/lib/coinbase_enums.dart';
-import 'package:coinbase_dart/src/models/candle.dart';
-import 'package:coinbase_dart/src/models/currency.dart';
-import 'package:coinbase_dart/src/models/order_book.dart';
-import 'package:coinbase_dart/src/models/product.dart';
-import 'package:coinbase_dart/src/models/stats.dart';
-import 'package:coinbase_dart/src/models/ticker.dart';
-import 'package:coinbase_dart/src/models/trade.dart';
-import 'package:coinbase_dart/src/models/trade_list.dart';
 import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
-import 'package:logger/logger.dart';
 
-class CoinbaseRestClient {
+abstract class CoinbaseRestClient {
   static const String defaultProductId = 'BTC-USD';
   static const String defaultCurrencyId = 'BTC';
   static const String apiAuthority = 'api.pro.coinbase.com';
@@ -33,21 +21,44 @@ class CoinbaseRestClient {
 
   String get _authority => sandbox ? sandboxApiAuthority : apiAuthority;
 
+  Map<String, dynamic> createPaginationQueryParameters({
+    int? before,
+    int? after,
+    int? limit,
+  }) {
+    Map<String, dynamic> queryParameters = {};
+    if (before != null) queryParameters['before'] = before.toString();
+    if (after != null) queryParameters['after'] = after.toString();
+    if (limit != null) queryParameters['limit'] = limit.toString();
+    return queryParameters;
+  }
+
+  int? getBeforeHeader(http.Response response) {
+    String? beforeString = response.headers['cb-before'] ;
+    return beforeString == null ? null : int.parse(beforeString);
+  }
+
+  int? getAfterHeader(http.Response response) {
+    String? afterString = response.headers['cb-after'];
+    return afterString == null ? null : int.parse(afterString);
+  }
+
   String _calculateSignature({
     required String method,
     required String requestPath,
-    required Map<String, dynamic> body,
     required String timestamp,
-  }) {
+    Map<String, dynamic>? body,
+ }) {
     method = method.toUpperCase();
-    String bodyString = jsonEncode(body);
 
-    String preHashMessage = timestamp + method + requestPath + bodyString;
+    String preHashMessage = timestamp + method + requestPath;
+    if (body != null) preHashMessage += jsonEncode(body);
     List<int> preHashMessageByes = utf8.encode(preHashMessage);
-    List<int> hmacKey = base64.decode(secretKey ?? '');
 
+    List<int> hmacKey = base64.decode(secretKey ?? '');
     Hmac hmac =  Hmac(sha256, hmacKey);
     Digest digest = hmac.convert(preHashMessageByes);
+
     return base64.encode(digest.bytes);
   }
 
@@ -68,8 +79,7 @@ class CoinbaseRestClient {
       || secretKey == null
       || passphrase == null
       || method == null
-      || requestPath == null
-      || body == null) return headers;
+      || requestPath == null) return headers;
 
     String timestamp = (DateTime.now().millisecondsSinceEpoch * 0.001).toString();
     String signature = _calculateSignature(
@@ -90,33 +100,51 @@ class CoinbaseRestClient {
     return headers;
   }
 
-  Future<http.Response> _get(
-    String path, {
+  Future<http.Response> get({
+    required String path,
     Map<String, String>? headers,
     Map<String, dynamic>? queryParameters,
   }) async {
     Uri url = Uri.https(_authority, path, queryParameters);
-    var response = await http.get(url, headers: _addHeaders(additionalHeaders: headers));
+    var response = await http.get(
+      url,
+      headers: _addHeaders(
+        method: 'GET',
+        requestPath: path,
+        additionalHeaders: headers,
+      ),
+    );
 
     if (response.statusCode == 429) {
       await Future.delayed(Duration(seconds: 1));
-      return _get(path, headers: headers, queryParameters: queryParameters);
+      return get(path: path, headers: headers, queryParameters: queryParameters);
     }
 
     return response;
   }
 
-  List<Map<String, dynamic>> _listDecode(String body) => List<Map<String, dynamic>>.from(json.decode(body));
+  //Future<http.Response> _post(String path) async {
+    //TODO
+ // }
 
-  Map<String, dynamic> _mapDecode(String body) => Map<String, dynamic>.from(json.decode(body));
+  List<Map<String, dynamic>> listDecode(String body) => List<Map<String, dynamic>>.from(json.decode(body));
 
-  Future<List<Product>> getProducts() async {
-    var response = await _get('/products');
+  Map<String, dynamic> mapDecode(String body) => Map<String, dynamic>.from(json.decode(body));
+
+
+
+
+
+
+
+
+  /*Future<List<Product>> getProducts() async {
+    var response = await _get(path: '/products');
     return _listDecode(response.body).map((product) => Product.fromJson(product)).toList();
   }
 
   Future<Product> getSingleProduct({String productId = defaultProductId}) async {
-    var response = await _get('/products/$productId');
+    var response = await _get(path: '/products/$productId');
     return Product.fromJson(_mapDecode(response.body));
   }
 
@@ -128,14 +156,14 @@ class CoinbaseRestClient {
     if (level != null) queryParameters['level'] = level.value().toString();
 
     var response = await _get(
-      '/products/$productId/book',
+      path: '/products/$productId/book',
       queryParameters: queryParameters,
     );
     return OrderBook.fromJson(_mapDecode(response.body));
   }
 
   Future<Ticker> getProductTicker({String productId = defaultProductId}) async {
-    var response = await _get('/products/$productId/ticker');
+    var response = await _get(path: '/products/$productId/ticker');
     return Ticker.fromJson(_mapDecode(response.body));
   }
 
@@ -145,24 +173,18 @@ class CoinbaseRestClient {
     int? after,
     int? limit,
   }) async {
-    Map<String, dynamic> queryParameters = {};
-    if (before != null) queryParameters['before'] = before.toString();
-    if (after != null) queryParameters['after'] = after.toString();
-    if (limit != null) queryParameters['limit'] = limit.toString();
-
     var response = await _get(
-      '/products/$productId/trades',
-      queryParameters: queryParameters,
+      path: '/products/$productId/trades',
+      queryParameters: _createPaginationQueryParameters(
+        before: before,
+        after: after,
+        limit: limit,
+      ),
     );
 
-    String? beforeString = response.headers['cb-before'];
-    String? afterString = response.headers['cb-after'];
-    int? beforeInt = beforeString == null ? null : int.parse(beforeString);
-    int? afterInt = afterString == null ? null : int.parse(afterString);
-
     return TradeList(
-      before: beforeInt,
-      after: afterInt,
+      before: _getBeforeHeader(response),
+      after: _getAfterHeader(response),
       trades: _listDecode(response.body).map((product) => Trade.fromJson(product)).toList(),
     );
   }
@@ -174,7 +196,7 @@ class CoinbaseRestClient {
     required CoinbaseGranularity granularity,
   }) async {
     var response = await _get(
-      '/products/$productId/candles',
+      path: '/products/$productId/candles',
       queryParameters: {
         'start': start.toIso8601String(),
         'end': end.toIso8601String(),
@@ -186,22 +208,22 @@ class CoinbaseRestClient {
   }
 
   Future<Stats> get24HourStats({String productId = defaultProductId}) async {
-    var response = await _get('/products/$productId/stats');
+    var response = await _get(path: '/products/$productId/stats');
     return Stats.fromJson(_mapDecode(response.body));
   }
 
   Future<List<Currency>> getCurrencies() async {
-    var response = await _get('/currencies');
+    var response = await _get(path: '/currencies');
     return _listDecode(response.body).map((currencies) => Currency.fromJson(currencies)).toList();
   }
 
   Future<Currency> getCurrency({String currencyId = defaultCurrencyId}) async {
-    var response = await _get('/currencies/$currencyId');
+    var response = await _get(path: '/currencies/$currencyId');
     return Currency.fromJson(_mapDecode(response.body));
   }
 
   Future<DateTime?> getTime() async {
-    var response = await _get('/time');
+    var response = await _get(path: '/time');
     return DateTime.parse(_mapDecode(response.body)['iso'] as String);
-  }
+  }*/
 }

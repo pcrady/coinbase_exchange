@@ -8,6 +8,7 @@ part of 'status.dart';
 
 Status _$StatusFromJson(Map<String, dynamic> json) {
   return Status(
+    type: json['type'] as String?,
     currencies: (json['currencies'] as List<dynamic>?)
         ?.map((e) =>
             e == null ? null : Currency.fromJson(e as Map<String, dynamic>))
@@ -20,6 +21,7 @@ Status _$StatusFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$StatusToJson(Status instance) => <String, dynamic>{
+      'type': instance.type,
       'products': instance.products?.map((e) => e?.toJson()).toList(),
       'currencies': instance.currencies?.map((e) => e?.toJson()).toList(),
     };

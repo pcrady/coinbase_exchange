@@ -114,7 +114,8 @@ class CoinbaseWebsocketClient {
       channelProductIdMap: channelProductIdMap,
     );
     _channel?.sink.add(request);
-    return _channel?.stream.asBroadcastStream().map((event) => jsonDecode(event)).map((event) => _sortEvent(event));
+    return _channel?.stream.asBroadcastStream().map((event) =>
+      jsonDecode(event)).map((event) => _sortEvent(event));
   }
 
   Stream<dynamic>? subscribe({

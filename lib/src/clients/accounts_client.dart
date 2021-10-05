@@ -1,38 +1,45 @@
 import 'dart:convert';
 import 'package:coinbase_dart/coinbase_dart.dart';
+import 'package:coinbase_dart/src/clients/client.dart';
 import 'package:coinbase_dart/src/lib/paginator.dart';
 import 'package:coinbase_dart/src/models/account.dart';
 import 'package:coinbase_dart/src/lib/coinbase_enums.dart';
 import 'package:coinbase_dart/src/models/hold.dart';
 import 'package:coinbase_dart/src/models/ledger_entry.dart';
 import 'package:coinbase_dart/src/models/transfer.dart';
+import 'package:coinbase_dart/src/rest_clients/accounts_rest_client.dart';
 import 'package:logger/logger.dart';
 
 
-class AccountsClient extends CoinbaseRestClient {
+class AccountsClient extends Client {
   Logger _logger = Logger();
+  bool sandbox;
+  String apiKey;
+  String secretKey;
+  String passphrase;
+  late AccountsRestClient _accountsRestClient;
 
   AccountsClient({
-    bool sandbox = false,
-    required String apiKey,
-    required String secretKey,
-    required String passphrase,
-  }) : super(
-    sandbox: sandbox,
-    apiKey: apiKey,
-    secretKey: secretKey,
-    passphrase: passphrase,
-  );
+    this.sandbox = true,
+    required this.apiKey,
+    required this.secretKey,
+    required this.passphrase,
+  }) {
+    _accountsRestClient = AccountsRestClient(
+      sandbox: sandbox,
+      apiKey: apiKey,
+      secretKey: secretKey,
+      passphrase: passphrase,
+    );
+  }
 
   /// Get a list of trading accounts from the profile of the API key.
   ///
   /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getaccounts
   ///
   Future<List<Account>> listAccounts() async {
-    var response = await get(path: '/accounts');
-    if (response.statusCode != 200) {
-      throw response;
-    }
+    var response = await _accountsRestClient.listAccounts();
+    if (response.statusCode != 200) throw response;
     return listDecode(response.body).map((account) => Account.fromJson(account)).toList();
   }
 
@@ -46,10 +53,8 @@ class AccountsClient extends CoinbaseRestClient {
   Future<Account> getAccount({
     required String accountId,
   }) async {
-    var response = await get(path: '/accounts/$accountId');
-    if (response.statusCode != 200) {
-      throw response;
-    }
+    var response = await _accountsRestClient.getAccount(accountId: accountId);
+    if (response.statusCode != 200) throw response;
     return Account.fromJson(json.decode(response.body));
   }
 
@@ -69,20 +74,14 @@ class AccountsClient extends CoinbaseRestClient {
     DateTime? after,
     int? limit,
   }) async {
-    Map<String, String> queryParameters = {};
-    if (before != null) queryParameters['before'] = before.toIso8601String();
-    if (after != null) queryParameters['after'] = after.toIso8601String();
-    if (limit != null) queryParameters['limit'] = limit.toString();
-
-    var response = await get(
-      path: '/accounts/$accountId/holds',
-      queryParameters: queryParameters,
+    var response = await  _accountsRestClient.getHolds(
+      accountId: accountId,
+      before: before,
+      after: after,
+      limit: limit,
     );
 
-    if (response.statusCode != 200) {
-      _logger.i(response.statusCode);
-      throw response;
-    }
+    if (response.statusCode != 200) throw response;
 
     return Paginator(
       before: response.headers.containsKey('CB-BEFORE') ? DateTime.parse(response.headers['CB-BEFORE']!) : null,
@@ -106,20 +105,17 @@ class AccountsClient extends CoinbaseRestClient {
     DateTime? after,
     int? limit,
   }) async {
-    Map<String, String> queryParameters = {};
-    if (startDate != null) queryParameters['start_date'] = startDate.toIso8601String();
-    if (endDate != null) queryParameters['end_date'] = endDate.toIso8601String();
-    if (before != null) queryParameters['before'] = before.toIso8601String();
-    if (after != null) queryParameters['after'] = after.toIso8601String();
-    if (limit != null) queryParameters['limit'] = limit.toString();
-
-    var response = await get(
-      path: '/accounts/$accountId/ledger',
-      queryParameters: queryParameters,
+    var response = await _accountsRestClient.getAccountLedger(
+      accountId: accountId,
+      startDate: startDate,
+      endDate: endDate,
+      before: before,
+      after: after,
+      limit: limit,
     );
-    if (response.statusCode != 200) {
-      throw response;
-    }
+
+    if (response.statusCode != 200) throw response;
+
     return Paginator(
       before: response.headers.containsKey('CB-BEFORE') ? DateTime.parse(response.headers['CB-BEFORE']!) : null,
       after: response.headers.containsKey('CB-AFTER') ? DateTime.parse(response.headers['CB-AFTER']!) : null,
@@ -139,19 +135,16 @@ class AccountsClient extends CoinbaseRestClient {
     int? limit,
     CoinbaseTransferType? transferType,
   }) async {
-    Map<String, String> queryParameters = {};
-    if (before != null) queryParameters['before'] = before.toIso8601String();
-    if (after != null) queryParameters['after'] = after.toIso8601String();
-    if (limit != null) queryParameters['limit'] = limit.toString();
-    if (transferType != null) queryParameters['type'] = transferType.transferType();
-
-    var response = await get(
-      path: '/accounts/$accountId/transfers',
-      queryParameters: queryParameters,
+    var response = await _accountsRestClient.getAccountTransfers(
+      accountId: accountId,
+      before: before,
+      after: after,
+      limit: limit,
+      transferType: transferType,
     );
-    if (response.statusCode != 200) {
-      throw response;
-    }
+
+    if (response.statusCode != 200) throw response;
+
     return Paginator(
       before: response.headers.containsKey('CB-BEFORE') ? DateTime.parse(response.headers['CB-BEFORE']!) : null,
       after: response.headers.containsKey('CB-AFTER') ? DateTime.parse(response.headers['CB-AFTER']!) : null,

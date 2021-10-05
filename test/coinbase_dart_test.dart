@@ -2,10 +2,11 @@ import 'dart:developer';
 
 import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/secrets.dart';
+import 'package:coinbase_dart/src/clients/accounts_client.dart';
 import 'package:coinbase_dart/src/models/account.dart';
 import 'package:coinbase_dart/src/models/channels.dart';
 import 'package:coinbase_dart/src/models/heartbeat.dart';
-import 'package:coinbase_dart/src/rest_clients/accounts.dart';
+import 'package:coinbase_dart/src/rest_clients/accounts_rest_client.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 
@@ -31,7 +32,7 @@ void main() {
 
   // a better test would be to subscribe to everything and verify that you eventually
   // recieve at least one of each response.
- /* group('Websocket Feed', () {
+  group('Websocket Feed', () {
     test('Subscription Response', () async {
       wsClient.connect();
       stream = wsClient.subscribe(
@@ -48,14 +49,14 @@ void main() {
         wsClient.close();
       });
     });
-  });*/
+  });
 
 
-  group('Authenticated tests', () {
+  group('Accounts tests', () {
     late String accountId;
 
     test('listAccounts', () async {
-      List<Account> accounts = await accountsClient.listAccounts();
+      var accounts = await accountsClient.listAccounts();
       accountId = accounts.first.id!;
       expect(accounts.length != 0, true);
     });
@@ -66,17 +67,17 @@ void main() {
     });
 
     test('getHolds', () async {
-      var accounts = await accountsClient.getHolds(accountId: accountId);
+      var holds = await accountsClient.getHolds(accountId: accountId);
       expect(true, true);
     });
 
     test('getAccountLedger', () async {
-      await accountsClient.getAccountLedger(accountId: accountId);
+      var ledger = await accountsClient.getAccountLedger(accountId: accountId);
       expect(true, true);
     });
 
     test('getAccountTransfers', () async {
-      await accountsClient.getAccountTransfers(accountId: accountId);
+      var transfers = await accountsClient.getAccountTransfers(accountId: accountId);
       expect(true, true);
     });
   });

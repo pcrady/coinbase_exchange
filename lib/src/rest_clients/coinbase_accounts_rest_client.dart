@@ -18,7 +18,8 @@ class CoinbaseAccountsRestClient extends CoinbaseRestClient {
     passphrase: passphrase,
   );
 
-  Future<http.Response> getCoinbaseWallets() async => await get(path: '/coinbase-accounts');
+  Future<http.Response> getCoinbaseWallets() async =>
+    await get(path: '/coinbase-accounts');
 
   Future<http.Response> generateCryptoAddress({
     required String accountId,

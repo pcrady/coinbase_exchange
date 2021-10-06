@@ -7,8 +7,8 @@ abstract class CoinbaseRestClient {
   Logger _logger = Logger();
   static const String defaultProductId = 'BTC-USD';
   static const String defaultCurrencyId = 'BTC';
-  static const String apiAuthority = 'api.pro.coinbase.com';
-  static const String sandboxApiAuthority = 'api-public.sandbox.pro.coinbase.com';
+  static const String apiAuthority = 'api.exchange.coinbase.com';
+  static const String sandboxApiAuthority = 'api-public.sandbox.exchange.coinbase.com';
   final bool sandbox;
   String? apiKey;
   String? secretKey;

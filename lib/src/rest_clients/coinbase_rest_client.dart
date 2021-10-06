@@ -126,107 +126,75 @@ abstract class CoinbaseRestClient {
     return response;
   }
 
-  //Future<http.Response> _post(String path) async {
-    //TODO
- // }
-
-  List<Map<String, dynamic>> listDecode(String body) => List<Map<String, dynamic>>.from(json.decode(body));
-
-  Map<String, dynamic> mapDecode(String body) => Map<String, dynamic>.from(json.decode(body));
-
-
-
-
-
-
-
-
-  /*Future<List<Product>> getProducts() async {
-    var response = await _get(path: '/products');
-    return _listDecode(response.body).map((product) => Product.fromJson(product)).toList();
-  }
-
-  Future<Product> getSingleProduct({String productId = defaultProductId}) async {
-    var response = await _get(path: '/products/$productId');
-    return Product.fromJson(_mapDecode(response.body));
-  }
-
-  Future<OrderBook> getProductOrderBook({
-    String productId = defaultProductId,
-    CoinbaseLevel? level,
+  Future<http.Response> post({
+    required String path,
+    Map<String, String>? headers,
+    Map<String, String>? body,
   }) async {
-    Map<String, dynamic> queryParameters = {};
-    if (level != null) queryParameters['level'] = level.value().toString();
-
-    var response = await _get(
-      path: '/products/$productId/book',
-      queryParameters: queryParameters,
-    );
-    return OrderBook.fromJson(_mapDecode(response.body));
-  }
-
-  Future<Ticker> getProductTicker({String productId = defaultProductId}) async {
-    var response = await _get(path: '/products/$productId/ticker');
-    return Ticker.fromJson(_mapDecode(response.body));
-  }
-
-  Future<TradeList> getTrades({
-    String productId = defaultProductId,
-    int? before,
-    int? after,
-    int? limit,
-  }) async {
-    var response = await _get(
-      path: '/products/$productId/trades',
-      queryParameters: _createPaginationQueryParameters(
-        before: before,
-        after: after,
-        limit: limit,
+    Uri url = Uri.https(_authority, path);
+    var response = await http.post(
+      url,
+      headers: _addHeaders(
+        method: 'POST',
+        requestPath: url.path,
+        additionalHeaders: headers,
+        body: body,
       ),
     );
 
-    return TradeList(
-      before: _getBeforeHeader(response),
-      after: _getAfterHeader(response),
-      trades: _listDecode(response.body).map((product) => Trade.fromJson(product)).toList(),
-    );
+    if (response.statusCode == 429) {
+      await Future.delayed(Duration(seconds: 1));
+      return post(path: path, headers: headers, body: body);
+    }
+
+    return response;
   }
 
-  Future<List<Candle>> getHistoricRates({
-    String productId = defaultProductId,
-    required DateTime start,
-    required DateTime end,
-    required CoinbaseGranularity granularity,
+  Future<http.Response> put({
+    required String path,
+    Map<String, String>? headers,
+    Map<String, String>? body,
   }) async {
-    var response = await _get(
-      path: '/products/$productId/candles',
-      queryParameters: {
-        'start': start.toIso8601String(),
-        'end': end.toIso8601String(),
-        'granularity': granularity.seconds().toString(),
-      },
+    Uri url = Uri.https(_authority, path);
+    var response = await http.put(
+      url,
+      headers: _addHeaders(
+        method: 'PUT',
+        requestPath: url.path,
+        additionalHeaders: headers,
+        body: body,
+      ),
     );
-    List<List> body = List<List>.from(json.decode(response.body));
-    return body.map((candle) => Candle.fromList(candle)).toList();
+
+    if (response.statusCode == 429) {
+      await Future.delayed(Duration(seconds: 1));
+      return put(path: path, headers: headers, body: body);
+    }
+
+    return response;;
   }
 
-  Future<Stats> get24HourStats({String productId = defaultProductId}) async {
-    var response = await _get(path: '/products/$productId/stats');
-    return Stats.fromJson(_mapDecode(response.body));
-  }
 
-  Future<List<Currency>> getCurrencies() async {
-    var response = await _get(path: '/currencies');
-    return _listDecode(response.body).map((currencies) => Currency.fromJson(currencies)).toList();
-  }
+  Future<http.Response> delete({
+    required String path,
+    Map<String, String>? headers,
+    Map<String, String>? queryParameters,
+  }) async {
+    Uri url = Uri.https(_authority, path, queryParameters);
+    var response = await http.delete(
+      url,
+      headers: _addHeaders(
+        method: 'DELETE',
+        requestPath: queryParameters != null ? '${url.path}?${url.query}' : url.path,
+        additionalHeaders: headers,
+      ),
+    );
 
-  Future<Currency> getCurrency({String currencyId = defaultCurrencyId}) async {
-    var response = await _get(path: '/currencies/$currencyId');
-    return Currency.fromJson(_mapDecode(response.body));
-  }
+    if (response.statusCode == 429) {
+      await Future.delayed(Duration(seconds: 1));
+      return delete(path: path, headers: headers, queryParameters: queryParameters);
+    }
 
-  Future<DateTime?> getTime() async {
-    var response = await _get(path: '/time');
-    return DateTime.parse(_mapDecode(response.body)['iso'] as String);
-  }*/
+    return response;
+  }
 }

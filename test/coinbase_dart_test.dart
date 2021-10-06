@@ -1,12 +1,8 @@
-import 'dart:developer';
-
 import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/secrets.dart';
 import 'package:coinbase_dart/src/clients/accounts_client.dart';
 import 'package:coinbase_dart/src/models/account.dart';
 import 'package:coinbase_dart/src/models/channels.dart';
-import 'package:coinbase_dart/src/models/heartbeat.dart';
-import 'package:coinbase_dart/src/rest_clients/accounts_rest_client.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 
@@ -19,15 +15,16 @@ import 'package:test/test.dart';
 
 void main() {
   Logger _logger = Logger();
+  Stream<dynamic>? stream;
+
+  CoinbaseWebsocketClient wsClient = CoinbaseWebsocketClient(sandbox: false);
 
   AccountsClient accountsClient = AccountsClient(
-    sandbox: false,
+    sandbox: true,
     secretKey: Secrets.secretKey,
     passphrase: Secrets.passphrase,
     apiKey: Secrets.apiKey,
   );
-  CoinbaseWebsocketClient wsClient = CoinbaseWebsocketClient(sandbox: false);
-  Stream<dynamic>? stream;
 
 
   // a better test would be to subscribe to everything and verify that you eventually
@@ -57,13 +54,17 @@ void main() {
 
     test('listAccounts', () async {
       var accounts = await accountsClient.listAccounts();
-      accountId = accounts.first.id!;
+      for (Account account in accounts) {
+        if (account.currency == 'BTC') {
+          accountId = account.id!;
+        }
+      }
       expect(accounts.length != 0, true);
     });
 
     test('getAccount', () async {
       var account = await accountsClient.getAccount(accountId: accountId);
-      expect(account.currency != null, true);
+      expect(account.balance! > 0, true);
     });
 
     test('getHolds', () async {
@@ -73,6 +74,7 @@ void main() {
 
     test('getAccountLedger', () async {
       var ledger = await accountsClient.getAccountLedger(accountId: accountId);
+      _logger.i(ledger.elements.first.amount);
       expect(true, true);
     });
 

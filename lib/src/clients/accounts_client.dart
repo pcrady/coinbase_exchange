@@ -20,7 +20,7 @@ class AccountsClient extends Client {
   late AccountsRestClient _accountsRestClient;
 
   AccountsClient({
-    this.sandbox = true,
+    this.sandbox = false,
     required this.apiKey,
     required this.secretKey,
     required this.passphrase,

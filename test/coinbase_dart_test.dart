@@ -2,19 +2,25 @@ import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/secrets.dart';
 import 'package:coinbase_dart/src/clients/accounts_client.dart';
 import 'package:coinbase_dart/src/clients/coinbase_accounts_client.dart';
+import 'package:coinbase_dart/src/clients/conversions_client.dart';
+import 'package:coinbase_dart/src/lib/paginator.dart';
 import 'package:coinbase_dart/src/models/account.dart';
 import 'package:coinbase_dart/src/models/channels.dart';
+import 'package:coinbase_dart/src/models/conversion.dart';
+import 'package:coinbase_dart/src/models/crypto_address.dart';
+import 'package:coinbase_dart/src/models/hold.dart';
+import 'package:coinbase_dart/src/models/ledger_entry.dart';
+import 'package:coinbase_dart/src/models/transfer.dart';
 import 'package:coinbase_dart/src/models/wallet.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
+import 'package:http/http.dart' as http;
+
 
 // flutter pub run build_runner build
 // flutter pub run test test/coinbase_dart_test.dart
 // pub run test --chain-stack-traces test/coinbase_dart_test.dart
 // dart --enable-asserts //to get Logger to work in terminal
-
-// TODO actually learn how to test
-
 void main() {
   Logger _logger = Logger();
   Stream<dynamic>? stream;
@@ -34,6 +40,15 @@ void main() {
     passphrase: Secrets.passphrase,
     apiKey: Secrets.apiKey,
   );
+
+  ConversionsClient conversionsClient = ConversionsClient(
+    sandbox: true,
+    secretKey: Secrets.secretKey,
+    passphrase: Secrets.passphrase,
+    apiKey: Secrets.apiKey,
+  );
+
+  void logResponse(http.Response response) => _logger.e('${response.statusCode}\n${response.body}');
 
 
   // a better test would be to subscribe to everything and verify that you eventually
@@ -58,38 +73,67 @@ void main() {
   });
 
 
-  //TODO figure out what to expect
   group('Accounts tests', () {
     late String accountId;
 
     test('listAccounts', () async {
-      var accounts = await accountsClient.listAccounts();
-      for (Account account in accounts) {
-        if (account.currency == 'BTC') {
-          accountId = account.id!;
+      List<Account>? accounts;
+      try {
+        accounts = await accountsClient.listAccounts();
+        for (Account account in accounts) {
+          if (account.currency == 'BTC') {
+            accountId = account.id!;
+          }
         }
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(accounts!.length != 0, true);
       }
-      expect(accounts.length != 0, true);
     });
 
     test('getAccount', () async {
-      var account = await accountsClient.getAccount(accountId: accountId);
-      expect(account.balance! > 0, true);
+      Account? account;
+      try {
+        account = await accountsClient.getAccount(accountId: accountId);
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(account!.balance! > 0, true);
+      }
     });
 
     test('getHolds', () async {
-      var holds = await accountsClient.getHolds(accountId: accountId);
-      expect(true, true);
+      Paginator<Hold, DateTime>? holds;
+      try {
+        holds = await accountsClient.getHolds(accountId: accountId);
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(holds?.elements != null, true);
+      }
     });
 
     test('getAccountLedger', () async {
-      var ledger = await accountsClient.getAccountLedger(accountId: accountId);
-      expect(true, true);
+      Paginator<LedgerEntry, DateTime>? ledger;
+      try {
+        ledger = await accountsClient.getAccountLedger(accountId: accountId);
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(ledger?.elements != null, true);
+      }
     });
 
     test('getAccountTransfers', () async {
-      var transfers = await accountsClient.getAccountTransfers(accountId: accountId);
-      expect(true, true);
+      Paginator<Transfer, DateTime>? transfers;
+      try {
+        transfers = await accountsClient.getAccountTransfers(accountId: accountId);
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(transfers?.elements != null, true);
+      }
     });
   });
 
@@ -98,28 +142,62 @@ void main() {
     late String accountId;
 
     test('getCoinbaseWallets', () async {
-      var wallets = await coinbaseAccountsClient.getCoinbaseWallets();
-      wallets.forEach((wallet) {
-        if (wallet.name == 'BTC Wallet') {
-          accountId = wallet.id!;
-        }
-      });
-      expect(wallets.first.currency != null, true);
+      List<Wallet>? wallets;
+      try {
+        wallets = await coinbaseAccountsClient.getCoinbaseWallets();
+        wallets.forEach((wallet) {
+          if (wallet.name == 'BTC Wallet') {
+            accountId = wallet.id!;
+          }
+        });
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(wallets!.first.currency != null, true);
+      }
     });
 
     test('generateCryptoAddress', () async {
-      var cryptoAddress = await coinbaseAccountsClient.generateCryptoAddress(accountId: accountId);
-      expect(cryptoAddress.address != null, true);
+      CryptoAddress? cryptoAddress;
+      try {
+        cryptoAddress = await coinbaseAccountsClient.generateCryptoAddress(accountId: accountId);
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(cryptoAddress?.address != null, true);
+      }
     });
   });
 
-  group('Conversions', () async {
-    test('convertCurrency', () async {
+  group('Conversions', () {
+    late String conversionId;
 
+    test('convertCurrency', () async {
+      double amount = 40.0;
+      Conversion? conversion;
+      try {
+        conversion = await conversionsClient.convertCurrency(
+          from: 'USD',
+          to: 'USDC',
+          amount: amount,
+        );
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        conversionId = conversion!.id!;
+        expect(conversion.amount == amount, true);
+      }
     });
 
     test('getConversion', () async {
-
+      Conversion? conversion;
+      try {
+        conversion = await conversionsClient.getConversion(conversionId: conversionId);
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(conversion?.id == conversionId, true);
+      }
     });
   });
 }

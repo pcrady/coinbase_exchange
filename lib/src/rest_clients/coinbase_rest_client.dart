@@ -134,6 +134,7 @@ abstract class CoinbaseRestClient {
     Uri url = Uri.https(_authority, path);
     var response = await http.post(
       url,
+      body: body != null ? jsonEncode(body) : null,
       headers: _addHeaders(
         method: 'POST',
         requestPath: url.path,
@@ -158,6 +159,7 @@ abstract class CoinbaseRestClient {
     Uri url = Uri.https(_authority, path);
     var response = await http.put(
       url,
+      body: body != null ? jsonEncode(body) : null,
       headers: _addHeaders(
         method: 'PUT',
         requestPath: url.path,

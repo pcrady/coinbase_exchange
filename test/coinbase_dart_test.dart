@@ -3,6 +3,7 @@ import 'package:coinbase_dart/secrets.dart';
 import 'package:coinbase_dart/src/clients/accounts_client.dart';
 import 'package:coinbase_dart/src/clients/coinbase_accounts_client.dart';
 import 'package:coinbase_dart/src/clients/conversions_client.dart';
+import 'package:coinbase_dart/src/clients/currencies_client.dart';
 import 'package:coinbase_dart/src/lib/paginator.dart';
 import 'package:coinbase_dart/src/models/account.dart';
 import 'package:coinbase_dart/src/models/channels.dart';
@@ -42,6 +43,13 @@ void main() {
   );
 
   ConversionsClient conversionsClient = ConversionsClient(
+    sandbox: true,
+    secretKey: Secrets.secretKey,
+    passphrase: Secrets.passphrase,
+    apiKey: Secrets.apiKey,
+  );
+
+  CurrenciesClient currenciesClient = CurrenciesClient(
     sandbox: true,
     secretKey: Secrets.secretKey,
     passphrase: Secrets.passphrase,
@@ -200,4 +208,43 @@ void main() {
       }
     });
   });
+
+
+  group('Currencies', () {
+    test('getAllCurrencies', () async {
+      List<Currency>? currencies;
+      Currency? usdCurrency;
+      try {
+        currencies = await currenciesClient.getAllCurrencies();
+        for (var currency in currencies) {
+          if (currency.id == 'USD') {
+            usdCurrency = currency;
+          }
+        }
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(usdCurrency?.name == 'United States Dollar', true);
+      }
+    });
+
+    test('getCurrency', () async {
+      Currency? currency;
+      try {
+        currency = await currenciesClient.getCurrency(currencyId: 'USD');
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(currency?.name == 'United States Dollar', true);
+      }
+    });
+  });
+
+
+  group('Transfers', () {});
+  group('Orders', () {});
+  group('Products', () {});
+  group('Profiles', () {});
+  group('Reports', () {});
+  group('Users', () {});
 }

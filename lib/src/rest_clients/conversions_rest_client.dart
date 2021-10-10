@@ -1,4 +1,4 @@
-import 'package:coinbase_dart/src/rest_clients/coinbase_rest_client.dart';
+import 'package:coinbase_dart/src/rest_clients/rest_client.dart';
 import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
@@ -33,13 +33,13 @@ class ConversionsRestClient extends CoinbaseRestClient {
     if (profileId != null) body['profile_id'] = profileId;
     if (nonce != null) body['nonce'] = nonce;
 
-    return await post(
+    return post(
       path: '/conversions',
-      body:  body,
+      body: body,
     );
   }
 
   Future<http.Response> getConversion({
     required String conversionId,
-  }) async => await get(path: '/conversions/$conversionId');
+  }) async => get(path: '/conversions/$conversionId');
 }

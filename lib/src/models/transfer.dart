@@ -15,6 +15,7 @@ class Transfer {
   String? userNonce;
   @StringToDoubleConverter()
   double? amount;
+  //TODO make this a class
   Map? details;
 
   Transfer({

@@ -27,6 +27,7 @@ class Product {
   final bool? limitOnly;
   final bool? postOnly;
   final bool? tradingDisabled;
+  final bool? marginEnabled;
 
   Product({
     this.id,
@@ -45,6 +46,7 @@ class Product {
     this.limitOnly,
     this.postOnly,
     this.tradingDisabled,
+    this.marginEnabled,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);

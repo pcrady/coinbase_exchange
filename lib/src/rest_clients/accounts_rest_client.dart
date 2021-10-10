@@ -20,11 +20,11 @@ class AccountsRestClient extends CoinbaseRestClient {
   );
 
 
-  Future<http.Response> listAccounts() async => await get(path: '/accounts');
+  Future<http.Response> listAccounts() async => get(path: '/accounts');
 
   Future<http.Response> getAccount({
     required String accountId,
-  }) async => await get(path: '/accounts/$accountId');
+  }) async => get(path: '/accounts/$accountId');
 
 
   Future<http.Response> getHolds({
@@ -38,7 +38,7 @@ class AccountsRestClient extends CoinbaseRestClient {
     if (after != null) queryParameters['after'] = after.toIso8601String();
     if (limit != null) queryParameters['limit'] = limit.toString();
 
-    return await get(
+    return get(
       path: '/accounts/$accountId/holds',
       queryParameters: queryParameters,
     );
@@ -60,7 +60,7 @@ class AccountsRestClient extends CoinbaseRestClient {
     if (after != null) queryParameters['after'] = after.toIso8601String();
     if (limit != null) queryParameters['limit'] = limit.toString();
 
-    return await get(
+    return get(
       path: '/accounts/$accountId/ledger',
       queryParameters: queryParameters,
     );
@@ -79,7 +79,7 @@ class AccountsRestClient extends CoinbaseRestClient {
     if (limit != null) queryParameters['limit'] = limit.toString();
     if (transferType != null) queryParameters['type'] = transferType.transferType();
 
-    return await get(
+    return get(
       path: '/accounts/$accountId/transfers',
       queryParameters: queryParameters,
     );

@@ -1,12 +1,11 @@
 import 'package:coinbase_dart/src/rest_clients/rest_client.dart';
-import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
 
-class CoinbaseAccountsRestClient extends CoinbaseRestClient {
+class UsersRestClient extends CoinbaseRestClient {
   Logger _logger = Logger();
 
-  CoinbaseAccountsRestClient({
+  UsersRestClient({
     bool sandbox = false,
     required String apiKey,
     required String secretKey,
@@ -18,10 +17,7 @@ class CoinbaseAccountsRestClient extends CoinbaseRestClient {
     passphrase: passphrase,
   );
 
-  Future<http.Response> getCoinbaseWallets() async =>
-    get(path: '/coinbase-accounts');
-
-  Future<http.Response> generateCryptoAddress({
-    required String accountId,
-  }) async => post(path: '/coinbase-accounts/$accountId/addresses');
+  Future<http.Response> getUserExchangeLimits({
+    required String userId,
+  }) async => get(path: '/users/$userId/exchange-limits');
 }

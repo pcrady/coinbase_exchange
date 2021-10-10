@@ -106,7 +106,7 @@ abstract class CoinbaseRestClient {
   Future<http.Response> get({
     required String path,
     Map<String, String>? headers,
-    Map<String, String>? queryParameters,
+    Map<String, dynamic>? queryParameters,
   }) async {
     Uri url = Uri.https(_authority, path, queryParameters);
     var response = await http.get(
@@ -129,7 +129,7 @@ abstract class CoinbaseRestClient {
   Future<http.Response> post({
     required String path,
     Map<String, String>? headers,
-    Map<String, String>? body,
+    Map<String, dynamic>? body,
   }) async {
     Uri url = Uri.https(_authority, path);
     var response = await http.post(
@@ -154,7 +154,7 @@ abstract class CoinbaseRestClient {
   Future<http.Response> put({
     required String path,
     Map<String, String>? headers,
-    Map<String, String>? body,
+    Map<String, dynamic>? body,
   }) async {
     Uri url = Uri.https(_authority, path);
     var response = await http.put(
@@ -180,7 +180,7 @@ abstract class CoinbaseRestClient {
   Future<http.Response> delete({
     required String path,
     Map<String, String>? headers,
-    Map<String, String>? queryParameters,
+    Map<String, dynamic>? queryParameters,
   }) async {
     Uri url = Uri.https(_authority, path, queryParameters);
     var response = await http.delete(

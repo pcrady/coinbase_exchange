@@ -1,4 +1,4 @@
-import 'package:coinbase_dart/src/rest_clients/coinbase_rest_client.dart';
+import 'package:coinbase_dart/src/rest_clients/rest_client.dart';
 import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,9 +18,9 @@ class CurrenciesRestClient extends CoinbaseRestClient {
   );
 
   Future<http.Response> getAllCurrencies() async =>
-    await get(path: '/currencies');
+    get(path: '/currencies');
 
   Future<http.Response> getCurrency({
     required String currencyId,
-  }) async => await get(path: '/currencies/$currencyId');
+  }) async => get(path: '/currencies/$currencyId');
 }

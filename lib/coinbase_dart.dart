@@ -1,5 +1,5 @@
 library coinbase_dart;
-export 'package:coinbase_dart/src/rest_clients/coinbase_rest_client.dart';
+export 'package:coinbase_dart/src/rest_clients/rest_client.dart';
 export 'package:coinbase_dart/src/websocket_client/coinbase_websocket_client.dart';
 
 export 'package:coinbase_dart/src/models/candle.dart';

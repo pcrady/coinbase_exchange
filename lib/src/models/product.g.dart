@@ -30,6 +30,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     limitOnly: json['limit_only'] as bool?,
     postOnly: json['post_only'] as bool?,
     tradingDisabled: json['trading_disabled'] as bool?,
+    marginEnabled: json['margin_enabled'] as bool?,
   );
 }
 
@@ -56,4 +57,5 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'limit_only': instance.limitOnly,
       'post_only': instance.postOnly,
       'trading_disabled': instance.tradingDisabled,
+      'margin_enabled': instance.marginEnabled,
     };

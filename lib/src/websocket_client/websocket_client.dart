@@ -2,7 +2,7 @@ import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/src/lib/coinbase_enums.dart';
 import 'package:coinbase_dart/src/models/activate.dart';
 import 'package:coinbase_dart/src/models/change.dart';
-import 'package:coinbase_dart/src/models/channels.dart';
+import 'package:coinbase_dart/src/models/subscriptions.dart';
 import 'package:coinbase_dart/src/models/done.dart';
 import 'package:coinbase_dart/src/models/heartbeat.dart';
 import 'package:coinbase_dart/src/models/l2update.dart';
@@ -15,13 +15,13 @@ import 'package:coinbase_dart/src/models/stream_ticker.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'dart:convert';
 
-class CoinbaseWebsocketClient {
+class WebsocketClient {
   static const String webSocketAuthority = 'wss://ws-feed.pro.coinbase.com';
   static const String sandboxWebSocketAuthority = 'wss://ws-feed-public.sandbox.pro.coinbase.com';
   final bool sandbox;
   WebSocketChannel? _channel;
 
-  CoinbaseWebsocketClient({
+  WebsocketClient({
     this.sandbox = false,
   });
 

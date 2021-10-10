@@ -2,7 +2,7 @@ import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/src/rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
-class ProductsRestClient extends CoinbaseRestClient {
+class ProductsRestClient extends RestClient {
   ProductsRestClient({
     bool sandbox = false,
     required String apiKey,

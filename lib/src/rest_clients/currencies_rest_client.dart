@@ -1,7 +1,7 @@
 import 'package:coinbase_dart/src/rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
-class CurrenciesRestClient extends CoinbaseRestClient {
+class CurrenciesRestClient extends RestClient {
   CurrenciesRestClient({
     bool sandbox = false,
     required String apiKey,

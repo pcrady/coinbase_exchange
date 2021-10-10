@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
-import 'package:logger/logger.dart';
 
-abstract class CoinbaseRestClient {
+abstract class RestClient {
   static const String defaultProductId = 'BTC-USD';
   static const String defaultCurrencyId = 'BTC';
   static const String apiAuthority = 'api.exchange.coinbase.com';
@@ -13,7 +12,7 @@ abstract class CoinbaseRestClient {
   String? secretKey;
   String? passphrase;
 
-  CoinbaseRestClient({
+  RestClient({
     this.sandbox = false,
     this.apiKey,
     this.secretKey,

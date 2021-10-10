@@ -1,9 +1,10 @@
 import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/src/lib/coinbase_enums.dart';
+import 'package:coinbase_dart/src/rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
 
-class AccountsRestClient extends CoinbaseRestClient {
+class AccountsRestClient extends RestClient {
   AccountsRestClient({
     bool sandbox = false,
     required String apiKey,

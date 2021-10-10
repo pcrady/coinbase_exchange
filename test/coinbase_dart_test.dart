@@ -1,18 +1,5 @@
 import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/secrets.dart';
-import 'package:coinbase_dart/src/clients/accounts_client.dart';
-import 'package:coinbase_dart/src/clients/coinbase_accounts_client.dart';
-import 'package:coinbase_dart/src/clients/conversions_client.dart';
-import 'package:coinbase_dart/src/clients/currencies_client.dart';
-import 'package:coinbase_dart/src/lib/paginator.dart';
-import 'package:coinbase_dart/src/models/account.dart';
-import 'package:coinbase_dart/src/models/channels.dart';
-import 'package:coinbase_dart/src/models/conversion.dart';
-import 'package:coinbase_dart/src/models/crypto_address.dart';
-import 'package:coinbase_dart/src/models/hold.dart';
-import 'package:coinbase_dart/src/models/ledger_entry.dart';
-import 'package:coinbase_dart/src/models/transfer.dart';
-import 'package:coinbase_dart/src/models/wallet.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +13,7 @@ void main() {
   Logger _logger = Logger();
   Stream<dynamic>? stream;
 
-  CoinbaseWebsocketClient wsClient = CoinbaseWebsocketClient(sandbox: false);
+  WebsocketClient wsClient = WebsocketClient(sandbox: false);
 
   AccountsClient accountsClient = AccountsClient(
     sandbox: true,

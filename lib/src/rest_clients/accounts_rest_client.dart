@@ -1,12 +1,9 @@
 import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/src/lib/coinbase_enums.dart';
-import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
 
 
 class AccountsRestClient extends CoinbaseRestClient {
-  Logger _logger = Logger();
-
   AccountsRestClient({
     bool sandbox = false,
     required String apiKey,
@@ -18,7 +15,6 @@ class AccountsRestClient extends CoinbaseRestClient {
     secretKey: secretKey,
     passphrase: passphrase,
   );
-
 
   Future<http.Response> listAccounts() async => get(path: '/accounts');
 

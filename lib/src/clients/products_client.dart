@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/src/clients/client.dart';
 import 'package:coinbase_dart/src/lib/paginator.dart';

@@ -1,5 +1,3 @@
-import 'package:http/http.dart' as http;
-
 class Paginator<T, U> {
   U? before;
   U? after;

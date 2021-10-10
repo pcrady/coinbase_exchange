@@ -3,8 +3,6 @@ import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
 
 class UsersRestClient extends CoinbaseRestClient {
-  Logger _logger = Logger();
-
   UsersRestClient({
     bool sandbox = false,
     required String apiKey,

@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:coinbase_dart/src/clients/client.dart';
 import 'package:coinbase_dart/src/models/profile.dart';
 import 'package:coinbase_dart/src/rest_clients/profiles_rest_client.dart';

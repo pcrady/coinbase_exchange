@@ -13,7 +13,6 @@ import 'package:coinbase_dart/src/models/snapshot.dart';
 import 'package:coinbase_dart/src/models/status.dart';
 import 'package:coinbase_dart/src/models/stream_ticker.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:logger/logger.dart';
 import 'dart:convert';
 
 class CoinbaseWebsocketClient {

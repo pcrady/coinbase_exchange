@@ -1,18 +1,8 @@
-import 'dart:html';
-
-import 'package:coinbase_dart/coinbase_dart.dart';
 import 'package:coinbase_dart/src/clients/client.dart';
-import 'package:coinbase_dart/src/lib/paginator.dart';
-import 'package:coinbase_dart/src/rest_clients/products_rest_client.dart';
-import 'package:coinbase_dart/src/rest_clients/profiles_rest_client.dart';
-import 'package:coinbase_dart/src/rest_clients/reports_rest_client.dart';
-import 'package:coinbase_dart/src/rest_clients/transfers_rest_client.dart';
 import 'package:coinbase_dart/src/rest_clients/users_rest_client.dart';
-import 'package:logger/logger.dart';
 import 'dart:convert';
 
 class UsersClient extends Client {
-  Logger _logger = Logger();
   bool sandbox;
   String apiKey;
   String secretKey;
@@ -33,4 +23,19 @@ class UsersClient extends Client {
     );
   }
 
+  /// Get user exchange limits
+  ///
+  /// Gets exchange limits information for a single user.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getuserexchangelimits
+  ///
+  Future<Map> getUserExchangeLimits({
+    required String userId,
+  }) async {
+    var response = await _usersRestClient.getUserExchangeLimits(userId: userId);
+
+    if (response.statusCode != 200) throw response;
+
+    return json.decode(response.body);
+  }
 }

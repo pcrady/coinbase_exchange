@@ -1,6 +1,6 @@
-# coinbase_dart
+# coinbase_exchange
 
-A new Flutter project.
+An unofficial library for the coinbase cloud exchange.
 
 ## Getting Started
 

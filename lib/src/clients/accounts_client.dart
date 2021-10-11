@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:coinbase_dart/coinbase_dart.dart';
+import 'package:coinbase_dart/coinbase_exchange.dart';
 import 'package:coinbase_dart/src/clients/client.dart';
 import 'package:coinbase_dart/src/lib/paginator.dart';
 import 'package:coinbase_dart/src/models/account.dart';

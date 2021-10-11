@@ -1,4 +1,4 @@
-import 'package:coinbase_dart/coinbase_dart.dart';
+import 'package:coinbase_dart/coinbase_exchange.dart';
 import 'package:coinbase_dart/secrets.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';

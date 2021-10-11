@@ -1,4 +1,4 @@
-import 'package:coinbase_dart/coinbase_dart.dart';
+import 'package:coinbase_dart/coinbase_exchange.dart';
 import 'package:coinbase_dart/src/lib/coinbase_enums.dart';
 import 'package:coinbase_dart/src/models/activate.dart';
 import 'package:coinbase_dart/src/models/change.dart';

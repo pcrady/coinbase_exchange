@@ -1,5 +1,5 @@
 import 'package:coinbase_dart/src/rest_clients/rest_client.dart';
-import 'package:coinbase_dart/coinbase_dart.dart';
+import 'package:coinbase_dart/coinbase_exchange.dart';
 import 'package:http/http.dart' as http;
 
 class CoinbaseAccountsRestClient extends RestClient {

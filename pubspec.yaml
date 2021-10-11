@@ -1,5 +1,5 @@
-name: coinbase_dart
-description: A new Flutter project.
+name: coinbase_exchange
+description: A library for the coinbase cloud exchange
 version: 0.0.1
 homepage:
 

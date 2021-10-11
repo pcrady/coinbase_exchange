@@ -4,11 +4,11 @@ An unofficial library for the coinbase cloud exchange.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+This project is a Dart implementation of the
+[coinbase exchange api](https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getaccounts).
+This api allows for the retrieval of real time pricing data as well and information about
+individual profiles on coinbase and coinbase pro. It also allows for the trading of
+cryptocurrencies on the coinbase pro platform. This package uses api keys which must be generated
+from [coinbase pro](https://pro.coinbase.com/) or the [coinbase pro sandbox](https://public.sandbox.pro.coinbase.com/).
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+

@@ -3,7 +3,6 @@ import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
 
-
 /// flutter pub run build_runner build
 /// flutter pub run test test/coinbase_exchange_test.dart
 /// pub run test --chain-stack-traces test/coinbase_exchange_test.dart
@@ -49,8 +48,8 @@ void main() {
     apiKey: Secrets.apiKey,
   );
 
-  void logResponse(http.Response response) => _logger.e('${response.statusCode}\n${response.body}');
-
+  void logResponse(http.Response response) =>
+      _logger.e('${response.statusCode}\n${response.body}');
 
   // a better test would be to subscribe to everything and verify that you eventually
   // recieve at least one of each response.
@@ -72,7 +71,6 @@ void main() {
       });
     });
   });
-
 
   group('Accounts tests', () {
     late String accountId;
@@ -129,7 +127,8 @@ void main() {
     test('getAccountTransfers', () async {
       Paginator<Transfer, DateTime>? transfers;
       try {
-        transfers = await accountsClient.getAccountTransfers(accountId: accountId);
+        transfers =
+            await accountsClient.getAccountTransfers(accountId: accountId);
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
@@ -137,7 +136,6 @@ void main() {
       }
     });
   });
-
 
   group('Coinbase Accounts', () {
     late String accountId;
@@ -161,7 +159,8 @@ void main() {
     test('generateCryptoAddress', () async {
       CryptoAddress? cryptoAddress;
       try {
-        cryptoAddress = await coinbaseAccountsClient.generateCryptoAddress(accountId: accountId);
+        cryptoAddress = await coinbaseAccountsClient.generateCryptoAddress(
+            accountId: accountId);
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
@@ -193,7 +192,8 @@ void main() {
     test('getConversion', () async {
       Conversion? conversion;
       try {
-        conversion = await conversionsClient.getConversion(conversionId: conversionId);
+        conversion =
+            await conversionsClient.getConversion(conversionId: conversionId);
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
@@ -201,7 +201,6 @@ void main() {
       }
     });
   });
-
 
   group('Currencies', () {
     test('getAllCurrencies', () async {
@@ -232,7 +231,6 @@ void main() {
       }
     });
   });
-
 
   group('Transfers', () {});
   group('Orders', () {});

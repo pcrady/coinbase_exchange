@@ -16,13 +16,15 @@ class Snapshot {
   factory Snapshot.fromJson(Map<String, dynamic> json) {
     List<Tuple2<double, double>> bidsDouble = [];
     for (List bid in json['bids']) {
-      Tuple2<double, double> bidDouble = Tuple2(double.parse(bid[0]), double.parse(bid[1]));
+      Tuple2<double, double> bidDouble =
+          Tuple2(double.parse(bid[0]), double.parse(bid[1]));
       bidsDouble.add(bidDouble);
     }
 
     List<Tuple2<double, double>> asksDouble = [];
     for (List ask in json['asks']) {
-      Tuple2<double, double> askDouble = Tuple2(double.parse(ask[0]), double.parse(ask[1]));
+      Tuple2<double, double> askDouble =
+          Tuple2(double.parse(ask[0]), double.parse(ask[1]));
       asksDouble.add(askDouble);
     }
 

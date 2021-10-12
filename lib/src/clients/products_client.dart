@@ -2,11 +2,9 @@ import 'package:coinbase_exchange/coinbase_exchange.dart';
 import '../clients/client.dart';
 import '../lib/paginator.dart';
 import '../rest_clients/products_rest_client.dart';
-import 'package:logger/logger.dart';
 import 'dart:convert';
 
 class ProductsClient extends Client {
-  Logger _logger = Logger();
   bool sandbox;
   String apiKey;
   String secretKey;
@@ -38,7 +36,9 @@ class ProductsClient extends Client {
 
     if (response.statusCode != 200) throw response;
 
-    return listDecode(response.body).map((product) => Product.fromJson(product)).toList();
+    return listDecode(response.body)
+        .map((product) => Product.fromJson(product))
+        .toList();
   }
 
   /// Get single product
@@ -103,7 +103,6 @@ class ProductsClient extends Client {
 
     List<List> body = List<List>.from(json.decode(response.body));
     return body.map((candle) => Candle.fromList(candle)).toList();
-
   }
 
   /// Get product stats
@@ -115,7 +114,8 @@ class ProductsClient extends Client {
   Future<Map<String, Stats>> getProductStats({
     required String productId,
   }) async {
-    var response = await _productsRestClient.getProductStats(productId: productId);
+    var response =
+        await _productsRestClient.getProductStats(productId: productId);
 
     if (response.statusCode != 200) throw response;
 
@@ -134,12 +134,14 @@ class ProductsClient extends Client {
   Future<Ticker> getProductTicker({
     required String productId,
   }) async {
-    var response = await _productsRestClient.getProductTicker(productId: productId);
+    var response =
+        await _productsRestClient.getProductTicker(productId: productId);
 
     if (response.statusCode != 200) throw response;
 
     return Ticker.fromJson(json.decode(response.body));
   }
+
   /// Get product trades
   ///
   /// Gets a list the latest trades for a product.
@@ -161,9 +163,15 @@ class ProductsClient extends Client {
     if (response.statusCode != 200) throw response;
 
     return Paginator(
-      before: response.headers.containsKey('CB-BEFORE') ? DateTime.parse(response.headers['CB-BEFORE']!) : null,
-      after: response.headers.containsKey('CB-AFTER') ? DateTime.parse(response.headers['CB-AFTER']!) : null,
-      elements: listDecode(response.body).map((trade) => Trade.fromJson(trade)).toList(),
+      before: response.headers.containsKey('CB-BEFORE')
+          ? DateTime.parse(response.headers['CB-BEFORE']!)
+          : null,
+      after: response.headers.containsKey('CB-AFTER')
+          ? DateTime.parse(response.headers['CB-AFTER']!)
+          : null,
+      elements: listDecode(response.body)
+          .map((trade) => Trade.fromJson(trade))
+          .toList(),
     );
   }
 }

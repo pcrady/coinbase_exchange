@@ -3,7 +3,6 @@ import '../lib/coinbase_enums.dart';
 import '../rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
-
 class AccountsRestClient extends RestClient {
   AccountsRestClient({
     bool sandbox = false,
@@ -11,18 +10,18 @@ class AccountsRestClient extends RestClient {
     required String secretKey,
     required String passphrase,
   }) : super(
-    sandbox: sandbox,
-    apiKey: apiKey,
-    secretKey: secretKey,
-    passphrase: passphrase,
-  );
+          sandbox: sandbox,
+          apiKey: apiKey,
+          secretKey: secretKey,
+          passphrase: passphrase,
+        );
 
   Future<http.Response> listAccounts() async => get(path: '/accounts');
 
   Future<http.Response> getAccount({
     required String accountId,
-  }) async => get(path: '/accounts/$accountId');
-
+  }) async =>
+      get(path: '/accounts/$accountId');
 
   Future<http.Response> getHolds({
     required String accountId,
@@ -41,7 +40,6 @@ class AccountsRestClient extends RestClient {
     );
   }
 
-
   Future<http.Response> getAccountLedger({
     required String accountId,
     DateTime? startDate,
@@ -51,8 +49,10 @@ class AccountsRestClient extends RestClient {
     int? limit,
   }) async {
     Map<String, String> queryParameters = {};
-    if (startDate != null) queryParameters['start_date'] = startDate.toIso8601String();
-    if (endDate != null) queryParameters['end_date'] = endDate.toIso8601String();
+    if (startDate != null)
+      queryParameters['start_date'] = startDate.toIso8601String();
+    if (endDate != null)
+      queryParameters['end_date'] = endDate.toIso8601String();
     if (before != null) queryParameters['before'] = before.toIso8601String();
     if (after != null) queryParameters['after'] = after.toIso8601String();
     if (limit != null) queryParameters['limit'] = limit.toString();
@@ -74,7 +74,8 @@ class AccountsRestClient extends RestClient {
     if (before != null) queryParameters['before'] = before.toIso8601String();
     if (after != null) queryParameters['after'] = after.toIso8601String();
     if (limit != null) queryParameters['limit'] = limit.toString();
-    if (transferType != null) queryParameters['type'] = transferType.transferType();
+    if (transferType != null)
+      queryParameters['type'] = transferType.transferType();
 
     return get(
       path: '/accounts/$accountId/transfers',
@@ -82,4 +83,3 @@ class AccountsRestClient extends RestClient {
     );
   }
 }
-

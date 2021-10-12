@@ -2,11 +2,9 @@ import '../clients/client.dart';
 import '../models/fill.dart';
 import '../models/order.dart';
 import '../rest_clients/orders_rest_client.dart';
-import 'package:logger/logger.dart';
 import 'dart:convert';
 
 class OrdersClient extends Client {
-  Logger _logger = Logger();
   bool sandbox;
   String apiKey;
   String secretKey;
@@ -52,7 +50,9 @@ class OrdersClient extends Client {
 
     if (response.statusCode != 200) throw response;
 
-    return listDecode(response.body).map((fill) => Fill.fromJson(fill)).toList();
+    return listDecode(response.body)
+        .map((fill) => Fill.fromJson(fill))
+        .toList();
   }
 
   /// Get all orders
@@ -95,7 +95,9 @@ class OrdersClient extends Client {
 
     if (response.statusCode != 200) throw response;
 
-    return listDecode(response.body).map((order) => Order.fromJson(order)).toList();
+    return listDecode(response.body)
+        .map((order) => Order.fromJson(order))
+        .toList();
   }
 
   /// Cancel all orders

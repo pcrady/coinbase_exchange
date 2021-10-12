@@ -12,7 +12,8 @@ class SubscribedChannel {
     this.productIds,
   });
 
-  factory SubscribedChannel.fromJson(Map<String, dynamic> json) => _$SubscribedChannelFromJson(json);
+  factory SubscribedChannel.fromJson(Map<String, dynamic> json) =>
+      _$SubscribedChannelFromJson(json);
 
   Map<String, dynamic> toJson() => _$SubscribedChannelToJson(this);
 }

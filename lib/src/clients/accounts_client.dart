@@ -8,11 +8,8 @@ import '../models/hold.dart';
 import '../models/ledger_entry.dart';
 import '../models/transfer.dart';
 import '../rest_clients/accounts_rest_client.dart';
-import 'package:logger/logger.dart';
-
 
 class AccountsClient extends Client {
-  Logger _logger = Logger();
   bool sandbox;
   String apiKey;
   String secretKey;
@@ -40,7 +37,9 @@ class AccountsClient extends Client {
   Future<List<Account>> listAccounts() async {
     var response = await _accountsRestClient.listAccounts();
     if (response.statusCode != 200) throw response;
-    return listDecode(response.body).map((account) => Account.fromJson(account)).toList();
+    return listDecode(response.body)
+        .map((account) => Account.fromJson(account))
+        .toList();
   }
 
   /// Get a single account by id
@@ -74,7 +73,7 @@ class AccountsClient extends Client {
     DateTime? after,
     int? limit,
   }) async {
-    var response = await  _accountsRestClient.getHolds(
+    var response = await _accountsRestClient.getHolds(
       accountId: accountId,
       before: before,
       after: after,
@@ -84,9 +83,14 @@ class AccountsClient extends Client {
     if (response.statusCode != 200) throw response;
 
     return Paginator(
-      before: response.headers.containsKey('CB-BEFORE') ? DateTime.parse(response.headers['CB-BEFORE']!) : null,
-      after: response.headers.containsKey('CB-AFTER') ? DateTime.parse(response.headers['CB-AFTER']!) : null,
-      elements: listDecode(response.body).map((hold) => Hold.fromJson(hold)).toList(),
+      before: response.headers.containsKey('CB-BEFORE')
+          ? DateTime.parse(response.headers['CB-BEFORE']!)
+          : null,
+      after: response.headers.containsKey('CB-AFTER')
+          ? DateTime.parse(response.headers['CB-AFTER']!)
+          : null,
+      elements:
+          listDecode(response.body).map((hold) => Hold.fromJson(hold)).toList(),
     );
   }
 
@@ -117,9 +121,15 @@ class AccountsClient extends Client {
     if (response.statusCode != 200) throw response;
 
     return Paginator(
-      before: response.headers.containsKey('CB-BEFORE') ? DateTime.parse(response.headers['CB-BEFORE']!) : null,
-      after: response.headers.containsKey('CB-AFTER') ? DateTime.parse(response.headers['CB-AFTER']!) : null,
-      elements: listDecode(response.body).map((hold) => LedgerEntry.fromJson(hold)).toList(),
+      before: response.headers.containsKey('CB-BEFORE')
+          ? DateTime.parse(response.headers['CB-BEFORE']!)
+          : null,
+      after: response.headers.containsKey('CB-AFTER')
+          ? DateTime.parse(response.headers['CB-AFTER']!)
+          : null,
+      elements: listDecode(response.body)
+          .map((hold) => LedgerEntry.fromJson(hold))
+          .toList(),
     );
   }
 
@@ -146,10 +156,15 @@ class AccountsClient extends Client {
     if (response.statusCode != 200) throw response;
 
     return Paginator(
-      before: response.headers.containsKey('CB-BEFORE') ? DateTime.parse(response.headers['CB-BEFORE']!) : null,
-      after: response.headers.containsKey('CB-AFTER') ? DateTime.parse(response.headers['CB-AFTER']!) : null,
-      elements: listDecode(response.body).map((hold) => Transfer.fromJson(hold)).toList(),
+      before: response.headers.containsKey('CB-BEFORE')
+          ? DateTime.parse(response.headers['CB-BEFORE']!)
+          : null,
+      after: response.headers.containsKey('CB-AFTER')
+          ? DateTime.parse(response.headers['CB-AFTER']!)
+          : null,
+      elements: listDecode(response.body)
+          .map((hold) => Transfer.fromJson(hold))
+          .toList(),
     );
   }
 }
-

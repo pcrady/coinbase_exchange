@@ -13,7 +13,8 @@ class Subscriptions {
 
   factory Subscriptions.fromJson(Map<String, dynamic> json) {
     List<SubscribedChannel> subscribedChannels = [];
-    json['channels'].forEach((channel) => subscribedChannels.add(SubscribedChannel.fromJson(channel)));
+    json['channels'].forEach((channel) =>
+        subscribedChannels.add(SubscribedChannel.fromJson(channel)));
     return Subscriptions(
       channels: subscribedChannels,
     );

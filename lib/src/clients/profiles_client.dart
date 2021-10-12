@@ -1,11 +1,9 @@
 import '../clients/client.dart';
 import '../models/profile.dart';
 import '../rest_clients/profiles_rest_client.dart';
-import 'package:logger/logger.dart';
 import 'dart:convert';
 
 class ProfilesClient extends Client {
-  Logger _logger = Logger();
   bool sandbox;
   String apiKey;
   String secretKey;
@@ -39,7 +37,9 @@ class ProfilesClient extends Client {
 
     if (response.statusCode != 200) throw response;
 
-    return listDecode(response.body).map((product) => Profile.fromJson(product)).toList();
+    return listDecode(response.body)
+        .map((product) => Profile.fromJson(product))
+        .toList();
   }
 
   /// Create a profile
@@ -92,7 +92,8 @@ class ProfilesClient extends Client {
     required String profileId,
     bool? active,
   }) async {
-    var response = await _profilesRestClient.getProfileById(profileId: profileId);
+    var response =
+        await _profilesRestClient.getProfileById(profileId: profileId);
 
     if (response.statusCode != 200) throw response;
 

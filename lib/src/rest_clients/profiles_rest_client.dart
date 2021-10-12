@@ -1,5 +1,4 @@
 import '../rest_clients/rest_client.dart';
-import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
 
 class ProfilesRestClient extends RestClient {
@@ -9,11 +8,11 @@ class ProfilesRestClient extends RestClient {
     required String secretKey,
     required String passphrase,
   }) : super(
-    sandbox: sandbox,
-    apiKey: apiKey,
-    secretKey: secretKey,
-    passphrase: passphrase,
-  );
+          sandbox: sandbox,
+          apiKey: apiKey,
+          secretKey: secretKey,
+          passphrase: passphrase,
+        );
 
   Future<http.Response> getProfiles({
     bool? active,

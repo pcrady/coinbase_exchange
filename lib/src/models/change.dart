@@ -23,19 +23,18 @@ class Change {
   final double? price;
   final CoinbaseSide? side;
 
-  Change({
-    this.type,
-    this.time,
-    this.sequence,
-    this.orderId,
-    this.productId,
-    this.newSize,
-    this.oldSize,
-    this.newFunds,
-    this.oldFunds,
-    this.price,
-    this.side
-  });
+  Change(
+      {this.type,
+      this.time,
+      this.sequence,
+      this.orderId,
+      this.productId,
+      this.newSize,
+      this.oldSize,
+      this.newFunds,
+      this.oldFunds,
+      this.price,
+      this.side});
 
   factory Change.fromJson(Map<String, dynamic> json) => _$ChangeFromJson(json);
 

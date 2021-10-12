@@ -17,7 +17,7 @@ class Candle {
 
   factory Candle.fromList(List bucket) {
     assert(bucket.length == 6);
-    return  Candle(
+    return Candle(
       time: DateTime.fromMillisecondsSinceEpoch(bucket[0] as int),
       low: (bucket[1] as num).toDouble(),
       high: (bucket[2] as num).toDouble(),

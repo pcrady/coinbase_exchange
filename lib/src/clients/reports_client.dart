@@ -1,11 +1,9 @@
 import '../clients/client.dart';
 import '../models/report.dart';
 import '../rest_clients/reports_rest_client.dart';
-import 'package:logger/logger.dart';
 import 'dart:convert';
 
 class ReportsClient extends Client {
-  Logger _logger = Logger();
   bool sandbox;
   String apiKey;
   String secretKey;
@@ -25,7 +23,6 @@ class ReportsClient extends Client {
       passphrase: passphrase,
     );
   }
-
 
   /// Get all reports
   ///
@@ -51,7 +48,9 @@ class ReportsClient extends Client {
 
     if (response.statusCode != 200) throw response;
 
-    return listDecode(response.body).map((product) => Report.fromJson(product)).toList();
+    return listDecode(response.body)
+        .map((product) => Report.fromJson(product))
+        .toList();
   }
 
   /// Create a report
@@ -97,9 +96,7 @@ class ReportsClient extends Client {
   ///
   /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getreport
   ///
-  Future<Report> getReport({
-    required String? reportId
-  }) async {
+  Future<Report> getReport({required String? reportId}) async {
     var response = await _reportsRestClient.getReport(reportId: reportId);
 
     if (response.statusCode != 200) throw response;

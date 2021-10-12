@@ -9,16 +9,17 @@ class CoinbaseAccountsRestClient extends RestClient {
     required String secretKey,
     required String passphrase,
   }) : super(
-    sandbox: sandbox,
-    apiKey: apiKey,
-    secretKey: secretKey,
-    passphrase: passphrase,
-  );
+          sandbox: sandbox,
+          apiKey: apiKey,
+          secretKey: secretKey,
+          passphrase: passphrase,
+        );
 
   Future<http.Response> getCoinbaseWallets() async =>
-    get(path: '/coinbase-accounts');
+      get(path: '/coinbase-accounts');
 
   Future<http.Response> generateCryptoAddress({
     required String accountId,
-  }) async => post(path: '/coinbase-accounts/$accountId/addresses');
+  }) async =>
+      post(path: '/coinbase-accounts/$accountId/addresses');
 }

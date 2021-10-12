@@ -39,7 +39,8 @@ class Activate {
     this.private,
   });
 
-  factory Activate.fromJson(Map<String, dynamic> json) => _$ActivateFromJson(json);
+  factory Activate.fromJson(Map<String, dynamic> json) =>
+      _$ActivateFromJson(json);
 
   Map<String, dynamic> toJson() => _$ActivateToJson(this);
 }

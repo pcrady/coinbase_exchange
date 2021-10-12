@@ -19,24 +19,24 @@ class CryptoAddress {
   final String? callbackUrl;
   final bool? exchangeDepositAddress;
 
-  CryptoAddress({
-    this.id,
-    this.address,
-    this.addressInfo,
-    this.name,
-    this.createdAt,
-    this.updatedAt,
-    this.network,
-    this.uriScheme,
-    this.resource,
-    this.resourcePath,
-    this.warnings,
-    this.depositUri,
-    this.callbackUrl,
-    this.exchangeDepositAddress
-  });
+  CryptoAddress(
+      {this.id,
+      this.address,
+      this.addressInfo,
+      this.name,
+      this.createdAt,
+      this.updatedAt,
+      this.network,
+      this.uriScheme,
+      this.resource,
+      this.resourcePath,
+      this.warnings,
+      this.depositUri,
+      this.callbackUrl,
+      this.exchangeDepositAddress});
 
-  factory CryptoAddress.fromJson(Map<String, dynamic> json) => _$CryptoAddressFromJson(json);
+  factory CryptoAddress.fromJson(Map<String, dynamic> json) =>
+      _$CryptoAddressFromJson(json);
 
   Map<String, dynamic> toJson() => _$CryptoAddressToJson(this);
 }

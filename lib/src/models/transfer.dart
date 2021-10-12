@@ -30,7 +30,8 @@ class Transfer {
     this.details,
   });
 
-  factory Transfer.fromJson(Map<String, dynamic> json) => _$TransferFromJson(json);
+  factory Transfer.fromJson(Map<String, dynamic> json) =>
+      _$TransferFromJson(json);
 
   Map<String, dynamic> toJson() => _$TransferToJson(this);
 }

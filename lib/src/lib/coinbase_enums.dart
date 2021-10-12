@@ -7,8 +7,10 @@ enum CoinbaseLevel {
 extension Value on CoinbaseLevel {
   int value() {
     if (this == CoinbaseLevel.one) return 1;
-    if (this == CoinbaseLevel.two) return 2;
-    else return 3;
+    if (this == CoinbaseLevel.two)
+      return 2;
+    else
+      return 3;
   }
 }
 
@@ -27,8 +29,10 @@ extension Seconds on CoinbaseGranularity {
     if (this == CoinbaseGranularity.fiveMinutes) return 300;
     if (this == CoinbaseGranularity.fifteenMinutes) return 900;
     if (this == CoinbaseGranularity.oneHour) return 3600;
-    if (this == CoinbaseGranularity.sixHours) return 21600;
-    else return 86400;
+    if (this == CoinbaseGranularity.sixHours)
+      return 21600;
+    else
+      return 86400;
   }
 }
 
@@ -39,8 +43,10 @@ enum CoinbaseSide {
 
 extension Side on CoinbaseSide {
   String side() {
-    if (this == CoinbaseSide.buy) return 'buy';
-    else return 'sell';
+    if (this == CoinbaseSide.buy)
+      return 'buy';
+    else
+      return 'sell';
   }
 }
 
@@ -58,8 +64,10 @@ enum Action {
 extension OrderType on CoinbaseOrderType {
   String orderType() {
     if (this == CoinbaseOrderType.limit) return 'limit';
-    if (this == CoinbaseOrderType.market) return 'market';
-    else return 'stop';
+    if (this == CoinbaseOrderType.market)
+      return 'market';
+    else
+      return 'stop';
   }
 }
 
@@ -80,8 +88,10 @@ extension Channel on CoinbaseChannel {
     if (this == CoinbaseChannel.ticker) return 'ticker';
     if (this == CoinbaseChannel.level2) return 'level2';
     if (this == CoinbaseChannel.user) return 'user';
-    if (this == CoinbaseChannel.matches) return 'matches';
-    else return 'full';
+    if (this == CoinbaseChannel.matches)
+      return 'matches';
+    else
+      return 'full';
   }
 }
 
@@ -103,7 +113,9 @@ enum CoinbaseTransferType {
 
 extension TransferType on CoinbaseTransferType {
   String transferType() {
-    if (this == CoinbaseTransferType.withdrawal) return 'withdrawal';
-    else return 'deposit';
+    if (this == CoinbaseTransferType.withdrawal)
+      return 'withdrawal';
+    else
+      return 'deposit';
   }
 }

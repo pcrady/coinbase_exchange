@@ -36,7 +36,8 @@ class L2update {
     return L2update(
       type: json['type'] as String?,
       productId: json['product_id'] as String?,
-      time: json['time'] == null ? null : DateTime.parse(json['time'] as String),
+      time:
+          json['time'] == null ? null : DateTime.parse(json['time'] as String),
       changes: _changes,
     );
   }

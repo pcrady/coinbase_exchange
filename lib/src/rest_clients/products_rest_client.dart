@@ -9,18 +9,18 @@ class ProductsRestClient extends RestClient {
     required String secretKey,
     required String passphrase,
   }) : super(
-    sandbox: sandbox,
-    apiKey: apiKey,
-    secretKey: secretKey,
-    passphrase: passphrase,
-  );
+          sandbox: sandbox,
+          apiKey: apiKey,
+          secretKey: secretKey,
+          passphrase: passphrase,
+        );
 
-  Future<http.Response> getAllTradingPairs() async =>
-    get(path: '/products');
+  Future<http.Response> getAllTradingPairs() async => get(path: '/products');
 
   Future<http.Response> getProduct({
     required String productId,
-  }) async => get(path: '/products/$productId');
+  }) async =>
+      get(path: '/products/$productId');
 
   Future<http.Response> getProductBook({
     required String productId,
@@ -42,7 +42,8 @@ class ProductsRestClient extends RestClient {
     DateTime? end,
   }) async {
     Map<String, dynamic> queryParameters = {};
-    if (granularity != null) queryParameters['granularity'] = granularity.seconds();
+    if (granularity != null)
+      queryParameters['granularity'] = granularity.seconds();
     if (start != null) queryParameters['start'] = start;
     if (end != null) queryParameters['end'] = end;
 
@@ -54,11 +55,13 @@ class ProductsRestClient extends RestClient {
 
   Future<http.Response> getProductStats({
     required String productId,
-  }) async => get(path: '/products/$productId/stats');
+  }) async =>
+      get(path: '/products/$productId/stats');
 
   Future<http.Response> getProductTicker({
     required String productId,
-  }) async => get(path: '/products/$productId/ticker');
+  }) async =>
+      get(path: '/products/$productId/ticker');
 
   Future<http.Response> getProductTrades({
     required String productId,

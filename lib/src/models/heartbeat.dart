@@ -15,10 +15,11 @@ class Heartbeat {
     this.sequence,
     this.lastTradeId,
     this.productId,
-    this.time
+    this.time,
   });
 
-  factory Heartbeat.fromJson(Map<String, dynamic> json) => _$HeartbeatFromJson(json);
+  factory Heartbeat.fromJson(Map<String, dynamic> json) =>
+      _$HeartbeatFromJson(json);
 
   Map<String, dynamic> toJson() => _$HeartbeatToJson(this);
 }

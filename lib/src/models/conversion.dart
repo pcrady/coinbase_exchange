@@ -22,7 +22,8 @@ class Conversion {
     this.to,
   });
 
-  factory Conversion.fromJson(Map<String, dynamic> json) => _$ConversionFromJson(json);
+  factory Conversion.fromJson(Map<String, dynamic> json) =>
+      _$ConversionFromJson(json);
 
   Map<String, dynamic> toJson() => _$ConversionToJson(this);
 }

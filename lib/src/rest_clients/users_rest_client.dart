@@ -1,5 +1,4 @@
 import '../rest_clients/rest_client.dart';
-import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
 
 class UsersRestClient extends RestClient {
@@ -9,13 +8,14 @@ class UsersRestClient extends RestClient {
     required String secretKey,
     required String passphrase,
   }) : super(
-    sandbox: sandbox,
-    apiKey: apiKey,
-    secretKey: secretKey,
-    passphrase: passphrase,
-  );
+          sandbox: sandbox,
+          apiKey: apiKey,
+          secretKey: secretKey,
+          passphrase: passphrase,
+        );
 
   Future<http.Response> getUserExchangeLimits({
     required String userId,
-  }) async => get(path: '/users/$userId/exchange-limits');
+  }) async =>
+      get(path: '/users/$userId/exchange-limits');
 }

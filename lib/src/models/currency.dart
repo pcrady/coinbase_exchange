@@ -28,7 +28,8 @@ class Currency {
     this.statusMessage,
   });
 
-  factory Currency.fromJson(Map<String, dynamic> json) => _$CurrencyFromJson(json);
+  factory Currency.fromJson(Map<String, dynamic> json) =>
+      _$CurrencyFromJson(json);
 
   Map<String, dynamic> toJson() => _$CurrencyToJson(this);
 }

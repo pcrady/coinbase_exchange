@@ -9,11 +9,11 @@ class ConversionsRestClient extends RestClient {
     required String secretKey,
     required String passphrase,
   }) : super(
-    sandbox: sandbox,
-    apiKey: apiKey,
-    secretKey: secretKey,
-    passphrase: passphrase,
-  );
+          sandbox: sandbox,
+          apiKey: apiKey,
+          secretKey: secretKey,
+          passphrase: passphrase,
+        );
 
   Future<http.Response> convertCurrency({
     String? profileId,
@@ -38,5 +38,6 @@ class ConversionsRestClient extends RestClient {
 
   Future<http.Response> getConversion({
     required String conversionId,
-  }) async => get(path: '/conversions/$conversionId');
+  }) async =>
+      get(path: '/conversions/$conversionId');
 }

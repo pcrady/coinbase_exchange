@@ -8,13 +8,10 @@ class OrderBook {
   final List<List?>? bids;
   final List<List?>? asks;
 
-  OrderBook({
-    this.sequence,
-    this.bids,
-    this.asks
-  });
+  OrderBook({this.sequence, this.bids, this.asks});
 
-  factory OrderBook.fromJson(Map<String, dynamic> json) => _$OrderBookFromJson(json);
+  factory OrderBook.fromJson(Map<String, dynamic> json) =>
+      _$OrderBookFromJson(json);
 
   Map<String, dynamic> toJson() => _$OrderBookToJson(this);
 }

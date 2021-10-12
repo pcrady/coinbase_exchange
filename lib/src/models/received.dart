@@ -27,7 +27,8 @@ class Received {
     this.orderType,
   });
 
-  factory Received.fromJson(Map<String, dynamic> json) => _$ReceivedFromJson(json);
+  factory Received.fromJson(Map<String, dynamic> json) =>
+      _$ReceivedFromJson(json);
 
   Map<String, dynamic> toJson() => _$ReceivedToJson(this);
 }

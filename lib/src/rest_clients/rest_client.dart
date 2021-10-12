@@ -6,7 +6,8 @@ abstract class RestClient {
   static const String defaultProductId = 'BTC-USD';
   static const String defaultCurrencyId = 'BTC';
   static const String apiAuthority = 'api.exchange.coinbase.com';
-  static const String sandboxApiAuthority = 'api-public.sandbox.exchange.coinbase.com';
+  static const String sandboxApiAuthority =
+      'api-public.sandbox.exchange.coinbase.com';
   final bool sandbox;
   String? apiKey;
   String? secretKey;
@@ -34,7 +35,7 @@ abstract class RestClient {
   }
 
   int? getBeforeHeader(http.Response response) {
-    String? beforeString = response.headers['cb-before'] ;
+    String? beforeString = response.headers['cb-before'];
     return beforeString == null ? null : int.parse(beforeString);
   }
 
@@ -48,7 +49,7 @@ abstract class RestClient {
     required String requestPath,
     required String timestamp,
     Map<String, dynamic>? body,
- }) {
+  }) {
     method = method.toUpperCase();
 
     String preHashMessage = timestamp + method + requestPath;
@@ -56,7 +57,7 @@ abstract class RestClient {
     List<int> preHashMessageByes = utf8.encode(preHashMessage);
 
     List<int> hmacKey = base64.decode(secretKey ?? '');
-    Hmac hmac =  Hmac(sha256, hmacKey);
+    Hmac hmac = Hmac(sha256, hmacKey);
     Digest digest = hmac.convert(preHashMessageByes);
 
     return base64.encode(digest.bytes);
@@ -76,13 +77,14 @@ abstract class RestClient {
       ...?additionalHeaders,
     };
 
-    if (apiKey == null
-      || secretKey == null
-      || passphrase == null
-      || method == null
-      || requestPath == null) return headers;
+    if (apiKey == null ||
+        secretKey == null ||
+        passphrase == null ||
+        method == null ||
+        requestPath == null) return headers;
 
-    String timestamp = (DateTime.now().millisecondsSinceEpoch * 0.001).toString();
+    String timestamp =
+        (DateTime.now().millisecondsSinceEpoch * 0.001).toString();
     String signature = _calculateSignature(
       method: method,
       requestPath: requestPath,
@@ -111,14 +113,16 @@ abstract class RestClient {
       url,
       headers: _addHeaders(
         method: 'GET',
-        requestPath: queryParameters != null ? '${url.path}?${url.query}' : url.path,
+        requestPath:
+            queryParameters != null ? '${url.path}?${url.query}' : url.path,
         additionalHeaders: headers,
       ),
     );
 
     if (response.statusCode == 429) {
       await Future.delayed(Duration(seconds: 1));
-      return get(path: path, headers: headers, queryParameters: queryParameters);
+      return get(
+          path: path, headers: headers, queryParameters: queryParameters);
     }
 
     return response;
@@ -171,9 +175,9 @@ abstract class RestClient {
       return put(path: path, headers: headers, body: body);
     }
 
-    return response;;
+    return response;
+    ;
   }
-
 
   Future<http.Response> delete({
     required String path,
@@ -185,14 +189,16 @@ abstract class RestClient {
       url,
       headers: _addHeaders(
         method: 'DELETE',
-        requestPath: queryParameters != null ? '${url.path}?${url.query}' : url.path,
+        requestPath:
+            queryParameters != null ? '${url.path}?${url.query}' : url.path,
         additionalHeaders: headers,
       ),
     );
 
     if (response.statusCode == 429) {
       await Future.delayed(Duration(seconds: 1));
-      return delete(path: path, headers: headers, queryParameters: queryParameters);
+      return delete(
+          path: path, headers: headers, queryParameters: queryParameters);
     }
 
     return response;

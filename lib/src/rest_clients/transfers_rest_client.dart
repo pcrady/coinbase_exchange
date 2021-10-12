@@ -8,11 +8,11 @@ class TransfersRestClient extends RestClient {
     required String secretKey,
     required String passphrase,
   }) : super(
-    sandbox: sandbox,
-    apiKey: apiKey,
-    secretKey: secretKey,
-    passphrase: passphrase,
-  );
+          sandbox: sandbox,
+          apiKey: apiKey,
+          secretKey: secretKey,
+          passphrase: passphrase,
+        );
 
   Future<http.Response> depositFromCoinbaseAccount({
     String? profileId,
@@ -53,14 +53,14 @@ class TransfersRestClient extends RestClient {
   }
 
   Future<http.Response> getAllPaymentMethods() async =>
-    get(path: '/deposits/payment-methods');
+      get(path: '/deposits/payment-methods');
 
-  Future<http.Response> getAllTransfers() async  =>
-    get(path: '/transfers');
+  Future<http.Response> getAllTransfers() async => get(path: '/transfers');
 
   Future<http.Response> getTransfer({
     required String transferId,
-  }) async => get(path: '/transfers/$transferId');
+  }) async =>
+      get(path: '/transfers/$transferId');
 
   Future<http.Response> withdrawToCoinbaseAccount({
     String? profileId,
@@ -116,7 +116,8 @@ class TransfersRestClient extends RestClient {
   }) async {
     Map<String, String> queryParameters = {};
     if (currency != null) queryParameters['currency'] = currency;
-    if (cryptoAddress != null) queryParameters['crypto_address'] = cryptoAddress;
+    if (cryptoAddress != null)
+      queryParameters['crypto_address'] = cryptoAddress;
 
     return get(
       path: '/withdrawals/fee-estimate',

@@ -1,10 +1,8 @@
 import '../clients/client.dart';
 import '../models/conversion.dart';
 import '../rest_clients/conversions_rest_client.dart';
-import 'package:logger/logger.dart';
 
 class ConversionsClient extends Client {
-  Logger _logger = Logger();
   bool sandbox;
   String apiKey;
   String secretKey;
@@ -48,8 +46,8 @@ class ConversionsClient extends Client {
   Future<Conversion> getConversion({
     required String conversionId,
   }) async {
-
-    var response = await _conversionsRestClient.getConversion(conversionId: conversionId);
+    var response =
+        await _conversionsRestClient.getConversion(conversionId: conversionId);
 
     if (response.statusCode != 200) throw response;
 

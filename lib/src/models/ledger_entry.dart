@@ -25,9 +25,8 @@ class LedgerEntry {
     this.details,
   });
 
-
-
-  factory LedgerEntry.fromJson(Map<String, dynamic> json) => _$LedgerEntryFromJson(json);
+  factory LedgerEntry.fromJson(Map<String, dynamic> json) =>
+      _$LedgerEntryFromJson(json);
 
   Map<String, dynamic> toJson() => _$LedgerEntryToJson(this);
 }

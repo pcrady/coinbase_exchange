@@ -5,11 +5,7 @@ class TradeList {
   final int? after;
   final List<Trade> trades;
 
-  TradeList({
-    required this.trades,
-    this.before,
-    this.after
-  });
+  TradeList({required this.trades, this.before, this.after});
 
   Map<String, dynamic> toJson() {
     return {

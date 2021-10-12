@@ -1,9 +1,7 @@
 import '../clients/client.dart';
 import '../rest_clients/transfers_rest_client.dart';
-import 'package:logger/logger.dart';
 
 class TransfersClient extends Client {
-  Logger _logger = Logger();
   bool sandbox;
   String apiKey;
   String secretKey;
@@ -23,5 +21,4 @@ class TransfersClient extends Client {
       passphrase: passphrase,
     );
   }
-
 }

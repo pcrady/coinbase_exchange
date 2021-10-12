@@ -8,16 +8,16 @@ class CurrenciesRestClient extends RestClient {
     required String secretKey,
     required String passphrase,
   }) : super(
-    sandbox: sandbox,
-    apiKey: apiKey,
-    secretKey: secretKey,
-    passphrase: passphrase,
-  );
+          sandbox: sandbox,
+          apiKey: apiKey,
+          secretKey: secretKey,
+          passphrase: passphrase,
+        );
 
-  Future<http.Response> getAllCurrencies() async =>
-    get(path: '/currencies');
+  Future<http.Response> getAllCurrencies() async => get(path: '/currencies');
 
   Future<http.Response> getCurrency({
     required String currencyId,
-  }) async => get(path: '/currencies/$currencyId');
+  }) async =>
+      get(path: '/currencies/$currencyId');
 }

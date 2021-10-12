@@ -19,7 +19,6 @@ class StreamTicker {
   @StringToDoubleConverter()
   final double? bestAsk;
 
-
   StreamTicker({
     this.tradeId,
     this.sequence,
@@ -32,7 +31,8 @@ class StreamTicker {
     this.bestBid,
   });
 
-  factory StreamTicker.fromJson(Map<String, dynamic> json) => _$StreamTickerFromJson(json);
+  factory StreamTicker.fromJson(Map<String, dynamic> json) =>
+      _$StreamTickerFromJson(json);
 
   Map<String, dynamic> toJson() => _$StreamTickerToJson(this);
 }

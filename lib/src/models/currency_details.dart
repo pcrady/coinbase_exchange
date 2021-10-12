@@ -30,7 +30,8 @@ class CurrencyDetails {
     this.minWithdrawalAmount,
   });
 
-  factory CurrencyDetails.fromJson(Map<String, dynamic> json) => _$CurrencyDetailsFromJson(json);
+  factory CurrencyDetails.fromJson(Map<String, dynamic> json) =>
+      _$CurrencyDetailsFromJson(json);
 
   Map<String, dynamic> toJson() => _$CurrencyDetailsToJson(this);
 }

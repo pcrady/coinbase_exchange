@@ -2,10 +2,8 @@ import '../clients/client.dart';
 import '../models/crypto_address.dart';
 import '../models/wallet.dart';
 import '../rest_clients/coinbase_accounts_rest_client.dart';
-import 'package:logger/logger.dart';
 
 class CoinbaseAccountsClient extends Client {
-  Logger _logger = Logger();
   bool sandbox;
   String apiKey;
   String secretKey;
@@ -38,7 +36,9 @@ class CoinbaseAccountsClient extends Client {
     var response = await _coinbaseAccountsRestClient.getCoinbaseWallets();
 
     if (response.statusCode != 200) throw response;
-    return listDecode(response.body).map((hold) => Wallet.fromJson(hold)).toList();
+    return listDecode(response.body)
+        .map((hold) => Wallet.fromJson(hold))
+        .toList();
   }
 
   /// Generate crypto address
@@ -50,7 +50,8 @@ class CoinbaseAccountsClient extends Client {
   Future<CryptoAddress> generateCryptoAddress({
     required String accountId,
   }) async {
-    var response = await _coinbaseAccountsRestClient.generateCryptoAddress(accountId: accountId);
+    var response = await _coinbaseAccountsRestClient.generateCryptoAddress(
+        accountId: accountId);
 
     if (response.statusCode != 200) throw response;
 

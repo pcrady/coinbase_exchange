@@ -17,7 +17,8 @@ import 'dart:convert';
 
 class WebsocketClient {
   static const String webSocketAuthority = 'wss://ws-feed.pro.coinbase.com';
-  static const String sandboxWebSocketAuthority = 'wss://ws-feed-public.sandbox.pro.coinbase.com';
+  static const String sandboxWebSocketAuthority =
+      'wss://ws-feed-public.sandbox.pro.coinbase.com';
   final bool sandbox;
   WebSocketChannel? _channel;
 
@@ -25,7 +26,8 @@ class WebsocketClient {
     this.sandbox = false,
   });
 
-  String get _authority => sandbox ? sandboxWebSocketAuthority : webSocketAuthority;
+  String get _authority =>
+      sandbox ? sandboxWebSocketAuthority : webSocketAuthority;
 
   String _buildRequest({
     String? type,
@@ -38,7 +40,9 @@ class WebsocketClient {
       'channels': [],
     };
 
-    if (channels != null) request['channels'] = channels.map((channel) => channel.channel()).toList();
+    if (channels != null)
+      request['channels'] =
+          channels.map((channel) => channel.channel()).toList();
     if (productIds != null) request['product_ids'] = productIds;
     if (channelProductIdMap != null) {
       List<Map<String, dynamic>> channelMapping = [];
@@ -113,8 +117,10 @@ class WebsocketClient {
       channelProductIdMap: channelProductIdMap,
     );
     _channel?.sink.add(request);
-    return _channel?.stream.asBroadcastStream().map((event) =>
-      jsonDecode(event)).map((event) => _sortEvent(event));
+    return _channel?.stream
+        .asBroadcastStream()
+        .map((event) => jsonDecode(event))
+        .map((event) => _sortEvent(event));
   }
 
   Stream<dynamic>? subscribe({

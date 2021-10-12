@@ -1,10 +1,8 @@
 import '../clients/client.dart';
 import '../models/currency.dart';
 import '../rest_clients/currencies_rest_client.dart';
-import 'package:logger/logger.dart';
 
 class CurrenciesClient extends Client {
-  Logger _logger = Logger();
   bool sandbox;
   String apiKey;
   String secretKey;
@@ -37,7 +35,9 @@ class CurrenciesClient extends Client {
 
     if (response.statusCode != 200) throw response;
 
-    return listDecode(response.body).map((currency) => Currency.fromJson(currency)).toList();
+    return listDecode(response.body)
+        .map((currency) => Currency.fromJson(currency))
+        .toList();
   }
 
   /// Get a currency
@@ -51,8 +51,8 @@ class CurrenciesClient extends Client {
   Future<Currency> getCurrency({
     required String currencyId,
   }) async {
-
-    var response = await _currenciesRestClient.getCurrency(currencyId: currencyId);
+    var response =
+        await _currenciesRestClient.getCurrency(currencyId: currencyId);
 
     if (response.statusCode != 200) throw response;
 

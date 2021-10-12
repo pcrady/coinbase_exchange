@@ -132,7 +132,8 @@ class OrdersRestClient extends RestClient {
 
   Future<http.Response> getSingleOrder({
     String? orderId,
-  }) async => get(path: '/orders/$orderId');
+  }) async =>
+      get(path: '/orders/$orderId');
 
   Future<http.Response> cancelOrder({
     required String orderId,

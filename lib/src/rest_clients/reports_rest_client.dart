@@ -8,11 +8,11 @@ class ReportsRestClient extends RestClient {
     required String secretKey,
     required String passphrase,
   }) : super(
-    sandbox: sandbox,
-    apiKey: apiKey,
-    secretKey: secretKey,
-    passphrase: passphrase,
-  );
+          sandbox: sandbox,
+          apiKey: apiKey,
+          secretKey: secretKey,
+          passphrase: passphrase,
+        );
 
   Future<http.Response> getAllReports({
     String? portfolioId,
@@ -27,14 +27,14 @@ class ReportsRestClient extends RestClient {
     if (after != null) queryParameters['after'] = after.toIso8601String();
     if (limit != null) queryParameters['limit'] = limit;
     if (type != null) queryParameters['type'] = type;
-    if (ignoreExpired != null) queryParameters['ignore_expired'] = ignoreExpired;
+    if (ignoreExpired != null)
+      queryParameters['ignore_expired'] = ignoreExpired;
 
     return get(
       path: '/reports',
       queryParameters: queryParameters,
     );
   }
-
 
   Future<http.Response> createReport({
     DateTime? startDate,
@@ -65,7 +65,6 @@ class ReportsRestClient extends RestClient {
     );
   }
 
-  Future<http.Response> getReport({
-    required String? reportId
-  }) async => get(path: '/reports/$reportId');
+  Future<http.Response> getReport({required String? reportId}) async =>
+      get(path: '/reports/$reportId');
 }

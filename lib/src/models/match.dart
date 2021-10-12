@@ -1,11 +1,12 @@
 import 'package:coinbase_exchange/coinbase_exchange.dart';
 import '../lib/custom_json_converters.dart';
+import '../lib/websocket_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'match.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class Match {
+class Match extends WebsocketResponse {
   final String? type;
   final int? tradeId;
   final int? sequence;

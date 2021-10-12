@@ -1,11 +1,13 @@
 import 'package:coinbase_exchange/coinbase_exchange.dart';
 import '../lib/custom_json_converters.dart';
 import 'package:json_annotation/json_annotation.dart';
+import '../lib/websocket_response.dart';
+
 
 part 'activate.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class Activate {
+class Activate extends WebsocketResponse {
   final String? type;
   final String? productId;
   final DateTime? timestamp;

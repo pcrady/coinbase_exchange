@@ -1,4 +1,6 @@
 import '../models/subscribed_channel.dart';
+import '../lib/websocket_response.dart';
+
 
 ///
 /// Once a subscribe message is received the server will respond with a subscriptions
@@ -6,7 +8,7 @@ import '../models/subscribed_channel.dart';
 /// will add to the list of subscriptions.In case you already subscribed to a channel
 /// without being authenticated you will remain in the unauthenticated channel.
 ///
-class Subscriptions {
+class Subscriptions extends WebsocketResponse {
   final List<SubscribedChannel>? channels;
 
   Subscriptions({this.channels});

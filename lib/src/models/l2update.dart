@@ -1,4 +1,5 @@
-import 'package:coinbase_exchange/coinbase_exchange.dart';
+import '../lib/websocket_response.dart';
+import '../lib/coinbase_enums.dart';
 import 'package:tuple/tuple.dart';
 
 ///
@@ -9,7 +10,7 @@ import 'package:tuple/tuple.dart';
 /// the updated size at that price level, not a delta.
 /// A size of "0" indicates the price level can be removed.
 ///
-class L2update {
+class L2update extends WebsocketResponse {
   final String? type;
   final String? productId;
   final List<Tuple3<CoinbaseSide, double, double>>? changes;

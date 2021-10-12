@@ -1,10 +1,11 @@
+import '../lib/websocket_response.dart';
 import '../lib/custom_json_converters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'stream_ticker.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class StreamTicker {
+class StreamTicker extends WebsocketResponse {
   final int? tradeId;
   final int? sequence;
   final DateTime? time;

@@ -1,6 +1,8 @@
+import 'package:coinbase_exchange/src/lib/websocket_response.dart';
+import '../lib/websocket_response.dart';
 import 'package:tuple/tuple.dart';
 
-class Snapshot {
+class Snapshot extends WebsocketResponse {
   final String? type;
   final String? productId;
   final List<Tuple2<double, double>>? bids;

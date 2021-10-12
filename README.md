@@ -33,7 +33,7 @@ import 'package:coinbase_exchange/coinbase_exchange.dart' as cb;
 
 cb.WebsocketClient wsClient = cb.WebsocketClient(sandbox: false);
 
-var stream = cb.wsClient.subscribe(
+var stream = wsClient.subscribe(
   productIds: ['ETH-USD'],
   channels: [
     cb.CoinbaseChannel.heartBeat,
@@ -44,7 +44,7 @@ var stream = cb.wsClient.subscribe(
 // After the first event it is up to you to manually sort events from the stream.
 stream.listen((event) {
   print(event.toJson().toString());
-  cb.wsClient.close();
+  wsClient.close();
 });
 ```
 

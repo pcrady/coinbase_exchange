@@ -1,4 +1,6 @@
 import 'package:coinbase_exchange/coinbase_exchange.dart';
+import 'package:coinbase_exchange/src/lib/websocket_response.dart';
+import 'package:coinbase_exchange/src/models/websocket_error.dart';
 import '../lib/coinbase_enums.dart';
 import '../models/activate.dart';
 import '../models/change.dart';
@@ -63,7 +65,7 @@ class WebsocketClient {
     return json.encode(request);
   }
 
-  dynamic _sortEvent(Map<String, dynamic> event) {
+  WebsocketResponse _sortEvent(Map<String, dynamic> event) {
     String? type = event['type'];
     if (type == 'heartbeat') {
       return Heartbeat.fromJson(event);
@@ -90,9 +92,9 @@ class WebsocketClient {
     } else if (type == 'subscriptions') {
       return Subscriptions.fromJson(event);
     } else if (type == 'error') {
-      return event['message'];
+      return WebsocketError(message: event['message'].toString());
     } else {
-      return event;
+      throw Exception('An unknown event has occurred: ${event.toString()}');
     }
   }
 
@@ -101,10 +103,12 @@ class WebsocketClient {
   }
 
   Future<void> close() async {
-    await _channel?.sink.close();
+    if (_channel != null) {
+      await _channel!.sink.close();
+    }
   }
 
-  Stream<dynamic>? _manageSubscriptions({
+  Stream<WebsocketResponse> _manageSubscriptions({
     required Action action,
     List<CoinbaseChannel>? channels,
     List<String>? productIds,
@@ -116,18 +120,20 @@ class WebsocketClient {
       productIds: productIds,
       channelProductIdMap: channelProductIdMap,
     );
-    _channel?.sink.add(request);
-    return _channel?.stream
-        .asBroadcastStream()
+    _channel!.sink.add(request);
+    return _channel!.stream
         .map((event) => jsonDecode(event))
         .map((event) => _sortEvent(event));
   }
 
-  Stream<dynamic>? subscribe({
+  Stream<WebsocketResponse> subscribe({
     List<CoinbaseChannel>? channels,
     List<String>? productIds,
     Map<CoinbaseChannel, List<String>?>? channelProductIdMap,
   }) {
+    if (_channel == null) {
+      throw Exception('You must connect before you can subscribe to a channel');
+    }
     return _manageSubscriptions(
       action: Action.subscribe,
       channels: channels,
@@ -136,11 +142,14 @@ class WebsocketClient {
     );
   }
 
-  Stream<dynamic>? unSubscribe({
+  Stream<WebsocketResponse> unSubscribe({
     List<CoinbaseChannel>? channels,
     List<String>? productIds,
     Map<CoinbaseChannel, List<String>?>? channelProductIdMap,
   }) {
+    if (_channel == null) {
+      throw Exception('You must connect before you can unsubscribe to a channel');
+    }
     return _manageSubscriptions(
       action: Action.unsubscribe,
       channels: channels,

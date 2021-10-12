@@ -1,6 +1,6 @@
-import 'package:coinbase_dart/src/clients/client.dart';
-import 'package:coinbase_dart/src/models/report.dart';
-import 'package:coinbase_dart/src/rest_clients/reports_rest_client.dart';
+import 'package:coinbase_exchange/src/clients/client.dart';
+import 'package:coinbase_exchange/src/models/report.dart';
+import 'package:coinbase_exchange/src/rest_clients/reports_rest_client.dart';
 import 'package:logger/logger.dart';
 import 'dart:convert';
 

@@ -1,6 +1,6 @@
-import 'package:coinbase_dart/coinbase_exchange.dart';
-import 'package:coinbase_dart/src/lib/coinbase_enums.dart';
-import 'package:coinbase_dart/src/rest_clients/rest_client.dart';
+import 'package:coinbase_exchange/coinbase_exchange.dart';
+import 'package:coinbase_exchange/src/lib/coinbase_enums.dart';
+import 'package:coinbase_exchange/src/rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
 

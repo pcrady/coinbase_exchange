@@ -1,4 +1,4 @@
-import 'package:coinbase_dart/src/models/params.dart';
+import 'package:coinbase_exchange/src/models/params.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'report.g.dart';

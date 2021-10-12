@@ -1,4 +1,4 @@
-import 'package:coinbase_dart/coinbase_exchange.dart';
+import 'package:coinbase_exchange/coinbase_exchange.dart';
 import 'package:tuple/tuple.dart';
 
 ///

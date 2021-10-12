@@ -1,5 +1,5 @@
-import 'package:coinbase_dart/src/models/currency.dart';
-import 'package:coinbase_dart/src/models/product.dart';
+import 'package:coinbase_exchange/src/models/currency.dart';
+import 'package:coinbase_exchange/src/models/product.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'status.g.dart';

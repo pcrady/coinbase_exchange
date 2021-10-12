@@ -1,5 +1,5 @@
-import 'package:coinbase_dart/src/lib/custom_json_converters.dart';
-import 'package:coinbase_dart/src/models/currency_details.dart';
+import 'package:coinbase_exchange/src/lib/custom_json_converters.dart';
+import 'package:coinbase_exchange/src/models/currency_details.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'currency.g.dart';

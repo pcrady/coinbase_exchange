@@ -1,4 +1,4 @@
-import 'package:coinbase_dart/src/models/subscribed_channel.dart';
+import 'package:coinbase_exchange/src/models/subscribed_channel.dart';
 
 ///
 /// Once a subscribe message is received the server will respond with a subscriptions

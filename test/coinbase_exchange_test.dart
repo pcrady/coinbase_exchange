@@ -1,14 +1,13 @@
 import 'package:coinbase_exchange/coinbase_exchange.dart';
-//import 'package:coinbase_exchange/secrets.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
 
 
-// flutter pub run build_runner build
-// flutter pub run test test/coinbase_dart_test.dart
-// pub run test --chain-stack-traces test/coinbase_dart_test.dart
-// dart --enable-asserts //to get Logger to work in terminal
+/// flutter pub run build_runner build
+/// flutter pub run test test/coinbase_exchange_test.dart
+/// pub run test --chain-stack-traces test/coinbase_exchange_test.dart
+/// dart --enable-asserts //to get Logger to work in terminal
 
 class Secrets {
   static const String apiKey = '';

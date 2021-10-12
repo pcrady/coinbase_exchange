@@ -81,8 +81,8 @@ class ProductsClient extends Client {
   /// Get product candles
   ///
   /// Historic rates for a product. Rates are returned in grouped buckets.
-  /// Candle schema is of the form [\timestamp, price_low, price_high,
-  /// price_open, price_close]
+  /// Candle schema is of the form \[timestamp, price_low, price_high,
+  /// price_open, price_close\]
   ///
   /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getproductcandles
   ///

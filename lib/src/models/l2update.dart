@@ -3,7 +3,7 @@ import 'package:tuple/tuple.dart';
 
 ///
 /// The changes property of l2updates is an array
-/// with [side, price, size] tuples. The time property
+/// with \[side, price, size\] tuples. The time property
 /// of l2update is the time of the event as recorded
 /// by our trading engine. Please note that size is
 /// the updated size at that price level, not a delta.

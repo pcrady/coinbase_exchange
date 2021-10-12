@@ -148,7 +148,8 @@ class WebsocketClient {
     Map<CoinbaseChannel, List<String>?>? channelProductIdMap,
   }) {
     if (_channel == null) {
-      throw Exception('You must connect before you can unsubscribe to a channel');
+      throw Exception(
+          'You must connect before you can unsubscribe to a channel');
     }
     return _manageSubscriptions(
       action: Action.unsubscribe,

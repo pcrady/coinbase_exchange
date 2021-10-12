@@ -1,3 +1,1 @@
-abstract class WebsocketResponse {
-
-}
+abstract class WebsocketResponse {}

@@ -1,7 +1,6 @@
 import '../models/subscribed_channel.dart';
 import '../lib/websocket_response.dart';
 
-
 ///
 /// Once a subscribe message is received the server will respond with a subscriptions
 /// message that lists all channels you are subscribed to. Subsequent subscribe messages

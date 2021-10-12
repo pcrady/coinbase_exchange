@@ -3,7 +3,6 @@ import '../lib/custom_json_converters.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../lib/websocket_response.dart';
 
-
 part 'activate.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)

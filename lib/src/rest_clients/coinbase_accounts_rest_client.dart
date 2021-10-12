@@ -1,4 +1,4 @@
-import 'package:coinbase_exchange/src/rest_clients/rest_client.dart';
+import '../rest_clients/rest_client.dart';
 import 'package:coinbase_exchange/coinbase_exchange.dart';
 import 'package:http/http.dart' as http;
 

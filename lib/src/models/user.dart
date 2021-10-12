@@ -1,4 +1,4 @@
-import 'package:coinbase_exchange/src/models/preferences.dart';
+import '../models/preferences.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';

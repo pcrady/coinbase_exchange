@@ -1,7 +1,7 @@
-import 'package:coinbase_exchange/src/clients/client.dart';
-import 'package:coinbase_exchange/src/models/crypto_address.dart';
-import 'package:coinbase_exchange/src/models/wallet.dart';
-import 'package:coinbase_exchange/src/rest_clients/coinbase_accounts_rest_client.dart';
+import '../clients/client.dart';
+import '../models/crypto_address.dart';
+import '../models/wallet.dart';
+import '../rest_clients/coinbase_accounts_rest_client.dart';
 import 'package:logger/logger.dart';
 
 class CoinbaseAccountsClient extends Client {

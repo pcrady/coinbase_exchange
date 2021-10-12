@@ -1,6 +1,6 @@
-import 'package:coinbase_exchange/src/clients/client.dart';
-import 'package:coinbase_exchange/src/models/conversion.dart';
-import 'package:coinbase_exchange/src/rest_clients/conversions_rest_client.dart';
+import '../clients/client.dart';
+import '../models/conversion.dart';
+import '../rest_clients/conversions_rest_client.dart';
 import 'package:logger/logger.dart';
 
 class ConversionsClient extends Client {

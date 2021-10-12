@@ -1,7 +1,7 @@
-import 'package:coinbase_exchange/src/clients/client.dart';
-import 'package:coinbase_exchange/src/models/fill.dart';
-import 'package:coinbase_exchange/src/models/order.dart';
-import 'package:coinbase_exchange/src/rest_clients/orders_rest_client.dart';
+import '../clients/client.dart';
+import '../models/fill.dart';
+import '../models/order.dart';
+import '../rest_clients/orders_rest_client.dart';
 import 'package:logger/logger.dart';
 import 'dart:convert';
 

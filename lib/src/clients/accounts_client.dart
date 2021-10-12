@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:coinbase_exchange/coinbase_exchange.dart';
-import 'package:coinbase_exchange/src/clients/client.dart';
-import 'package:coinbase_exchange/src/lib/paginator.dart';
-import 'package:coinbase_exchange/src/models/account.dart';
-import 'package:coinbase_exchange/src/lib/coinbase_enums.dart';
-import 'package:coinbase_exchange/src/models/hold.dart';
-import 'package:coinbase_exchange/src/models/ledger_entry.dart';
-import 'package:coinbase_exchange/src/models/transfer.dart';
-import 'package:coinbase_exchange/src/rest_clients/accounts_rest_client.dart';
+import '../clients/client.dart';
+import '../lib/paginator.dart';
+import '../models/account.dart';
+import '../lib/coinbase_enums.dart';
+import '../models/hold.dart';
+import '../models/ledger_entry.dart';
+import '../models/transfer.dart';
+import '../rest_clients/accounts_rest_client.dart';
 import 'package:logger/logger.dart';
 
 

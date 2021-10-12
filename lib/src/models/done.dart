@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:coinbase_exchange/coinbase_exchange.dart';
-import 'package:coinbase_exchange/src/lib/custom_json_converters.dart';
+import '../lib/custom_json_converters.dart';
 
 part 'done.g.dart';
 

@@ -1,5 +1,5 @@
 import 'package:coinbase_exchange/coinbase_exchange.dart';
-import 'package:coinbase_exchange/secrets.dart';
+//import 'package:coinbase_exchange/secrets.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
@@ -9,6 +9,13 @@ import 'package:http/http.dart' as http;
 // flutter pub run test test/coinbase_dart_test.dart
 // pub run test --chain-stack-traces test/coinbase_dart_test.dart
 // dart --enable-asserts //to get Logger to work in terminal
+
+class Secrets {
+  static const String apiKey = '';
+  static const String secretKey = '';
+  static const String passphrase = '';
+}
+
 void main() {
   Logger _logger = Logger();
   Stream<dynamic>? stream;

@@ -1,6 +1,6 @@
-import 'package:coinbase_exchange/src/lib/coinbase_enums.dart';
-import 'package:coinbase_exchange/src/lib/custom_json_converters.dart';
-import 'package:coinbase_exchange/src/models/status.dart';
+import '../lib/coinbase_enums.dart';
+import '../lib/custom_json_converters.dart';
+import '../models/status.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'order.g.dart';

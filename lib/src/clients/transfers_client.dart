@@ -1,5 +1,5 @@
-import 'package:coinbase_exchange/src/clients/client.dart';
-import 'package:coinbase_exchange/src/rest_clients/transfers_rest_client.dart';
+import '../clients/client.dart';
+import '../rest_clients/transfers_rest_client.dart';
 import 'package:logger/logger.dart';
 
 class TransfersClient extends Client {

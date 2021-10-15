@@ -1,3 +1,6 @@
+## 0.0.4
+- Add example gif
+
 ## 0.0.3
 - Add an example flutter application
 - Make websocket responses subclasses of a WebsocketResponse class

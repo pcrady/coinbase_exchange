@@ -2,6 +2,8 @@
 
 An unofficial library for the coinbase cloud exchange.
 
+![GIF](https://github.com/pcrady/coinbase_exchange/blob/main/example.gif, "Real Time Price")
+
 ## Getting Started
 
 This project is a Dart sdk the

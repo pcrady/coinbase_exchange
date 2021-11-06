@@ -28,6 +28,7 @@ class OrdersClient extends Client {
   /// Get all fills
   ///
   /// Get a list of fills. A fill is a partial or complete match on a specific order.
+  /// must contain either a productId or an orderId
   ///
   /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getfills
   ///
@@ -42,7 +43,8 @@ class OrdersClient extends Client {
   }) async {
     var response = await _ordersRestClient.getAllFills(
       orderId: orderId,
-      productId: profileId,
+      productId: productId,
+      profileId: profileId,
       limit: limit,
       before: before,
       after: after,

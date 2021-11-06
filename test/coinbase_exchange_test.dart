@@ -2,50 +2,53 @@ import 'package:coinbase_exchange/coinbase_exchange.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
+import 'secrets.dart';
 
 /// flutter pub run build_runner build
 /// flutter pub run test test/coinbase_exchange_test.dart
 /// pub run test --chain-stack-traces test/coinbase_exchange_test.dart
 /// dart --enable-asserts //to get Logger to work in terminal
 
-class Secrets {
-  static const String apiKey = '';
-  static const String secretKey = '';
-  static const String passphrase = '';
-}
-
 void main() {
   Logger _logger = Logger();
   Stream<dynamic>? stream;
+  final bool sandbox = true;
 
   WebsocketClient wsClient = WebsocketClient(sandbox: false);
 
   AccountsClient accountsClient = AccountsClient(
-    sandbox: true,
+    sandbox: sandbox,
     secretKey: Secrets.secretKey,
     passphrase: Secrets.passphrase,
     apiKey: Secrets.apiKey,
   );
 
   CoinbaseAccountsClient coinbaseAccountsClient = CoinbaseAccountsClient(
-    sandbox: true,
+    sandbox: sandbox,
     secretKey: Secrets.secretKey,
     passphrase: Secrets.passphrase,
     apiKey: Secrets.apiKey,
   );
 
   ConversionsClient conversionsClient = ConversionsClient(
-    sandbox: true,
+    sandbox: sandbox,
     secretKey: Secrets.secretKey,
     passphrase: Secrets.passphrase,
     apiKey: Secrets.apiKey,
   );
 
   CurrenciesClient currenciesClient = CurrenciesClient(
-    sandbox: true,
+    sandbox: sandbox,
     secretKey: Secrets.secretKey,
     passphrase: Secrets.passphrase,
     apiKey: Secrets.apiKey,
+  );
+
+  OrdersClient ordersClient = OrdersClient(
+    sandbox: sandbox,
+    apiKey: Secrets.apiKey,
+    secretKey: Secrets.secretKey,
+    passphrase: Secrets.passphrase,
   );
 
   void logResponse(http.Response response) =>
@@ -57,7 +60,7 @@ void main() {
     test('Subscription Response', () async {
       wsClient.connect();
       stream = wsClient.subscribe(
-        productIds: ['ETH-USD'],
+        productIds: ['BTC-USD'],
         channels: [
           CoinbaseChannel.heartBeat,
         ],
@@ -233,7 +236,20 @@ void main() {
   });
 
   group('Transfers', () {});
-  group('Orders', () {});
+
+  group('Orders', () {
+    test('getAllFills', () async {
+      List<Fill>? fills;
+      try {
+        fills = await ordersClient.getAllFills(productId: 'BTC-USD');
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(fills?.isNotEmpty, true);
+      }
+    });
+  });
+
   group('Products', () {});
   group('Profiles', () {});
   group('Reports', () {});

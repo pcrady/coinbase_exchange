@@ -13,7 +13,7 @@ individual profiles on coinbase and coinbase pro. It also allows for the trading
 cryptocurrencies on the coinbase pro platform. This package uses api keys which must be generated
 from [coinbase pro](https://pro.coinbase.com/) or the [coinbase pro sandbox](https://public.sandbox.pro.coinbase.com/).
 
-To test to make sure you have generated your keys correctly paste them into:
+To test to make sure you have generated your keys correctly, create a file test/secrets.dart with the contents:
 ```dart
 class Secrets {
   static const String apiKey = '';
@@ -21,7 +21,8 @@ class Secrets {
   static const String passphrase = '';
 }
 ```
-in the coinbase_exchange_test.dart file. Then run:
+Put in your apiKey, secretKey and passphrase.
+In the coinbase_exchange_test.dart file. Then run:
 ```console
 pub run test --chain-stack-traces test/coinbase_exchange_test.dart
 ```

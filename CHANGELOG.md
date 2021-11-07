@@ -1,3 +1,6 @@
+## 0.0.5
+- Fix Limit in queryParameter breaks methods
+
 ## 0.0.4
 - Add example gif
 

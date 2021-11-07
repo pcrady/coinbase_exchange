@@ -9,6 +9,8 @@ import 'secrets.dart';
 /// pub run test --chain-stack-traces test/coinbase_exchange_test.dart
 /// dart --enable-asserts //to get Logger to work in terminal
 
+//TODO make a bunch of transfers and trades to make sure the
+//TODO sandbox has enough data in it to be useful
 void main() {
   Logger _logger = Logger();
   Stream<dynamic>? stream;
@@ -79,7 +81,7 @@ void main() {
     late String accountId;
 
     test('listAccounts', () async {
-      List<Account>? accounts;
+      late List<Account> accounts;
       try {
         accounts = await accountsClient.listAccounts();
         for (Account account in accounts) {
@@ -90,52 +92,53 @@ void main() {
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(accounts!.length != 0, true);
+        expect(accounts.length != 0, true);
       }
     });
 
     test('getAccount', () async {
-      Account? account;
+      late Account account;
       try {
         account = await accountsClient.getAccount(accountId: accountId);
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(account!.balance! > 0, true);
+        expect(account.balance! > 0, true);
       }
     });
 
     test('getHolds', () async {
-      Paginator<Hold, DateTime>? holds;
+      late Paginator<Hold, DateTime> holds;
       try {
         holds = await accountsClient.getHolds(accountId: accountId);
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(holds?.elements != null, true);
+        expect(holds.elements != null, true);
       }
     });
 
     test('getAccountLedger', () async {
-      Paginator<LedgerEntry, DateTime>? ledger;
+      late Paginator<LedgerEntry, DateTime> ledger;
       try {
         ledger = await accountsClient.getAccountLedger(accountId: accountId);
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(ledger?.elements != null, true);
+        expect(ledger.elements != null, true);
       }
     });
 
     test('getAccountTransfers', () async {
-      Paginator<Transfer, DateTime>? transfers;
+      late Paginator<Transfer, DateTime> transfers;
       try {
-        transfers =
-            await accountsClient.getAccountTransfers(accountId: accountId);
+        transfers = await accountsClient.getAccountTransfers(
+          accountId: accountId,
+        );
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(transfers?.elements != null, true);
+        expect(transfers.elements != null, true);
       }
     });
   });
@@ -144,7 +147,7 @@ void main() {
     late String accountId;
 
     test('getCoinbaseWallets', () async {
-      List<Wallet>? wallets;
+      late List<Wallet> wallets;
       try {
         wallets = await coinbaseAccountsClient.getCoinbaseWallets();
         wallets.forEach((wallet) {
@@ -155,19 +158,20 @@ void main() {
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(wallets!.first.currency != null, true);
+        expect(wallets.first.currency != null, true);
       }
     });
 
     test('generateCryptoAddress', () async {
-      CryptoAddress? cryptoAddress;
+      late CryptoAddress cryptoAddress;
       try {
         cryptoAddress = await coinbaseAccountsClient.generateCryptoAddress(
-            accountId: accountId);
+          accountId: accountId,
+        );
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(cryptoAddress?.address != null, true);
+        expect(cryptoAddress.address != null, true);
       }
     });
   });
@@ -177,7 +181,7 @@ void main() {
 
     test('convertCurrency', () async {
       double amount = 40.0;
-      Conversion? conversion;
+      late Conversion conversion;
       try {
         conversion = await conversionsClient.convertCurrency(
           from: 'USD',
@@ -187,28 +191,28 @@ void main() {
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        conversionId = conversion!.id!;
+        conversionId = conversion.id!;
         expect(conversion.amount == amount, true);
       }
     });
 
     test('getConversion', () async {
-      Conversion? conversion;
+      late Conversion conversion;
       try {
         conversion =
             await conversionsClient.getConversion(conversionId: conversionId);
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(conversion?.id == conversionId, true);
+        expect(conversion.id == conversionId, true);
       }
     });
   });
 
   group('Currencies', () {
     test('getAllCurrencies', () async {
-      List<Currency>? currencies;
-      Currency? usdCurrency;
+      late List<Currency> currencies;
+      late Currency usdCurrency;
       try {
         currencies = await currenciesClient.getAllCurrencies();
         for (var currency in currencies) {
@@ -219,18 +223,18 @@ void main() {
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(usdCurrency?.name == 'United States Dollar', true);
+        expect(usdCurrency.name == 'United States Dollar', true);
       }
     });
 
     test('getCurrency', () async {
-      Currency? currency;
+      late Currency currency;
       try {
         currency = await currenciesClient.getCurrency(currencyId: 'USD');
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(currency?.name == 'United States Dollar', true);
+        expect(currency.name == 'United States Dollar', true);
       }
     });
   });
@@ -239,13 +243,27 @@ void main() {
 
   group('Orders', () {
     test('getAllFills', () async {
-      List<Fill>? fills;
+      late List<Fill> fills;
       try {
         fills = await ordersClient.getAllFills(productId: 'BTC-USD');
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(fills?.isNotEmpty, true);
+        expect(fills.isNotEmpty, true);
+      }
+    });
+
+    test('getAllFills with limit', () async {
+      late List<Fill> fills;
+      try {
+        fills = await ordersClient.getAllFills(
+          productId: 'BTC-USD',
+          limit: 3,
+        );
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(fills.length == 3, true);
       }
     });
   });

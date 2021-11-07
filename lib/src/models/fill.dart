@@ -1,3 +1,4 @@
+import 'package:coinbase_exchange/src/lib/coinbase_enums.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../lib/custom_json_converters.dart';
 
@@ -18,6 +19,7 @@ class Fill {
   @StringToDoubleConverter()
   final double? fee;
   final String? sell;
+  final CoinbaseSide? side;
   final bool? settled;
   @StringToDoubleConverter()
   final double? usdVolume;
@@ -33,6 +35,7 @@ class Fill {
     this.size,
     this.fee,
     this.sell,
+    this.side,
     this.settled,
     this.usdVolume,
   });

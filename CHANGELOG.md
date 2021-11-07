@@ -1,3 +1,6 @@
+## 0.0.6
+- Adding field side to Fill model class
+
 ## 0.0.5
 - Fix Limit in queryParameter breaks methods
 

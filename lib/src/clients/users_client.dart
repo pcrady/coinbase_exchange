@@ -2,6 +2,7 @@ import '../clients/client.dart';
 import '../rest_clients/users_rest_client.dart';
 import 'dart:convert';
 
+/// A [Client] that helps manage users
 class UsersClient extends Client {
   bool sandbox;
   String apiKey;

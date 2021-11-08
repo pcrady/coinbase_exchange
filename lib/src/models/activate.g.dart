@@ -6,27 +6,25 @@ part of 'activate.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Activate _$ActivateFromJson(Map<String, dynamic> json) {
-  return Activate(
-    type: json['type'] as String?,
-    productId: json['product_id'] as String?,
-    timestamp: json['timestamp'] == null
-        ? null
-        : DateTime.parse(json['timestamp'] as String),
-    userId:
-        const StringToDoubleConverter().fromJson(json['user_id'] as String?),
-    profileId:
-        const StringToDoubleConverter().fromJson(json['profile_id'] as String?),
-    orderId: json['order_id'] as String?,
-    stopType: json['stop_type'] as String?,
-    side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
-    stopPrice:
-        const StringToDoubleConverter().fromJson(json['stop_price'] as String?),
-    size: const StringToDoubleConverter().fromJson(json['size'] as String?),
-    funds: const StringToDoubleConverter().fromJson(json['funds'] as String?),
-    private: json['private'] as bool?,
-  );
-}
+Activate _$ActivateFromJson(Map<String, dynamic> json) => Activate(
+      type: json['type'] as String?,
+      productId: json['product_id'] as String?,
+      timestamp: json['timestamp'] == null
+          ? null
+          : DateTime.parse(json['timestamp'] as String),
+      userId:
+          const StringToDoubleConverter().fromJson(json['user_id'] as String?),
+      profileId: const StringToDoubleConverter()
+          .fromJson(json['profile_id'] as String?),
+      orderId: json['order_id'] as String?,
+      stopType: json['stop_type'] as String?,
+      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
+      stopPrice: const StringToDoubleConverter()
+          .fromJson(json['stop_price'] as String?),
+      size: const StringToDoubleConverter().fromJson(json['size'] as String?),
+      funds: const StringToDoubleConverter().fromJson(json['funds'] as String?),
+      private: json['private'] as bool?,
+    );
 
 Map<String, dynamic> _$ActivateToJson(Activate instance) => <String, dynamic>{
       'type': instance.type,

@@ -3,6 +3,8 @@ import '../models/profile.dart';
 import '../rest_clients/profiles_rest_client.dart';
 import 'dart:convert';
 
+/// A [Client] that helps manage profiles and returns coinbase_exchange
+/// objects
 class ProfilesClient extends Client {
   bool sandbox;
   String apiKey;

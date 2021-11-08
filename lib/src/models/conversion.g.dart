@@ -6,16 +6,15 @@ part of 'conversion.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Conversion _$ConversionFromJson(Map<String, dynamic> json) {
-  return Conversion(
-    id: json['id'] as String?,
-    amount: const StringToDoubleConverter().fromJson(json['amount'] as String?),
-    fromAccountId: json['from_account_id'] as String?,
-    toAccountId: json['to_account_id'] as String?,
-    from: json['from'] as String?,
-    to: json['to'] as String?,
-  );
-}
+Conversion _$ConversionFromJson(Map<String, dynamic> json) => Conversion(
+      id: json['id'] as String?,
+      amount:
+          const StringToDoubleConverter().fromJson(json['amount'] as String?),
+      fromAccountId: json['from_account_id'] as String?,
+      toAccountId: json['to_account_id'] as String?,
+      from: json['from'] as String?,
+      to: json['to'] as String?,
+    );
 
 Map<String, dynamic> _$ConversionToJson(Conversion instance) =>
     <String, dynamic>{

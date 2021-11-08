@@ -1,6 +1,6 @@
 # coinbase_exchange
 
-An unofficial library for the coinbase cloud exchange.
+An unofficial sdk for the coinbase cloud exchange.
 
 ![Gif](https://github.com/pcrady/coinbase_exchange/blob/main/example.gif "Real Time Price")
 
@@ -37,7 +37,7 @@ import 'package:coinbase_exchange/coinbase_exchange.dart' as cb;
 cb.WebsocketClient wsClient = cb.WebsocketClient(sandbox: false);
 
 var stream = wsClient.subscribe(
-  productIds: ['ETH-USD'],
+  productIds: ['BTC-USD'],
   channels: [
     cb.CoinbaseChannel.heartBeat,
   ],

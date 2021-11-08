@@ -6,27 +6,26 @@ part of 'transfer.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Transfer _$TransferFromJson(Map<String, dynamic> json) {
-  return Transfer(
-    id: json['id'] as String?,
-    type: _$enumDecodeNullable(_$CoinbaseTransferTypeEnumMap, json['type']),
-    createdAt: json['created_at'] == null
-        ? null
-        : DateTime.parse(json['created_at'] as String),
-    completedAt: json['completed_at'] == null
-        ? null
-        : DateTime.parse(json['completed_at'] as String),
-    canceledAt: json['canceled_at'] == null
-        ? null
-        : DateTime.parse(json['canceled_at'] as String),
-    processedAt: json['processed_at'] == null
-        ? null
-        : DateTime.parse(json['processed_at'] as String),
-    userNonce: json['user_nonce'] as String?,
-    amount: const StringToDoubleConverter().fromJson(json['amount'] as String?),
-    details: json['details'] as Map<String, dynamic>?,
-  );
-}
+Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
+      id: json['id'] as String?,
+      type: _$enumDecodeNullable(_$CoinbaseTransferTypeEnumMap, json['type']),
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      completedAt: json['completed_at'] == null
+          ? null
+          : DateTime.parse(json['completed_at'] as String),
+      canceledAt: json['canceled_at'] == null
+          ? null
+          : DateTime.parse(json['canceled_at'] as String),
+      processedAt: json['processed_at'] == null
+          ? null
+          : DateTime.parse(json['processed_at'] as String),
+      userNonce: json['user_nonce'] as String?,
+      amount:
+          const StringToDoubleConverter().fromJson(json['amount'] as String?),
+      details: json['details'] as Map<String, dynamic>?,
+    );
 
 Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
       'id': instance.id,

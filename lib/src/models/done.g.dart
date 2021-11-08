@@ -6,20 +6,19 @@ part of 'done.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Done _$DoneFromJson(Map<String, dynamic> json) {
-  return Done(
-    type: json['type'] as String?,
-    time: json['time'] == null ? null : DateTime.parse(json['time'] as String),
-    productId: json['product_id'] as String?,
-    sequence: json['sequence'] as int?,
-    orderId: json['order_id'] as String?,
-    price: const StringToDoubleConverter().fromJson(json['price'] as String?),
-    remainingSize: const StringToDoubleConverter()
-        .fromJson(json['remaining_size'] as String?),
-    side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
-    reason: _$enumDecodeNullable(_$CoinbaseReasonEnumMap, json['reason']),
-  );
-}
+Done _$DoneFromJson(Map<String, dynamic> json) => Done(
+      type: json['type'] as String?,
+      time:
+          json['time'] == null ? null : DateTime.parse(json['time'] as String),
+      productId: json['product_id'] as String?,
+      sequence: json['sequence'] as int?,
+      orderId: json['order_id'] as String?,
+      price: const StringToDoubleConverter().fromJson(json['price'] as String?),
+      remainingSize: const StringToDoubleConverter()
+          .fromJson(json['remaining_size'] as String?),
+      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
+      reason: _$enumDecodeNullable(_$CoinbaseReasonEnumMap, json['reason']),
+    );
 
 Map<String, dynamic> _$DoneToJson(Done instance) => <String, dynamic>{
       'type': instance.type,

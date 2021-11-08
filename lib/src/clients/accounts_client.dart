@@ -9,6 +9,8 @@ import '../models/ledger_entry.dart';
 import '../models/transfer.dart';
 import '../rest_clients/accounts_rest_client.dart';
 
+/// A [Client] that helps manage accounts and returns coinbase_exchange
+/// objects
 class AccountsClient extends Client {
   bool sandbox;
   String apiKey;

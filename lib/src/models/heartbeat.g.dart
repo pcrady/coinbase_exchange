@@ -6,15 +6,14 @@ part of 'heartbeat.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Heartbeat _$HeartbeatFromJson(Map<String, dynamic> json) {
-  return Heartbeat(
-    type: json['type'] as String?,
-    sequence: json['sequence'] as int?,
-    lastTradeId: json['last_trade_id'] as int?,
-    productId: json['product_id'] as String?,
-    time: json['time'] == null ? null : DateTime.parse(json['time'] as String),
-  );
-}
+Heartbeat _$HeartbeatFromJson(Map<String, dynamic> json) => Heartbeat(
+      type: json['type'] as String?,
+      sequence: json['sequence'] as int?,
+      lastTradeId: json['last_trade_id'] as int?,
+      productId: json['product_id'] as String?,
+      time:
+          json['time'] == null ? null : DateTime.parse(json['time'] as String),
+    );
 
 Map<String, dynamic> _$HeartbeatToJson(Heartbeat instance) => <String, dynamic>{
       'type': instance.type,

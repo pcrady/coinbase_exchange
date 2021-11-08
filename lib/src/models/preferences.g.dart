@@ -6,18 +6,16 @@ part of 'preferences.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Preferences _$PreferencesFromJson(Map<String, dynamic> json) {
-  return Preferences(
-    preferredMarket: json['preferred_market'] as String?,
-    marginTermsCompletedInUtc: json['margin_terms_completed_in_utc'] == null
-        ? null
-        : DateTime.parse(json['margin_terms_completed_in_utc'] as String),
-    marginTutorialCompletedInUtc: json['margin_tutorial_completed_in_utc'] ==
-            null
-        ? null
-        : DateTime.parse(json['margin_tutorial_completed_in_utc'] as String),
-  );
-}
+Preferences _$PreferencesFromJson(Map<String, dynamic> json) => Preferences(
+      preferredMarket: json['preferred_market'] as String?,
+      marginTermsCompletedInUtc: json['margin_terms_completed_in_utc'] == null
+          ? null
+          : DateTime.parse(json['margin_terms_completed_in_utc'] as String),
+      marginTutorialCompletedInUtc: json['margin_tutorial_completed_in_utc'] ==
+              null
+          ? null
+          : DateTime.parse(json['margin_tutorial_completed_in_utc'] as String),
+    );
 
 Map<String, dynamic> _$PreferencesToJson(Preferences instance) =>
     <String, dynamic>{

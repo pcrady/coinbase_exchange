@@ -6,19 +6,17 @@ part of 'profile.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Profile _$ProfileFromJson(Map<String, dynamic> json) {
-  return Profile(
-    id: json['id'] as String?,
-    userId: json['user_id'] as String?,
-    name: json['name'] as String?,
-    active: json['active'] as bool?,
-    isDefault: json['is_default'] as bool?,
-    createdAt: json['created_at'] == null
-        ? null
-        : DateTime.parse(json['created_at'] as String),
-    hasMargin: json['has_margin'] as bool?,
-  );
-}
+Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
+      id: json['id'] as String?,
+      userId: json['user_id'] as String?,
+      name: json['name'] as String?,
+      active: json['active'] as bool?,
+      isDefault: json['is_default'] as bool?,
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      hasMargin: json['has_margin'] as bool?,
+    );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'id': instance.id,

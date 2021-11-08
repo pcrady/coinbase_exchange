@@ -6,25 +6,24 @@ part of 'change.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Change _$ChangeFromJson(Map<String, dynamic> json) {
-  return Change(
-    type: json['type'] as String?,
-    time: json['time'] == null ? null : DateTime.parse(json['time'] as String),
-    sequence: json['sequence'] as int?,
-    orderId: json['order_id'] as String?,
-    productId: json['product_id'] as String?,
-    newSize:
-        const StringToDoubleConverter().fromJson(json['new_size'] as String?),
-    oldSize:
-        const StringToDoubleConverter().fromJson(json['old_size'] as String?),
-    newFunds:
-        const StringToDoubleConverter().fromJson(json['new_funds'] as String?),
-    oldFunds:
-        const StringToDoubleConverter().fromJson(json['old_funds'] as String?),
-    price: const StringToDoubleConverter().fromJson(json['price'] as String?),
-    side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
-  );
-}
+Change _$ChangeFromJson(Map<String, dynamic> json) => Change(
+      type: json['type'] as String?,
+      time:
+          json['time'] == null ? null : DateTime.parse(json['time'] as String),
+      sequence: json['sequence'] as int?,
+      orderId: json['order_id'] as String?,
+      productId: json['product_id'] as String?,
+      newSize:
+          const StringToDoubleConverter().fromJson(json['new_size'] as String?),
+      oldSize:
+          const StringToDoubleConverter().fromJson(json['old_size'] as String?),
+      newFunds: const StringToDoubleConverter()
+          .fromJson(json['new_funds'] as String?),
+      oldFunds: const StringToDoubleConverter()
+          .fromJson(json['old_funds'] as String?),
+      price: const StringToDoubleConverter().fromJson(json['price'] as String?),
+      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
+    );
 
 Map<String, dynamic> _$ChangeToJson(Change instance) => <String, dynamic>{
       'type': instance.type,

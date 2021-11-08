@@ -6,33 +6,31 @@ part of 'product.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Product _$ProductFromJson(Map<String, dynamic> json) {
-  return Product(
-    id: json['id'] as String?,
-    displayName: json['display_name'] as String?,
-    baseCurrency: json['base_currency'] as String?,
-    quoteCurrency: json['quote_currency'] as String?,
-    baseIncrement: const StringToDoubleConverter()
-        .fromJson(json['base_increment'] as String?),
-    quoteIncrement: const StringToDoubleConverter()
-        .fromJson(json['quote_increment'] as String?),
-    baseMinSize: const StringToDoubleConverter()
-        .fromJson(json['base_min_size'] as String?),
-    baseMaxSize: const StringToDoubleConverter()
-        .fromJson(json['base_max_size'] as String?),
-    minMarketFunds: const StringToDoubleConverter()
-        .fromJson(json['min_market_funds'] as String?),
-    maxMarketFunds: const StringToDoubleConverter()
-        .fromJson(json['max_market_funds'] as String?),
-    status: json['status'] as String?,
-    statusMessage: json['status_message'] as String?,
-    cancelOnly: json['cancel_only'] as bool?,
-    limitOnly: json['limit_only'] as bool?,
-    postOnly: json['post_only'] as bool?,
-    tradingDisabled: json['trading_disabled'] as bool?,
-    marginEnabled: json['margin_enabled'] as bool?,
-  );
-}
+Product _$ProductFromJson(Map<String, dynamic> json) => Product(
+      id: json['id'] as String?,
+      displayName: json['display_name'] as String?,
+      baseCurrency: json['base_currency'] as String?,
+      quoteCurrency: json['quote_currency'] as String?,
+      baseIncrement: const StringToDoubleConverter()
+          .fromJson(json['base_increment'] as String?),
+      quoteIncrement: const StringToDoubleConverter()
+          .fromJson(json['quote_increment'] as String?),
+      baseMinSize: const StringToDoubleConverter()
+          .fromJson(json['base_min_size'] as String?),
+      baseMaxSize: const StringToDoubleConverter()
+          .fromJson(json['base_max_size'] as String?),
+      minMarketFunds: const StringToDoubleConverter()
+          .fromJson(json['min_market_funds'] as String?),
+      maxMarketFunds: const StringToDoubleConverter()
+          .fromJson(json['max_market_funds'] as String?),
+      status: json['status'] as String?,
+      statusMessage: json['status_message'] as String?,
+      cancelOnly: json['cancel_only'] as bool?,
+      limitOnly: json['limit_only'] as bool?,
+      postOnly: json['post_only'] as bool?,
+      tradingDisabled: json['trading_disabled'] as bool?,
+      marginEnabled: json['margin_enabled'] as bool?,
+    );
 
 Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'id': instance.id,

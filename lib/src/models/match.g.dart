@@ -6,29 +6,28 @@ part of 'match.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Match _$MatchFromJson(Map<String, dynamic> json) {
-  return Match(
-    type: json['type'] as String?,
-    tradeId: json['trade_id'] as int?,
-    sequence: json['sequence'] as int?,
-    makerOrderId: json['maker_order_id'] as String?,
-    takerOrderId: json['taker_order_id'] as String?,
-    time: json['time'] == null ? null : DateTime.parse(json['time'] as String),
-    productId: json['product_id'] as String?,
-    size: const StringToDoubleConverter().fromJson(json['size'] as String?),
-    price: const StringToDoubleConverter().fromJson(json['price'] as String?),
-    side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
-    takerUserId: json['taker_user_id'] as String?,
-    userId: json['user_id'] as String?,
-    takerProfileId: json['taker_profile_id'] as String?,
-    profileId: json['profile_id'] as String?,
-    takerFeeRate: const StringToDoubleConverter()
-        .fromJson(json['taker_fee_rate'] as String?),
-    makerUserId: json['maker_user_id'] as String?,
-    makerProfileId: json['maker_profile_id'] as String?,
-    makerFeeRate: json['maker_fee_rate'] as String?,
-  );
-}
+Match _$MatchFromJson(Map<String, dynamic> json) => Match(
+      type: json['type'] as String?,
+      tradeId: json['trade_id'] as int?,
+      sequence: json['sequence'] as int?,
+      makerOrderId: json['maker_order_id'] as String?,
+      takerOrderId: json['taker_order_id'] as String?,
+      time:
+          json['time'] == null ? null : DateTime.parse(json['time'] as String),
+      productId: json['product_id'] as String?,
+      size: const StringToDoubleConverter().fromJson(json['size'] as String?),
+      price: const StringToDoubleConverter().fromJson(json['price'] as String?),
+      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
+      takerUserId: json['taker_user_id'] as String?,
+      userId: json['user_id'] as String?,
+      takerProfileId: json['taker_profile_id'] as String?,
+      profileId: json['profile_id'] as String?,
+      takerFeeRate: const StringToDoubleConverter()
+          .fromJson(json['taker_fee_rate'] as String?),
+      makerUserId: json['maker_user_id'] as String?,
+      makerProfileId: json['maker_profile_id'] as String?,
+      makerFeeRate: json['maker_fee_rate'] as String?,
+    );
 
 Map<String, dynamic> _$MatchToJson(Match instance) => <String, dynamic>{
       'type': instance.type,

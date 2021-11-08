@@ -2,6 +2,8 @@ import '../clients/client.dart';
 import '../models/currency.dart';
 import '../rest_clients/currencies_rest_client.dart';
 
+/// A [Client] that helps manage currencies and returns coinbase_exchange
+/// objects
 class CurrenciesClient extends Client {
   bool sandbox;
   String apiKey;
@@ -29,7 +31,7 @@ class CurrenciesClient extends Client {
   /// Note: Not all currencies may be currently in use for trading.
   ///
   /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getcurrencies
-
+  ///
   Future<List<Currency>> getAllCurrencies() async {
     var response = await _currenciesRestClient.getAllCurrencies();
 
@@ -47,7 +49,7 @@ class CurrenciesClient extends Client {
   /// may use a custom code.
   ///
   /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getcurrency
-
+  ///
   Future<Currency> getCurrency({
     required String currencyId,
   }) async {

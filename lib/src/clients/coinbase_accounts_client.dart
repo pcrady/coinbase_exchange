@@ -3,6 +3,8 @@ import '../models/crypto_address.dart';
 import '../models/wallet.dart';
 import '../rest_clients/coinbase_accounts_rest_client.dart';
 
+/// A [Client] that helps manage accounts on counbase.com **NOT** coinbase pro
+/// and returns coinbase_exchange objects
 class CoinbaseAccountsClient extends Client {
   bool sandbox;
   String apiKey;

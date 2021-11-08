@@ -2,6 +2,8 @@ import '../clients/client.dart';
 import '../models/conversion.dart';
 import '../rest_clients/conversions_rest_client.dart';
 
+/// A [Client] that helps manage currency conversions and
+/// returns coinbase_exchange objects
 class ConversionsClient extends Client {
   bool sandbox;
   String apiKey;
@@ -23,6 +25,13 @@ class ConversionsClient extends Client {
     );
   }
 
+  /// Convert a currency
+  ///
+  /// Converts funds from from currency to to currency.
+  /// Funds are converted on the from account in the profile_id profile.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_postconversion
+  ///
   Future<Conversion> convertCurrency({
     String? profileId,
     required String from,
@@ -43,6 +52,12 @@ class ConversionsClient extends Client {
     return Conversion.fromJson(mapDecode(response.body));
   }
 
+  /// Get a conversion
+  ///
+  /// Gets a currency conversion by id (i.e. USD -> USDC).
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getconversion
+  ///
   Future<Conversion> getConversion({
     required String conversionId,
   }) async {

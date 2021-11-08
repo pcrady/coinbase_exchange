@@ -6,19 +6,18 @@ part of 'received.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Received _$ReceivedFromJson(Map<String, dynamic> json) {
-  return Received(
-    type: json['type'] as String?,
-    time: json['time'] == null ? null : DateTime.parse(json['time'] as String),
-    productId: json['product_id'] as String?,
-    sequence: json['sequence'] as int?,
-    orderId: json['order_id'] as String?,
-    funds: const StringToDoubleConverter().fromJson(json['funds'] as String?),
-    side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
-    orderType:
-        _$enumDecodeNullable(_$CoinbaseOrderTypeEnumMap, json['order_type']),
-  );
-}
+Received _$ReceivedFromJson(Map<String, dynamic> json) => Received(
+      type: json['type'] as String?,
+      time:
+          json['time'] == null ? null : DateTime.parse(json['time'] as String),
+      productId: json['product_id'] as String?,
+      sequence: json['sequence'] as int?,
+      orderId: json['order_id'] as String?,
+      funds: const StringToDoubleConverter().fromJson(json['funds'] as String?),
+      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
+      orderType:
+          _$enumDecodeNullable(_$CoinbaseOrderTypeEnumMap, json['order_type']),
+    );
 
 Map<String, dynamic> _$ReceivedToJson(Received instance) => <String, dynamic>{
       'type': instance.type,

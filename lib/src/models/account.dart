@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'account.g.dart';
 
+/// A class to manage account information
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Account {
   String? id;

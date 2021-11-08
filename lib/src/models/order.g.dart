@@ -6,29 +6,27 @@ part of 'order.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Order _$OrderFromJson(Map<String, dynamic> json) {
-  return Order(
-    id: json['id'] as String?,
-    price: const StringToDoubleConverter().fromJson(json['price'] as String?),
-    size: const StringToDoubleConverter().fromJson(json['size'] as String?),
-    productId: json['product_id'] as String?,
-    profileId: json['profile_id'] as String?,
-    side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
-    type: _$enumDecodeNullable(_$CoinbaseOrderTypeEnumMap, json['type']),
-    timeInForce: json['time_in_force'] as String?,
-    postOnly: json['post_only'] as bool?,
-    createdAt: json['created_at'] == null
-        ? null
-        : DateTime.parse(json['created_at'] as String),
-    fillFees: (json['fill_fees'] as num?)?.toDouble(),
-    filledSize: (json['filled_size'] as num?)?.toDouble(),
-    executedValue: (json['executed_value'] as num?)?.toDouble(),
-    status: json['status'] == null
-        ? null
-        : Status.fromJson(json['status'] as Map<String, dynamic>),
-    settled: json['settled'] as bool?,
-  );
-}
+Order _$OrderFromJson(Map<String, dynamic> json) => Order(
+      id: json['id'] as String?,
+      price: const StringToDoubleConverter().fromJson(json['price'] as String?),
+      size: const StringToDoubleConverter().fromJson(json['size'] as String?),
+      productId: json['product_id'] as String?,
+      profileId: json['profile_id'] as String?,
+      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
+      type: _$enumDecodeNullable(_$CoinbaseOrderTypeEnumMap, json['type']),
+      timeInForce: json['time_in_force'] as String?,
+      postOnly: json['post_only'] as bool?,
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      fillFees: (json['fill_fees'] as num?)?.toDouble(),
+      filledSize: (json['filled_size'] as num?)?.toDouble(),
+      executedValue: (json['executed_value'] as num?)?.toDouble(),
+      status: json['status'] == null
+          ? null
+          : Status.fromJson(json['status'] as Map<String, dynamic>),
+      settled: json['settled'] as bool?,
+    );
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'id': instance.id,

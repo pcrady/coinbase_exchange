@@ -6,19 +6,18 @@ part of 'open.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Open _$OpenFromJson(Map<String, dynamic> json) {
-  return Open(
-    type: json['type'] as String?,
-    time: json['time'] == null ? null : DateTime.parse(json['time'] as String),
-    productId: json['product_id'] as String?,
-    sequence: json['sequence'] as int?,
-    orderId: json['order_id'] as String?,
-    price: const StringToDoubleConverter().fromJson(json['price'] as String?),
-    remainingSize: const StringToDoubleConverter()
-        .fromJson(json['remaining_size'] as String?),
-    side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
-  );
-}
+Open _$OpenFromJson(Map<String, dynamic> json) => Open(
+      type: json['type'] as String?,
+      time:
+          json['time'] == null ? null : DateTime.parse(json['time'] as String),
+      productId: json['product_id'] as String?,
+      sequence: json['sequence'] as int?,
+      orderId: json['order_id'] as String?,
+      price: const StringToDoubleConverter().fromJson(json['price'] as String?),
+      remainingSize: const StringToDoubleConverter()
+          .fromJson(json['remaining_size'] as String?),
+      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
+    );
 
 Map<String, dynamic> _$OpenToJson(Open instance) => <String, dynamic>{
       'type': instance.type,

@@ -1,3 +1,8 @@
+## 0.0.7
+- Add more documentation
+- Fill in TransfersClient which was left unfinished
+- Add FeesClient and CoinbasePriceOracleClient
+
 ## 0.0.6
 - Adding field side to Fill model class
 

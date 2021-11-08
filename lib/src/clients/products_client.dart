@@ -4,6 +4,8 @@ import '../lib/paginator.dart';
 import '../rest_clients/products_rest_client.dart';
 import 'dart:convert';
 
+/// A [Client] that helps manage products and returns coinbase_exchange
+/// objects
 class ProductsClient extends Client {
   bool sandbox;
   String apiKey;

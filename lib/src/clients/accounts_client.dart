@@ -145,7 +145,7 @@ class AccountsClient extends Client {
     DateTime? before,
     DateTime? after,
     int? limit,
-    CoinbaseTransferType? transferType,
+    TransferEnum? transferType,
   }) async {
     var response = await _accountsRestClient.getAccountTransfers(
       accountId: accountId,

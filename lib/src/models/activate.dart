@@ -16,7 +16,7 @@ class Activate extends WebsocketResponse {
   final double? profileId;
   final String? orderId;
   final String? stopType;
-  final CoinbaseSide? side;
+  final SideEnum? side;
   @StringToDoubleConverter()
   final double? stopPrice;
   @StringToDoubleConverter()

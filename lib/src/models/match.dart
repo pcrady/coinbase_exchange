@@ -18,7 +18,7 @@ class Match extends WebsocketResponse {
   final double? size;
   @StringToDoubleConverter()
   final double? price;
-  final CoinbaseSide? side;
+  final SideEnum? side;
   final String? takerUserId;
   final String? userId;
   final String? takerProfileId;

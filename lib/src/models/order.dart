@@ -14,8 +14,8 @@ class Order {
   final double? size;
   final String? productId;
   final String? profileId;
-  final CoinbaseSide? side;
-  final CoinbaseOrderType? type;
+  final SideEnum? side;
+  final OrderEnum? type;
   final String? timeInForce;
   final bool? postOnly;
   final DateTime? createdAt;

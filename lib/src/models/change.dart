@@ -22,7 +22,7 @@ class Change extends WebsocketResponse {
   final double? oldFunds;
   @StringToDoubleConverter()
   final double? price;
-  final CoinbaseSide? side;
+  final SideEnum? side;
 
   Change(
       {this.type,

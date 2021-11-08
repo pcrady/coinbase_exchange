@@ -1,3 +1,6 @@
+## 1.0.0
+- Rename enums to differentiate them from classes
+
 ## 0.0.7
 - Add more documentation
 - Fill in TransfersClient which was left unfinished

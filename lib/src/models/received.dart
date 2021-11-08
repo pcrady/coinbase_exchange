@@ -14,8 +14,8 @@ class Received extends WebsocketResponse {
   final String? orderId;
   @StringToDoubleConverter()
   final double? funds;
-  final CoinbaseSide? side;
-  final CoinbaseOrderType? orderType;
+  final SideEnum? side;
+  final OrderEnum? orderType;
 
   Received({
     this.type,

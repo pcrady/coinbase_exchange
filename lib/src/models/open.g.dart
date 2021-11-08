@@ -16,7 +16,7 @@ Open _$OpenFromJson(Map<String, dynamic> json) => Open(
       price: const StringToDoubleConverter().fromJson(json['price'] as String?),
       remainingSize: const StringToDoubleConverter()
           .fromJson(json['remaining_size'] as String?),
-      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
+      side: _$enumDecodeNullable(_$SideEnumEnumMap, json['side']),
     );
 
 Map<String, dynamic> _$OpenToJson(Open instance) => <String, dynamic>{
@@ -28,7 +28,7 @@ Map<String, dynamic> _$OpenToJson(Open instance) => <String, dynamic>{
       'price': const StringToDoubleConverter().toJson(instance.price),
       'remaining_size':
           const StringToDoubleConverter().toJson(instance.remainingSize),
-      'side': _$CoinbaseSideEnumMap[instance.side],
+      'side': _$SideEnumEnumMap[instance.side],
     };
 
 K _$enumDecode<K, V>(
@@ -68,7 +68,7 @@ K? _$enumDecodeNullable<K, V>(
   return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
-const _$CoinbaseSideEnumMap = {
-  CoinbaseSide.buy: 'buy',
-  CoinbaseSide.sell: 'sell',
+const _$SideEnumEnumMap = {
+  SideEnum.buy: 'buy',
+  SideEnum.sell: 'sell',
 };

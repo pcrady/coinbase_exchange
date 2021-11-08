@@ -68,7 +68,7 @@ class AccountsRestClient extends RestClient {
     DateTime? before,
     DateTime? after,
     int? limit,
-    CoinbaseTransferType? transferType,
+    TransferEnum? transferType,
   }) async {
     Map<String, String> queryParameters = {};
     if (before != null) queryParameters['before'] = before.toIso8601String();

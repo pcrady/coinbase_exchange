@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
     _streamController.addStream(
       _client.subscribe(
         productIds: ['ETH-USD', 'BTC-USD', 'LTC-USD'],
-        channels: [cb.CoinbaseChannel.ticker],
+        channels: [cb.ChannelEnum.ticker],
       ),
     );
     super.initState();

@@ -12,7 +12,7 @@ Trade _$TradeFromJson(Map<String, dynamic> json) => Trade(
       tradeId: json['trade_id'] as int?,
       price: const StringToDoubleConverter().fromJson(json['price'] as String?),
       size: const StringToDoubleConverter().fromJson(json['size'] as String?),
-      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
+      side: _$enumDecodeNullable(_$SideEnumEnumMap, json['side']),
     );
 
 Map<String, dynamic> _$TradeToJson(Trade instance) => <String, dynamic>{
@@ -20,7 +20,7 @@ Map<String, dynamic> _$TradeToJson(Trade instance) => <String, dynamic>{
       'trade_id': instance.tradeId,
       'price': const StringToDoubleConverter().toJson(instance.price),
       'size': const StringToDoubleConverter().toJson(instance.size),
-      'side': _$CoinbaseSideEnumMap[instance.side],
+      'side': _$SideEnumEnumMap[instance.side],
     };
 
 K _$enumDecode<K, V>(
@@ -60,7 +60,7 @@ K? _$enumDecodeNullable<K, V>(
   return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
-const _$CoinbaseSideEnumMap = {
-  CoinbaseSide.buy: 'buy',
-  CoinbaseSide.sell: 'sell',
+const _$SideEnumEnumMap = {
+  SideEnum.buy: 'buy',
+  SideEnum.sell: 'sell',
 };

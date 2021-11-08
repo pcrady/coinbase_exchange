@@ -68,7 +68,7 @@ class ProductsClient extends Client {
   ///
   Future<OrderBook> getProductBook({
     required String productId,
-    CoinbaseLevel? level,
+    LevelEnum? level,
   }) async {
     var response = await _productsRestClient.getProductBook(
       productId: productId,
@@ -90,7 +90,7 @@ class ProductsClient extends Client {
   ///
   Future<List<Candle>> getProductCandles({
     required String productId,
-    CoinbaseGranularity? granularity,
+    GranularityEnum? granularity,
     DateTime? start,
     DateTime? end,
   }) async {

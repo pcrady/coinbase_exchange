@@ -12,8 +12,8 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       size: const StringToDoubleConverter().fromJson(json['size'] as String?),
       productId: json['product_id'] as String?,
       profileId: json['profile_id'] as String?,
-      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
-      type: _$enumDecodeNullable(_$CoinbaseOrderTypeEnumMap, json['type']),
+      side: _$enumDecodeNullable(_$SideEnumEnumMap, json['side']),
+      type: _$enumDecodeNullable(_$OrderEnumEnumMap, json['type']),
       timeInForce: json['time_in_force'] as String?,
       postOnly: json['post_only'] as bool?,
       createdAt: json['created_at'] == null
@@ -34,8 +34,8 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'size': const StringToDoubleConverter().toJson(instance.size),
       'product_id': instance.productId,
       'profile_id': instance.profileId,
-      'side': _$CoinbaseSideEnumMap[instance.side],
-      'type': _$CoinbaseOrderTypeEnumMap[instance.type],
+      'side': _$SideEnumEnumMap[instance.side],
+      'type': _$OrderEnumEnumMap[instance.type],
       'time_in_force': instance.timeInForce,
       'post_only': instance.postOnly,
       'created_at': instance.createdAt?.toIso8601String(),
@@ -83,13 +83,13 @@ K? _$enumDecodeNullable<K, V>(
   return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
-const _$CoinbaseSideEnumMap = {
-  CoinbaseSide.buy: 'buy',
-  CoinbaseSide.sell: 'sell',
+const _$SideEnumEnumMap = {
+  SideEnum.buy: 'buy',
+  SideEnum.sell: 'sell',
 };
 
-const _$CoinbaseOrderTypeEnumMap = {
-  CoinbaseOrderType.limit: 'limit',
-  CoinbaseOrderType.market: 'market',
-  CoinbaseOrderType.stop: 'stop',
+const _$OrderEnumEnumMap = {
+  OrderEnum.limit: 'limit',
+  OrderEnum.market: 'market',
+  OrderEnum.stop: 'stop',
 };

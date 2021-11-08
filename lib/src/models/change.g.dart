@@ -22,7 +22,7 @@ Change _$ChangeFromJson(Map<String, dynamic> json) => Change(
       oldFunds: const StringToDoubleConverter()
           .fromJson(json['old_funds'] as String?),
       price: const StringToDoubleConverter().fromJson(json['price'] as String?),
-      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
+      side: _$enumDecodeNullable(_$SideEnumEnumMap, json['side']),
     );
 
 Map<String, dynamic> _$ChangeToJson(Change instance) => <String, dynamic>{
@@ -36,7 +36,7 @@ Map<String, dynamic> _$ChangeToJson(Change instance) => <String, dynamic>{
       'new_funds': const StringToDoubleConverter().toJson(instance.newFunds),
       'old_funds': const StringToDoubleConverter().toJson(instance.oldFunds),
       'price': const StringToDoubleConverter().toJson(instance.price),
-      'side': _$CoinbaseSideEnumMap[instance.side],
+      'side': _$SideEnumEnumMap[instance.side],
     };
 
 K _$enumDecode<K, V>(
@@ -76,7 +76,7 @@ K? _$enumDecodeNullable<K, V>(
   return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
-const _$CoinbaseSideEnumMap = {
-  CoinbaseSide.buy: 'buy',
-  CoinbaseSide.sell: 'sell',
+const _$SideEnumEnumMap = {
+  SideEnum.buy: 'buy',
+  SideEnum.sell: 'sell',
 };

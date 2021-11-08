@@ -16,8 +16,8 @@ Done _$DoneFromJson(Map<String, dynamic> json) => Done(
       price: const StringToDoubleConverter().fromJson(json['price'] as String?),
       remainingSize: const StringToDoubleConverter()
           .fromJson(json['remaining_size'] as String?),
-      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
-      reason: _$enumDecodeNullable(_$CoinbaseReasonEnumMap, json['reason']),
+      side: _$enumDecodeNullable(_$SideEnumEnumMap, json['side']),
+      reason: _$enumDecodeNullable(_$ReasonEnumEnumMap, json['reason']),
     );
 
 Map<String, dynamic> _$DoneToJson(Done instance) => <String, dynamic>{
@@ -29,8 +29,8 @@ Map<String, dynamic> _$DoneToJson(Done instance) => <String, dynamic>{
       'price': const StringToDoubleConverter().toJson(instance.price),
       'remaining_size':
           const StringToDoubleConverter().toJson(instance.remainingSize),
-      'side': _$CoinbaseSideEnumMap[instance.side],
-      'reason': _$CoinbaseReasonEnumMap[instance.reason],
+      'side': _$SideEnumEnumMap[instance.side],
+      'reason': _$ReasonEnumEnumMap[instance.reason],
     };
 
 K _$enumDecode<K, V>(
@@ -70,12 +70,12 @@ K? _$enumDecodeNullable<K, V>(
   return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
-const _$CoinbaseSideEnumMap = {
-  CoinbaseSide.buy: 'buy',
-  CoinbaseSide.sell: 'sell',
+const _$SideEnumEnumMap = {
+  SideEnum.buy: 'buy',
+  SideEnum.sell: 'sell',
 };
 
-const _$CoinbaseReasonEnumMap = {
-  CoinbaseReason.filled: 'filled',
-  CoinbaseReason.canceled: 'canceled',
+const _$ReasonEnumEnumMap = {
+  ReasonEnum.filled: 'filled',
+  ReasonEnum.canceled: 'canceled',
 };

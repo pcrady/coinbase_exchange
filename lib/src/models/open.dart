@@ -16,7 +16,7 @@ class Open extends WebsocketResponse {
   final double? price;
   @StringToDoubleConverter()
   final double? remainingSize;
-  final CoinbaseSide? side;
+  final SideEnum? side;
 
   Open({
     this.type,

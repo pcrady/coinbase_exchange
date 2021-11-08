@@ -19,7 +19,7 @@ class Fill {
   @StringToDoubleConverter()
   final double? fee;
   final String? sell;
-  final CoinbaseSide? side;
+  final SideEnum? side;
   final bool? settled;
   @StringToDoubleConverter()
   final double? usdVolume;

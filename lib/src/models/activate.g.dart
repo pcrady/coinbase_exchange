@@ -18,7 +18,7 @@ Activate _$ActivateFromJson(Map<String, dynamic> json) => Activate(
           .fromJson(json['profile_id'] as String?),
       orderId: json['order_id'] as String?,
       stopType: json['stop_type'] as String?,
-      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
+      side: _$enumDecodeNullable(_$SideEnumEnumMap, json['side']),
       stopPrice: const StringToDoubleConverter()
           .fromJson(json['stop_price'] as String?),
       size: const StringToDoubleConverter().fromJson(json['size'] as String?),
@@ -34,7 +34,7 @@ Map<String, dynamic> _$ActivateToJson(Activate instance) => <String, dynamic>{
       'profile_id': const StringToDoubleConverter().toJson(instance.profileId),
       'order_id': instance.orderId,
       'stop_type': instance.stopType,
-      'side': _$CoinbaseSideEnumMap[instance.side],
+      'side': _$SideEnumEnumMap[instance.side],
       'stop_price': const StringToDoubleConverter().toJson(instance.stopPrice),
       'size': const StringToDoubleConverter().toJson(instance.size),
       'funds': const StringToDoubleConverter().toJson(instance.funds),
@@ -78,7 +78,7 @@ K? _$enumDecodeNullable<K, V>(
   return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
-const _$CoinbaseSideEnumMap = {
-  CoinbaseSide.buy: 'buy',
-  CoinbaseSide.sell: 'sell',
+const _$SideEnumEnumMap = {
+  SideEnum.buy: 'buy',
+  SideEnum.sell: 'sell',
 };

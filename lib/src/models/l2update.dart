@@ -13,7 +13,7 @@ import 'package:tuple/tuple.dart';
 class L2update extends WebsocketResponse {
   final String? type;
   final String? productId;
-  final List<Tuple3<CoinbaseSide, double, double>>? changes;
+  final List<Tuple3<SideEnum, double, double>>? changes;
   final DateTime? time;
 
   L2update({
@@ -24,10 +24,10 @@ class L2update extends WebsocketResponse {
   });
 
   factory L2update.fromJson(Map<String, dynamic> json) {
-    List<Tuple3<CoinbaseSide, double, double>> _changes = [];
+    List<Tuple3<SideEnum, double, double>> _changes = [];
     for (var change in json['changes']) {
       var _change = Tuple3(
-        change[0] == 'buy' ? CoinbaseSide.buy : CoinbaseSide.sell,
+        change[0] == 'buy' ? SideEnum.buy : SideEnum.sell,
         double.parse(change[1]),
         double.parse(change[2]),
       );
@@ -49,7 +49,7 @@ class L2update extends WebsocketResponse {
       'product_id': productId,
       'changes': changes?.map((tuple) {
         var list = tuple.toList();
-        CoinbaseSide side = list[0];
+        SideEnum side = list[0];
         list[0] = side.side();
         return list;
       }).toList(),

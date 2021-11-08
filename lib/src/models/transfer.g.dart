@@ -8,7 +8,7 @@ part of 'transfer.dart';
 
 Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
       id: json['id'] as String?,
-      type: _$enumDecodeNullable(_$CoinbaseTransferTypeEnumMap, json['type']),
+      type: _$enumDecodeNullable(_$TransferEnumEnumMap, json['type']),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -29,7 +29,7 @@ Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
 
 Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
       'id': instance.id,
-      'type': _$CoinbaseTransferTypeEnumMap[instance.type],
+      'type': _$TransferEnumEnumMap[instance.type],
       'created_at': instance.createdAt?.toIso8601String(),
       'completed_at': instance.completedAt?.toIso8601String(),
       'canceled_at': instance.canceledAt?.toIso8601String(),
@@ -76,7 +76,7 @@ K? _$enumDecodeNullable<K, V>(
   return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
-const _$CoinbaseTransferTypeEnumMap = {
-  CoinbaseTransferType.withdrawal: 'withdrawal',
-  CoinbaseTransferType.deposit: 'deposit',
+const _$TransferEnumEnumMap = {
+  TransferEnum.withdrawal: 'withdrawal',
+  TransferEnum.deposit: 'deposit',
 };

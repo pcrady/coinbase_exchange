@@ -24,7 +24,7 @@ class ProductsRestClient extends RestClient {
 
   Future<http.Response> getProductBook({
     required String productId,
-    CoinbaseLevel? level,
+    LevelEnum? level,
   }) async {
     Map<String, dynamic> queryParameters = {};
     if (level != null) queryParameters['level'] = level.value();
@@ -37,7 +37,7 @@ class ProductsRestClient extends RestClient {
 
   Future<http.Response> getProductCandles({
     required String productId,
-    CoinbaseGranularity? granularity,
+    GranularityEnum? granularity,
     DateTime? start,
     DateTime? end,
   }) async {

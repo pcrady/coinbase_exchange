@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
-import 'package:logger/logger.dart';
 
+/// An abstract class for clients which return http.Response objects
 abstract class RestClient {
   static const String defaultProductId = 'BTC-USD';
   static const String defaultCurrencyId = 'BTC';

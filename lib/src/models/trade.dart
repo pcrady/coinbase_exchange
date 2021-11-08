@@ -12,7 +12,7 @@ class Trade {
   final double? price;
   @StringToDoubleConverter()
   final double? size;
-  final CoinbaseSide? side;
+  final SideEnum? side;
 
   Trade({
     this.time,

@@ -1,20 +1,20 @@
-enum CoinbaseLevel {
+enum LevelEnum {
   one,
   two,
   three,
 }
 
-extension Value on CoinbaseLevel {
+extension LevelExtension on LevelEnum {
   int value() {
-    if (this == CoinbaseLevel.one) return 1;
-    if (this == CoinbaseLevel.two)
+    if (this == LevelEnum.one) return 1;
+    if (this == LevelEnum.two)
       return 2;
     else
       return 3;
   }
 }
 
-enum CoinbaseGranularity {
+enum GranularityEnum {
   oneMinute,
   fiveMinutes,
   fifteenMinutes,
@@ -23,55 +23,55 @@ enum CoinbaseGranularity {
   oneDay,
 }
 
-extension Seconds on CoinbaseGranularity {
+extension GranularityExtension on GranularityEnum {
   int seconds() {
-    if (this == CoinbaseGranularity.oneMinute) return 60;
-    if (this == CoinbaseGranularity.fiveMinutes) return 300;
-    if (this == CoinbaseGranularity.fifteenMinutes) return 900;
-    if (this == CoinbaseGranularity.oneHour) return 3600;
-    if (this == CoinbaseGranularity.sixHours)
+    if (this == GranularityEnum.oneMinute) return 60;
+    if (this == GranularityEnum.fiveMinutes) return 300;
+    if (this == GranularityEnum.fifteenMinutes) return 900;
+    if (this == GranularityEnum.oneHour) return 3600;
+    if (this == GranularityEnum.sixHours)
       return 21600;
     else
       return 86400;
   }
 }
 
-enum CoinbaseSide {
+enum SideEnum {
   buy,
   sell,
 }
 
-extension Side on CoinbaseSide {
+extension SideExtension on SideEnum {
   String side() {
-    if (this == CoinbaseSide.buy)
+    if (this == SideEnum.buy)
       return 'buy';
     else
       return 'sell';
   }
 }
 
-enum CoinbaseOrderType {
+enum OrderEnum {
   limit,
   market,
   stop,
 }
 
-enum Action {
+enum ActionEnum {
   subscribe,
   unsubscribe,
 }
 
-extension OrderType on CoinbaseOrderType {
+extension OrderExtension on OrderEnum {
   String orderType() {
-    if (this == CoinbaseOrderType.limit) return 'limit';
-    if (this == CoinbaseOrderType.market)
+    if (this == OrderEnum.limit) return 'limit';
+    if (this == OrderEnum.market)
       return 'market';
     else
       return 'stop';
   }
 }
 
-enum CoinbaseChannel {
+enum ChannelEnum {
   heartBeat,
   status,
   ticker,
@@ -81,39 +81,39 @@ enum CoinbaseChannel {
   full,
 }
 
-extension Channel on CoinbaseChannel {
+extension ChannelExtension on ChannelEnum {
   String channel() {
-    if (this == CoinbaseChannel.heartBeat) return 'heartbeat';
-    if (this == CoinbaseChannel.status) return 'status';
-    if (this == CoinbaseChannel.ticker) return 'ticker';
-    if (this == CoinbaseChannel.level2) return 'level2';
-    if (this == CoinbaseChannel.user) return 'user';
-    if (this == CoinbaseChannel.matches)
+    if (this == ChannelEnum.heartBeat) return 'heartbeat';
+    if (this == ChannelEnum.status) return 'status';
+    if (this == ChannelEnum.ticker) return 'ticker';
+    if (this == ChannelEnum.level2) return 'level2';
+    if (this == ChannelEnum.user) return 'user';
+    if (this == ChannelEnum.matches)
       return 'matches';
     else
       return 'full';
   }
 }
 
-enum CoinbaseReason {
+enum ReasonEnum {
   filled,
   canceled,
 }
 
-extension Reason on CoinbaseReason {
+extension ReasonExtension on ReasonEnum {
   String reason() {
-    return this == CoinbaseReason.filled ? 'filled' : 'canceled';
+    return this == ReasonEnum.filled ? 'filled' : 'canceled';
   }
 }
 
-enum CoinbaseTransferType {
+enum TransferEnum {
   withdrawal,
   deposit,
 }
 
-extension TransferType on CoinbaseTransferType {
+extension TransferExtension on TransferEnum {
   String transferType() {
-    if (this == CoinbaseTransferType.withdrawal)
+    if (this == TransferEnum.withdrawal)
       return 'withdrawal';
     else
       return 'deposit';

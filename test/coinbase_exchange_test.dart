@@ -64,7 +64,7 @@ void main() {
       stream = wsClient.subscribe(
         productIds: ['BTC-USD'],
         channels: [
-          CoinbaseChannel.heartBeat,
+          ChannelEnum.heartBeat,
         ],
       );
 

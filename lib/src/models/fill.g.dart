@@ -19,7 +19,7 @@ Fill _$FillFromJson(Map<String, dynamic> json) => Fill(
       size: const StringToDoubleConverter().fromJson(json['size'] as String?),
       fee: const StringToDoubleConverter().fromJson(json['fee'] as String?),
       sell: json['sell'] as String?,
-      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
+      side: _$enumDecodeNullable(_$SideEnumEnumMap, json['side']),
       settled: json['settled'] as bool?,
       usdVolume: const StringToDoubleConverter()
           .fromJson(json['usd_volume'] as String?),
@@ -36,7 +36,7 @@ Map<String, dynamic> _$FillToJson(Fill instance) => <String, dynamic>{
       'size': const StringToDoubleConverter().toJson(instance.size),
       'fee': const StringToDoubleConverter().toJson(instance.fee),
       'sell': instance.sell,
-      'side': _$CoinbaseSideEnumMap[instance.side],
+      'side': _$SideEnumEnumMap[instance.side],
       'settled': instance.settled,
       'usd_volume': const StringToDoubleConverter().toJson(instance.usdVolume),
     };
@@ -78,7 +78,7 @@ K? _$enumDecodeNullable<K, V>(
   return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
-const _$CoinbaseSideEnumMap = {
-  CoinbaseSide.buy: 'buy',
-  CoinbaseSide.sell: 'sell',
+const _$SideEnumEnumMap = {
+  SideEnum.buy: 'buy',
+  SideEnum.sell: 'sell',
 };

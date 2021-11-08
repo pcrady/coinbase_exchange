@@ -7,7 +7,7 @@ part 'transfer.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Transfer {
   String? id;
-  CoinbaseTransferType? type;
+  TransferEnum? type;
   DateTime? createdAt;
   DateTime? completedAt;
   DateTime? canceledAt;

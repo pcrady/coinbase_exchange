@@ -16,8 +16,8 @@ class Done extends WebsocketResponse {
   final double? price;
   @StringToDoubleConverter()
   final double? remainingSize;
-  final CoinbaseSide? side;
-  final CoinbaseReason? reason;
+  final SideEnum? side;
+  final ReasonEnum? reason;
 
   Done({
     this.type,

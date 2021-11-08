@@ -14,9 +14,8 @@ Received _$ReceivedFromJson(Map<String, dynamic> json) => Received(
       sequence: json['sequence'] as int?,
       orderId: json['order_id'] as String?,
       funds: const StringToDoubleConverter().fromJson(json['funds'] as String?),
-      side: _$enumDecodeNullable(_$CoinbaseSideEnumMap, json['side']),
-      orderType:
-          _$enumDecodeNullable(_$CoinbaseOrderTypeEnumMap, json['order_type']),
+      side: _$enumDecodeNullable(_$SideEnumEnumMap, json['side']),
+      orderType: _$enumDecodeNullable(_$OrderEnumEnumMap, json['order_type']),
     );
 
 Map<String, dynamic> _$ReceivedToJson(Received instance) => <String, dynamic>{
@@ -26,8 +25,8 @@ Map<String, dynamic> _$ReceivedToJson(Received instance) => <String, dynamic>{
       'sequence': instance.sequence,
       'order_id': instance.orderId,
       'funds': const StringToDoubleConverter().toJson(instance.funds),
-      'side': _$CoinbaseSideEnumMap[instance.side],
-      'order_type': _$CoinbaseOrderTypeEnumMap[instance.orderType],
+      'side': _$SideEnumEnumMap[instance.side],
+      'order_type': _$OrderEnumEnumMap[instance.orderType],
     };
 
 K _$enumDecode<K, V>(
@@ -67,13 +66,13 @@ K? _$enumDecodeNullable<K, V>(
   return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
-const _$CoinbaseSideEnumMap = {
-  CoinbaseSide.buy: 'buy',
-  CoinbaseSide.sell: 'sell',
+const _$SideEnumEnumMap = {
+  SideEnum.buy: 'buy',
+  SideEnum.sell: 'sell',
 };
 
-const _$CoinbaseOrderTypeEnumMap = {
-  CoinbaseOrderType.limit: 'limit',
-  CoinbaseOrderType.market: 'market',
-  CoinbaseOrderType.stop: 'stop',
+const _$OrderEnumEnumMap = {
+  OrderEnum.limit: 'limit',
+  OrderEnum.market: 'market',
+  OrderEnum.stop: 'stop',
 };

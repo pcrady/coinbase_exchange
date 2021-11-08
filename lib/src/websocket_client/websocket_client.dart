@@ -33,8 +33,8 @@ class WebsocketClient {
 
   String _buildRequest({
     String? type,
-    Map<CoinbaseChannel, List<String>?>? channelProductIdMap,
-    List<CoinbaseChannel>? channels,
+    Map<ChannelEnum, List<String>?>? channelProductIdMap,
+    List<ChannelEnum>? channels,
     List<String>? productIds,
   }) {
     Map request = {
@@ -109,13 +109,13 @@ class WebsocketClient {
   }
 
   Stream<WebsocketResponse> _manageSubscriptions({
-    required Action action,
-    List<CoinbaseChannel>? channels,
+    required ActionEnum action,
+    List<ChannelEnum>? channels,
     List<String>? productIds,
-    Map<CoinbaseChannel, List<String>?>? channelProductIdMap,
+    Map<ChannelEnum, List<String>?>? channelProductIdMap,
   }) {
     String request = _buildRequest(
-      type: action == Action.subscribe ? 'subscribe' : 'unsubscribe',
+      type: action == ActionEnum.subscribe ? 'subscribe' : 'unsubscribe',
       channels: channels,
       productIds: productIds,
       channelProductIdMap: channelProductIdMap,
@@ -127,15 +127,15 @@ class WebsocketClient {
   }
 
   Stream<WebsocketResponse> subscribe({
-    List<CoinbaseChannel>? channels,
+    List<ChannelEnum>? channels,
     List<String>? productIds,
-    Map<CoinbaseChannel, List<String>?>? channelProductIdMap,
+    Map<ChannelEnum, List<String>?>? channelProductIdMap,
   }) {
     if (_channel == null) {
       throw Exception('You must connect before you can subscribe to a channel');
     }
     return _manageSubscriptions(
-      action: Action.subscribe,
+      action: ActionEnum.subscribe,
       channels: channels,
       productIds: productIds,
       channelProductIdMap: channelProductIdMap,
@@ -143,16 +143,16 @@ class WebsocketClient {
   }
 
   Stream<WebsocketResponse> unSubscribe({
-    List<CoinbaseChannel>? channels,
+    List<ChannelEnum>? channels,
     List<String>? productIds,
-    Map<CoinbaseChannel, List<String>?>? channelProductIdMap,
+    Map<ChannelEnum, List<String>?>? channelProductIdMap,
   }) {
     if (_channel == null) {
       throw Exception(
           'You must connect before you can unsubscribe to a channel');
     }
     return _manageSubscriptions(
-      action: Action.unsubscribe,
+      action: ActionEnum.unsubscribe,
       channels: channels,
       productIds: productIds,
       channelProductIdMap: channelProductIdMap,

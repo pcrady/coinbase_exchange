@@ -90,8 +90,10 @@ extension ChannelExtension on ChannelEnum {
     if (this == ChannelEnum.level2) return 'level2';
     if (this == ChannelEnum.user) return 'user';
     if (this == ChannelEnum.matches) return 'matches';
-    if (this == ChannelEnum.full) return 'full';
-    else return 'auction';
+    if (this == ChannelEnum.full)
+      return 'full';
+    else
+      return 'auction';
   }
 }
 

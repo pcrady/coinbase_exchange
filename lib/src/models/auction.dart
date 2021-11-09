@@ -46,7 +46,7 @@ class Auction extends WebsocketResponse {
   });
 
   factory Auction.fromJson(Map<String, dynamic> json) =>
-    _$AuctionFromJson(json);
+      _$AuctionFromJson(json);
 
   Map<String, dynamic> toJson() => _$AuctionToJson(this);
 }

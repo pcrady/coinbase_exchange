@@ -18,7 +18,6 @@ import '../models/stream_ticker.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'dart:convert';
 
-
 /// A client to connect to the coinbase exchange websocket feed.
 class WebsocketClient {
   static const String webSocketAuthority = 'wss://ws-feed.pro.coinbase.com';

@@ -1,6 +1,9 @@
+import 'package:coinbase_exchange/coinbase_exchange.dart';
+
 import '../models/subscribed_channel.dart';
 import '../lib/websocket_response.dart';
 
+/// The first message recieved when subscribing to a channel with the [WebsocketClient].
 ///
 /// Once a subscribe message is received the server will respond with a subscriptions
 /// message that lists all channels you are subscribed to. Subsequent subscribe messages

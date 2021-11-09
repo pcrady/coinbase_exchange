@@ -3,6 +3,8 @@ import '../lib/coinbase_enums.dart';
 import '../rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
+/// A [RestClient] that helps manage accounts and returns
+/// http.Response objects.
 class AccountsRestClient extends RestClient {
   AccountsRestClient({
     bool sandbox = false,

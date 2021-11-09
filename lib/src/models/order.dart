@@ -5,6 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'order.g.dart';
 
+/// An an object which contains information about an order.
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Order {
   final String? id;

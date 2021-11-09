@@ -1,6 +1,7 @@
 import '../rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
+/// A [RestClient] that helps manage users.
 class UsersRestClient extends RestClient {
   UsersRestClient({
     bool sandbox = false,

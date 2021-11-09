@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'currency_details.g.dart';
 
+/// Details about a particular Currency object.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class CurrencyDetails {
   final String? type;

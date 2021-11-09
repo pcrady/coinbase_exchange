@@ -1,8 +1,12 @@
+import 'package:coinbase_exchange/coinbase_exchange.dart';
+
 import '../lib/websocket_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'heartbeat.g.dart';
 
+/// An object returned once per second by the [WebsocketClient]
+/// for a particular product.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Heartbeat extends WebsocketResponse {
   final String? type;

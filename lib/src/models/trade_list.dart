@@ -1,5 +1,7 @@
 import '../models/trade.dart';
 
+/// An object which manages a list of trades in
+/// an interval for a given product.
 class TradeList {
   final int? before;
   final int? after;

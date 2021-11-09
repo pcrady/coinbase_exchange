@@ -4,6 +4,8 @@ import '../lib/custom_json_converters.dart';
 
 part 'fill.g.dart';
 
+/// An object reflecting the fulfillment of part or whole of an
+/// order.
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Fill {
   final DateTime? createdAt;

@@ -1,3 +1,7 @@
+## 1.0.1
+- Add more documentation
+- Add missing exports
+
 ## 1.0.0
 - Rename enums to differentiate them from classes
 

@@ -4,8 +4,8 @@ import 'dart:convert';
 
 import '../clients/client.dart';
 
-/// A [Client] that helps manage the coinbase price oracle and coinbase_exchange
-/// objects
+/// A [Client] that helps manage the coinbase price oracle and
+/// returns coinbase_exchange objects.
 class CoinbasePriceOracleClient extends Client {
   bool sandbox;
   String apiKey;

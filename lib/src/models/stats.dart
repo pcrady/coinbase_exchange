@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'stats.g.dart';
 
+/// The 30day and 24hour stats for a product.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Stats {
   @StringToDoubleConverter()

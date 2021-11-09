@@ -1,6 +1,8 @@
 import '../rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
+/// A [RestClient] that helps manage currency conversions and
+/// returns http.Response objects.
 class ConversionsRestClient extends RestClient {
   ConversionsRestClient({
     bool sandbox = false,

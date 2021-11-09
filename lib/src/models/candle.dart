@@ -1,3 +1,5 @@
+/// An object which reflects the price fluctuations of a product
+/// over a certain time period.
 class Candle {
   final DateTime? time;
   final double? low;

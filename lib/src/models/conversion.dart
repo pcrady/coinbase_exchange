@@ -3,6 +3,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'conversion.g.dart';
 
+/// An object which reflects having converted funds from one currency
+/// to another.
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Conversion {
   final String? id;

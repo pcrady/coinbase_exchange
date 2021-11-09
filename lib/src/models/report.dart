@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'report.g.dart';
 
+/// An object which contains information about reports.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Report {
   final DateTime? createdAt;

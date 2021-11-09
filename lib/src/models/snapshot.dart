@@ -1,7 +1,14 @@
+import 'package:coinbase_exchange/coinbase_exchange.dart';
 import 'package:coinbase_exchange/src/lib/websocket_response.dart';
 import '../lib/websocket_response.dart';
 import 'package:tuple/tuple.dart';
 
+/// An object returned by the [WebsocketClient] when subscribed to the
+/// level2 channel.
+///
+/// It is a snapshot of the order book.
+///
+/// https://docs.cloud.coinbase.com/exchange/docs/channels#the-level2-channel
 class Snapshot extends WebsocketResponse {
   final String? type;
   final String? productId;

@@ -1,8 +1,8 @@
-import '../models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'payment_method.g.dart';
 
+/// An object which contains information about a transfer of funds.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class PaymentMethod {
   final String? id;

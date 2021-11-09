@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'wallet.g.dart';
 
+/// A wallet object for coinbase.com accounts.
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Wallet {
   final bool? availableOnConsumer;

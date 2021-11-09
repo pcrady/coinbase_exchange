@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'order_book.g.dart';
 
+/// The order book for a product.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class OrderBook {
   final int? sequence;

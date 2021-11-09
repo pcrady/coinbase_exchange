@@ -4,6 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'trade.g.dart';
 
+/// A trade for a given product.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Trade {
   final DateTime? time;

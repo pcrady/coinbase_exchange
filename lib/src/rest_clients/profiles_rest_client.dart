@@ -1,6 +1,8 @@
 import '../rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
+/// A [RestClient] that helps manage profiles and returns http.Response
+/// objects
 class ProfilesRestClient extends RestClient {
   ProfilesRestClient({
     bool sandbox = false,

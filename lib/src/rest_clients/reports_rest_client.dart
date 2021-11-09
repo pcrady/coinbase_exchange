@@ -1,6 +1,8 @@
 import '../rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
+/// A [RestClient] that helps manage reports and returns http.Response
+/// objects.
 class ReportsRestClient extends RestClient {
   ReportsRestClient({
     bool sandbox = false,

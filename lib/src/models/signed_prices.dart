@@ -2,6 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'signed_prices.g.dart';
 
+/// A cryptographically signed price ready to be posted
+/// on-chain using Compound's Open Oracle smart contract.
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class SignedPrices {
   final DateTime? timestamp;

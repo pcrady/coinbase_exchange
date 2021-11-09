@@ -79,6 +79,7 @@ enum ChannelEnum {
   user,
   matches,
   full,
+  auction,
 }
 
 extension ChannelExtension on ChannelEnum {
@@ -88,10 +89,9 @@ extension ChannelExtension on ChannelEnum {
     if (this == ChannelEnum.ticker) return 'ticker';
     if (this == ChannelEnum.level2) return 'level2';
     if (this == ChannelEnum.user) return 'user';
-    if (this == ChannelEnum.matches)
-      return 'matches';
-    else
-      return 'full';
+    if (this == ChannelEnum.matches) return 'matches';
+    if (this == ChannelEnum.full) return 'full';
+    else return 'auction';
   }
 }
 

@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'product.g.dart';
 
+/// A product object such as BTC or ETH.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Product {
   final String? id;

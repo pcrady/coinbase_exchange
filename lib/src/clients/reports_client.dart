@@ -4,7 +4,7 @@ import '../rest_clients/reports_rest_client.dart';
 import 'dart:convert';
 
 /// A [Client] that helps manage reports and returns coinbase_exchange
-/// objects
+/// objects.
 class ReportsClient extends Client {
   bool sandbox;
   String apiKey;

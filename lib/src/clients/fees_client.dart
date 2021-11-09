@@ -4,8 +4,7 @@ import 'dart:convert';
 
 import '../clients/client.dart';
 
-/// A [Client] that helps manage transfers and returns coinbase_exchange
-/// objects
+/// A [Client] that helps manage fees and returns coinbase_exchange objects.
 class FeesClient extends Client {
   bool sandbox;
   String apiKey;

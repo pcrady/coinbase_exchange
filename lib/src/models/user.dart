@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';
 
+/// Information about a user.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class User {
   final String? createdAt;

@@ -4,6 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'transfer.g.dart';
 
+/// A transfer object
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Transfer {
   String? id;

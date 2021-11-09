@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'fees.g.dart';
 
+/// An object representing a user's fees.
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Fees {
   @StringToDoubleConverter()

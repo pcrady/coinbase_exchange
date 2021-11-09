@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'ledger_entry.g.dart';
 
+/// An entry in the ledger of an account.
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class LedgerEntry {
   DateTime? createdAt;

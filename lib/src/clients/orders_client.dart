@@ -5,7 +5,7 @@ import '../rest_clients/orders_rest_client.dart';
 import 'dart:convert';
 
 /// A [Client] that helps manage orders and returns coinbase_exchange
-/// objects
+/// objects.
 class OrdersClient extends Client {
   bool sandbox;
   String apiKey;

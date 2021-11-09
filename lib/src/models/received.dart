@@ -5,6 +5,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'received.g.dart';
 
+/// An object returned by the [WebsocketClient] that indicates a
+/// valid order has been received and is now active.
+///
+/// https://docs.cloud.coinbase.com/exchange/docs/channels#received
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Received extends WebsocketResponse {
   final String? type;

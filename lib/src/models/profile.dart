@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'profile.g.dart';
 
+/// A user's profile information.
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Profile {
   final String? id;

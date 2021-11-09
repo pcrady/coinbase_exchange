@@ -5,6 +5,10 @@ import '../lib/websocket_response.dart';
 
 part 'activate.g.dart';
 
+/// An object returned by the [WebsocketClient] which is returned when
+/// a stop order is placed.
+///
+/// https://docs.cloud.coinbase.com/exchange/docs/channels#activate
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Activate extends WebsocketResponse {
   final String? type;

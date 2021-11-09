@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'crypto_address.g.dart';
 
+/// A one time crypto address for depositing crypto.
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class CryptoAddress {
   final String? id;

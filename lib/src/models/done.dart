@@ -5,6 +5,10 @@ import '../lib/websocket_response.dart';
 
 part 'done.g.dart';
 
+/// An object returned by the [WebsocketClient] which indicates that
+/// an order is no longer on the book.
+///
+/// https://docs.cloud.coinbase.com/exchange/docs/channels#done
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Done extends WebsocketResponse {
   final String? type;

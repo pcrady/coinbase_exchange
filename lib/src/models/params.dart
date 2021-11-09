@@ -1,8 +1,11 @@
+import 'package:coinbase_exchange/coinbase_exchange.dart';
+
 import '../models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'params.g.dart';
 
+/// The parameters of a [Report] object.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Params {
   final DateTime? startDate;

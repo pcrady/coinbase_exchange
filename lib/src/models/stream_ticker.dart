@@ -1,9 +1,15 @@
+import 'package:coinbase_exchange/coinbase_exchange.dart';
+
 import '../lib/websocket_response.dart';
 import '../lib/custom_json_converters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'stream_ticker.g.dart';
 
+/// A ticker returned by the [WebsocketClient] which provides
+/// real-time price updates every time a match happens.
+///
+/// https://docs.cloud.coinbase.com/exchange/docs/channels#the-level2-channel
 @JsonSerializable(fieldRename: FieldRename.snake)
 class StreamTicker extends WebsocketResponse {
   final int? tradeId;

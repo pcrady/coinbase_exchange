@@ -5,6 +5,10 @@ import '../lib/websocket_response.dart';
 
 part 'change.g.dart';
 
+/// An object which is returned by the [WebsocketClient] when an
+/// order has changed.
+///
+/// https://docs.cloud.coinbase.com/exchange/docs/channels#change
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Change extends WebsocketResponse {
   final String? type;

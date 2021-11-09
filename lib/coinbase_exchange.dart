@@ -1,11 +1,28 @@
 library coinbase_exchange;
 
-export 'package:coinbase_exchange/src/lib/coinbase_enums.dart';
-export 'package:coinbase_exchange/src/lib/paginator.dart';
+export 'package:coinbase_exchange/src/lib/coinbase_enums.dart' show
+LevelEnum,
+LevelExtension,
+GranularityEnum,
+GranularityExtension,
+SideEnum,
+SideExtension,
+OrderEnum,
+OrderExtension,
+ChannelEnum,
+ChannelExtension,
+ReasonEnum,
+ReasonExtension,
+TransferEnum,
+TransferExtension;
+export 'package:coinbase_exchange/src/lib/websocket_response.dart' show WebsocketResponse;
+export 'package:coinbase_exchange/src/lib/paginator.dart' show Paginator;
 
 export 'package:coinbase_exchange/src/websocket_client/websocket_client.dart'
     show WebsocketClient;
 
+export 'package:coinbase_exchange/src/clients/client.dart'
+  show Client;
 export 'package:coinbase_exchange/src/clients/conversions_client.dart'
     show ConversionsClient;
 export 'package:coinbase_exchange/src/clients/currencies_client.dart'
@@ -14,10 +31,14 @@ export 'package:coinbase_exchange/src/clients/transfers_client.dart'
     show TransfersClient;
 export 'package:coinbase_exchange/src/clients/coinbase_accounts_client.dart'
     show CoinbaseAccountsClient;
+export 'package:coinbase_exchange/src/clients/coinbase_price_oracle_client.dart'
+  show CoinbasePriceOracleClient;
 export 'package:coinbase_exchange/src/clients/profiles_client.dart'
     show ProfilesClient;
 export 'package:coinbase_exchange/src/clients/products_client.dart'
     show ProductsClient;
+export 'package:coinbase_exchange/src/clients/fees_client.dart'
+  show FeesClient;
 export 'package:coinbase_exchange/src/clients/reports_client.dart'
     show ReportsClient;
 export 'package:coinbase_exchange/src/clients/orders_client.dart'
@@ -42,13 +63,18 @@ export 'package:coinbase_exchange/src/rest_clients/profiles_rest_client.dart'
     show ProfilesRestClient;
 export 'package:coinbase_exchange/src/rest_clients/orders_rest_client.dart'
     show OrdersRestClient;
+export 'package:coinbase_exchange/src/rest_clients/coinbase_price_oracle_rest_client.dart'
+  show CoinbasePriceOracleRestClient;
 export 'package:coinbase_exchange/src/rest_clients/conversions_rest_client.dart'
     show ConversionsRestClient;
 export 'package:coinbase_exchange/src/rest_clients/transfers_rest_client.dart'
     show TransfersRestClient;
 export 'package:coinbase_exchange/src/rest_clients/accounts_rest_client.dart'
     show AccountsRestClient;
-
+export 'package:coinbase_exchange/src/rest_clients/fees_rest_client.dart'
+  show FeesRestClient;
+export 'package:coinbase_exchange/src/rest_clients/rest_client.dart'
+  show RestClient;
 export 'package:coinbase_exchange/src/models/product.dart' show Product;
 export 'package:coinbase_exchange/src/models/change.dart' show Change;
 export 'package:coinbase_exchange/src/models/stats.dart' show Stats;
@@ -62,6 +88,10 @@ export 'package:coinbase_exchange/src/models/order.dart' show Order;
 export 'package:coinbase_exchange/src/models/user.dart' show User;
 export 'package:coinbase_exchange/src/models/account.dart' show Account;
 export 'package:coinbase_exchange/src/models/hold.dart' show Hold;
+export 'package:coinbase_exchange/src/models/fees.dart' show Fees;
+export 'package:coinbase_exchange/src/models/payment_method.dart' show PaymentMethod;
+export 'package:coinbase_exchange/src/models/signed_prices.dart' show SignedPrices;
+export 'package:coinbase_exchange/src/models/transaction.dart' show Transaction;
 export 'package:coinbase_exchange/src/models/currency_details.dart'
     show CurrencyDetails;
 export 'package:coinbase_exchange/src/models/currency.dart' show Currency;
@@ -73,6 +103,7 @@ export 'package:coinbase_exchange/src/models/stream_ticker.dart'
 export 'package:coinbase_exchange/src/models/subscriptions.dart'
     show Subscriptions;
 export 'package:coinbase_exchange/src/models/transfer.dart' show Transfer;
+export 'package:coinbase_exchange/src/models/auction.dart' show Auction;
 export 'package:coinbase_exchange/src/models/params.dart' show Params;
 export 'package:coinbase_exchange/src/models/snapshot.dart' show Snapshot;
 export 'package:coinbase_exchange/src/models/done.dart' show Done;
@@ -91,3 +122,5 @@ export 'package:coinbase_exchange/src/models/activate.dart' show Activate;
 export 'package:coinbase_exchange/src/models/crypto_address.dart'
     show CryptoAddress;
 export 'package:coinbase_exchange/src/models/report.dart' show Report;
+export 'package:coinbase_exchange/src/models/websocket_error.dart' show WebsocketError;
+

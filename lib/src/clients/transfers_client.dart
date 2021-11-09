@@ -7,7 +7,7 @@ import '../clients/client.dart';
 import '../rest_clients/transfers_rest_client.dart';
 
 /// A [Client] that helps manage transfers and returns coinbase_exchange
-/// objects
+/// objects.
 class TransfersClient extends Client {
   bool sandbox;
   String apiKey;

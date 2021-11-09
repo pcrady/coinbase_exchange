@@ -1,7 +1,9 @@
+import 'package:coinbase_exchange/coinbase_exchange.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'preferences.g.dart';
 
+/// The preferences of a [User].
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Preferences {
   final String? preferredMarket;

@@ -5,6 +5,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'match.g.dart';
 
+/// An object returned by the [WebsocketClient] that indicates
+/// a trade occurred between two orders.
+///
+/// https://docs.cloud.coinbase.com/exchange/docs/channels#match
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Match extends WebsocketResponse {
   final String? type;

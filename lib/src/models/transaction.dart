@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'transaction.g.dart';
 
+/// A transaction (withdrawal or deposit) object.
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Transaction {
   String? id;

@@ -2,6 +2,8 @@ import 'package:coinbase_exchange/coinbase_exchange.dart';
 import '../rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
+/// A [RestClient] that helps manage products and returns http.Response
+/// objects
 class ProductsRestClient extends RestClient {
   ProductsRestClient({
     bool sandbox = false,

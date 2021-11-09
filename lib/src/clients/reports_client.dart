@@ -1,3 +1,5 @@
+import 'package:coinbase_exchange/src/lib/coinbase_enums.dart';
+
 import '../clients/client.dart';
 import '../models/report.dart';
 import '../rest_clients/reports_rest_client.dart';
@@ -36,8 +38,7 @@ class ReportsClient extends Client {
     String? portfolioId,
     DateTime? after,
     int? limit,
-    // TODO make enum
-    String? type,
+    ReportTypeEnum? type,
     bool? ignoreExpired,
   }) async {
     var response = await _reportsRestClient.getAllReports(
@@ -65,11 +66,9 @@ class ReportsClient extends Client {
   Future<Map> createReport({
     DateTime? startDate,
     DateTime? endDate,
-    //TODO make enum
-    required String otcFills,
+    required ReportTypeEnum type,
     DateTime? year,
-    //todo make enum
-    String? format,
+    ReportFormatEnum? format,
     String? productId,
     String? accountId,
     String? email,
@@ -78,7 +77,7 @@ class ReportsClient extends Client {
     var response = await _reportsRestClient.createReport(
       startDate: startDate,
       endDate: endDate,
-      otcFills: otcFills,
+      type: type,
       year: year,
       format: format,
       productId: productId,

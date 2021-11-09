@@ -1,4 +1,5 @@
 import 'package:coinbase_exchange/coinbase_exchange.dart';
+import 'package:coinbase_exchange/src/models/transfer_details.dart';
 import '../lib/custom_json_converters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -16,8 +17,7 @@ class Transfer {
   String? userNonce;
   @StringToDoubleConverter()
   double? amount;
-  //TODO make this a class
-  Map? details;
+  TransferDetails? details;
 
   Transfer({
     this.id,

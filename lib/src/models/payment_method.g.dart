@@ -24,14 +24,23 @@ PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['updated_at'] as String),
       resource: json['resource'] as String?,
       resourcePath: json['resource_path'] as String?,
-      limits: json['limits'] as Map<String, dynamic>?,
+      limits: json['limits'] == null
+          ? null
+          : PaymentMethodLimits.fromJson(
+              json['limits'] as Map<String, dynamic>),
       allowBuy: json['allow_buy'] as bool?,
       allowSell: json['allow_sell'] as bool?,
       allowDeposit: json['allow_deposit'] as bool?,
       allowWithdraw: json['allow_withdraw'] as bool?,
-      fiatAccounts: json['fiat_accounts'] as Map<String, dynamic>?,
+      fiatAccounts: json['fiat_accounts'] == null
+          ? null
+          : PaymentMethodFiatAccount.fromJson(
+              json['fiat_accounts'] as Map<String, dynamic>),
       verified: json['verified'] as bool?,
-      pickerData: json['picker_data'] as Map<String, dynamic>?,
+      pickerData: json['picker_data'] == null
+          ? null
+          : PaymentMethodPickerData.fromJson(
+              json['picker_data'] as Map<String, dynamic>),
       holdBusinessDays: json['hold_business_days'] as int?,
       holdDays: json['hold_days'] as int?,
     );

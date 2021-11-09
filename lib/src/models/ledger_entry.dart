@@ -1,3 +1,5 @@
+import 'package:coinbase_exchange/src/models/ledger_entry_details.dart';
+
 import '../lib/custom_json_converters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -12,10 +14,8 @@ class LedgerEntry {
   double? amount;
   @StringToDoubleConverter()
   double? balance;
-  //TODO make type an enum
   String? type;
-  //TODO make details a class
-  Map<String, String>? details;
+  LedgerEntryDetails? details;
 
   LedgerEntry({
     this.createdAt,

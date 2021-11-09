@@ -121,3 +121,145 @@ extension TransferExtension on TransferEnum {
       return 'deposit';
   }
 }
+
+enum ReportTypeEnum {
+  fills,
+  account,
+  otc_fills,
+  type_1099k_transaction_history,
+  tax_invoice,
+}
+
+extension ReportTypeExtension on ReportTypeEnum {
+  String reportType() {
+    if (this == ReportTypeEnum.fills) return 'fills';
+    if (this == ReportTypeEnum.account) return 'account';
+    if (this == ReportTypeEnum.otc_fills) return 'otc-fills';
+    if (this == ReportTypeEnum.type_1099k_transaction_history) return '1099-transaction-history';
+    else return 'tax-invoice';
+  }
+}
+
+enum ReportFormatEnum {
+  pdf,
+  csv,
+}
+
+extension ReportFormatExtension on ReportFormatEnum {
+  String reportFormat() {
+    if (this == ReportFormatEnum.pdf) return 'pdf';
+    else return 'csv';
+  }
+}
+
+enum SortedByEnum {
+  created_at,
+  price,
+  size,
+  order_id,
+  side,
+  type,
+}
+
+extension SortedByExtension on SortedByEnum {
+  String sortType() {
+    if (this == SortedByEnum.created_at) return 'created-at';
+    if (this == SortedByEnum.price) return 'price';
+    if (this == SortedByEnum.size) return 'size';
+    if (this == SortedByEnum.order_id) return 'order-id';
+    if (this == SortedByEnum.side) return 'side';
+    else return 'type';
+  }
+}
+
+enum SortingEnum {
+  asc,
+  desc,
+}
+
+extension SortingExtension on SortingEnum {
+  String sorting() {
+    if (this == SortingEnum.asc) return 'asc';
+    else return 'desc';
+  }
+}
+
+enum StatusEnum {
+  open,
+  pending,
+  rejected,
+  done,
+  active,
+  received,
+  all,
+}
+
+extension StatusExtension on StatusEnum {
+  String status() {
+    if (this == StatusEnum.open) return 'open';
+    if (this == StatusEnum.pending) return 'pending';
+    if (this == StatusEnum.rejected) return 'rejected';
+    if (this == StatusEnum.done) return 'done';
+    if (this == StatusEnum.active) return 'active';
+    if (this == StatusEnum.received) return 'received';
+    else return 'all';
+  }
+}
+
+enum StpEnum {
+  dc,
+  co,
+  cn,
+  cb,
+}
+
+extension StpExtension on StpEnum {
+  String stp() {
+    if (this == StpEnum.dc) return 'dc';
+    if (this == StpEnum.co) return 'co';
+    if (this == StpEnum.cn) return 'cn';
+    else return 'cb';
+  }
+}
+
+enum StopEnum {
+  loss,
+  entry,
+}
+
+extension StopExtension on StopEnum {
+  String stop() {
+    if (this == StopEnum.loss) return 'loss';
+    else return 'entry';
+  }
+}
+
+enum TimeInForceEnum {
+  GTC,
+  GTT,
+  IOC,
+  FOK,
+}
+
+extension TimeInForceExtension on TimeInForceEnum {
+  String timeInForce() {
+    if (this == TimeInForceEnum.GTC) return 'GTC';
+    if (this == TimeInForceEnum.GTT) return 'GTT';
+    if (this == TimeInForceEnum.IOC) return 'IOC';
+    else return 'FOK';
+  }
+}
+
+enum CancelAfterEnum {
+  min,
+  hour,
+  day,
+}
+
+extension CancelAfterExtension on CancelAfterEnum {
+  String cancelAfter() {
+    if (this == CancelAfterEnum.min) return 'min';
+    if (this == CancelAfterEnum.hour) return 'hour';
+    else return 'day';
+  }
+}

@@ -1,3 +1,6 @@
+## 2.0.0
+- Make everything that could be an enum an enum
+
 ## 1.0.2
 - Update documentation
 

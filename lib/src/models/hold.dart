@@ -4,13 +4,14 @@ import 'package:json_annotation/json_annotation.dart';
 part 'hold.g.dart';
 
 /// An object which reflects any active orders or pending withdraw requests.
+///
+/// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getaccountholds
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Hold {
   DateTime? createdAt;
   String? id;
   @StringToDoubleConverter()
   double? amount;
-  //TODO make this an enum
   String? type;
   String? ref;
 

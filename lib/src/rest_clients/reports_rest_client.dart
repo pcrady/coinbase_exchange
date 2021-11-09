@@ -1,3 +1,5 @@
+import 'package:coinbase_exchange/src/lib/coinbase_enums.dart';
+
 import '../rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,15 +28,14 @@ class ReportsRestClient extends RestClient {
     String? portfolioId,
     DateTime? after,
     int? limit,
-    // TODO make enum
-    String? type,
+    ReportTypeEnum? type,
     bool? ignoreExpired,
   }) async {
     Map<String, dynamic> queryParameters = {};
     if (portfolioId != null) queryParameters['portfolio_id'] = portfolioId;
     if (after != null) queryParameters['after'] = after.toIso8601String();
     if (limit != null) queryParameters['limit'] = limit;
-    if (type != null) queryParameters['type'] = type;
+    if (type != null) queryParameters['type'] = type.reportType();
     if (ignoreExpired != null)
       queryParameters['ignore_expired'] = ignoreExpired;
 
@@ -54,21 +55,19 @@ class ReportsRestClient extends RestClient {
   Future<http.Response> createReport({
     DateTime? startDate,
     DateTime? endDate,
-    //TODO make enum
-    required String otcFills,
+    required ReportTypeEnum type,
     DateTime? year,
-    //todo make enum
-    String? format,
+    ReportFormatEnum? format,
     String? productId,
     String? accountId,
     String? email,
     String? profileId,
   }) async {
-    Map<String, dynamic> body = {'otc_fills': otcFills};
+    Map<String, dynamic> body = {'type': type.reportType()};
     if (startDate != null) body['start_date'] = startDate.toIso8601String();
     if (endDate != null) body['end_date'] = endDate.toIso8601String();
     if (year != null) body['year'] = year.year.toString();
-    if (format != null) body['format'] = format;
+    if (format != null) body['format'] = format.reportFormat();
     if (productId != null) body['product_id'] = productId;
     if (accountId != null) body['account_id'] = accountId;
     if (email != null) body['email'] = email;

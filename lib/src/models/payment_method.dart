@@ -1,3 +1,5 @@
+import 'package:coinbase_exchange/coinbase_exchange.dart';
+import 'package:coinbase_exchange/src/models/payment_method_limits.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'payment_method.g.dart';
@@ -17,16 +19,14 @@ class PaymentMethod {
   final DateTime? updatedAt;
   final String? resource;
   final String? resourcePath;
-  // TODO make class
-  final Map? limits;
+  final PaymentMethodLimits? limits;
   final bool? allowBuy;
   final bool? allowSell;
   final bool? allowDeposit;
   final bool? allowWithdraw;
-  final Map? fiatAccounts;
+  final PaymentMethodFiatAccount? fiatAccounts;
   final bool? verified;
-  // Todo make class
-  final Map? pickerData;
+  final PaymentMethodPickerData? pickerData;
   final int? holdBusinessDays;
   final int? holdDays;
 

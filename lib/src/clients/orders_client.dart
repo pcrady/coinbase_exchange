@@ -1,3 +1,5 @@
+import 'package:coinbase_exchange/src/lib/coinbase_enums.dart';
+
 import '../clients/client.dart';
 import '../models/fill.dart';
 import '../models/order.dart';
@@ -72,17 +74,14 @@ class OrdersClient extends Client {
   Future<List<Order>> getAllOrders({
     String? profileId,
     String? productId,
-    //TODO make enum
-    String? sortedBy,
-    //TODO make enum
-    String? sorting,
+    SortedByEnum? sortedBy,
+    SortingEnum? sorting,
     DateTime? startDate,
     DateTime? endDate,
     String? before,
     String? after,
     required int limit,
-    //TODO make enum
-    required List<String> status,
+    required List<StatusEnum> status,
   }) async {
     var response = await _ordersRestClient.getAllOrders(
       profileId: profileId,
@@ -139,23 +138,17 @@ class OrdersClient extends Client {
   ///
   Future<Order> createNewOrder({
     String? profileId,
-    //TODO make enum
-    String? type,
-    //TODO make enum
-    required String? side,
-    required String? productId,
-    //TODO make enum
-    String? stp,
-    //TODO make enum
-    String? stop,
+    OrderEnum? type,
+    required SideEnum side,
+    required String productId,
+    StpEnum? stp,
+    StopEnum? stop,
     double? stopPrice,
     double? price,
     double? size,
     double? funds,
-    //TODO make enum
-    String? timeInForce,
-    //TODO make enum
-    String? cancelAfter,
+    TimeInForceEnum? timeInForce,
+    CancelAfterEnum? cancelAfter,
     bool? postOnly,
     String? clientOid,
   }) async {

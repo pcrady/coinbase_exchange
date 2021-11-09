@@ -1,3 +1,5 @@
+import 'package:coinbase_exchange/src/lib/coinbase_enums.dart';
+
 import '../rest_clients/rest_client.dart';
 import 'package:http/http.dart' as http;
 
@@ -59,26 +61,23 @@ class OrdersRestClient extends RestClient {
   Future<http.Response> getAllOrders({
     String? profileId,
     String? productId,
-    //TODO make enum
-    String? sortedBy,
-    //TODO make enum
-    String? sorting,
+    SortedByEnum? sortedBy,
+    SortingEnum? sorting,
     DateTime? startDate,
     DateTime? endDate,
     String? before,
     String? after,
     required int limit,
-    //TODO make enum
-    required List<String> status,
+    required List<StatusEnum> status,
   }) async {
     Map<String, dynamic> queryParameters = {
       'limit': limit,
-      'status': status,
+      'status': status.map((e) => e.status()).toList(),
     };
     if (profileId != null) queryParameters['profile_id'] = profileId;
     if (productId != null) queryParameters['product_id'] = productId;
-    if (sortedBy != null) queryParameters['sortedBy'] = sortedBy;
-    if (sorting != null) queryParameters['sorting'] = sorting;
+    if (sortedBy != null) queryParameters['sortedBy'] = sortedBy.sortType();
+    if (sorting != null) queryParameters['sorting'] = sorting.sorting();
     if (startDate != null) queryParameters['start_date'] = startDate;
     if (endDate != null) queryParameters['end_date'] = endDate;
     if (before != null) queryParameters['before'] = before;
@@ -125,40 +124,34 @@ class OrdersRestClient extends RestClient {
   ///
   Future<http.Response> createNewOrder({
     String? profileId,
-    //TODO make enum
-    String? type,
-    //TODO make enum
-    required String? side,
-    required String? productId,
-    //TODO make enum
-    String? stp,
-    //TODO make enum
-    String? stop,
+    OrderEnum? type,
+    required SideEnum side,
+    required String productId,
+    StpEnum? stp,
+    StopEnum? stop,
     double? stopPrice,
     double? price,
     double? size,
     double? funds,
-    //TODO make enum
-    String? timeInForce,
-    //TODO make enum
-    String? cancelAfter,
+    TimeInForceEnum? timeInForce,
+    CancelAfterEnum? cancelAfter,
     bool? postOnly,
     String? clientOid,
   }) async {
     Map<String, dynamic> body = {
-      'side': side,
+      'side': side.side(),
       'product_id': productId,
     };
     if (profileId != null) body['profile_id'] = productId;
-    if (type != null) body['type'] = type;
-    if (stp != null) body['stp'] = stp;
-    if (stop != null) body['stop'] = stop;
+    if (type != null) body['type'] = type.orderType();
+    if (stp != null) body['stp'] = stp.stp();
+    if (stop != null) body['stop'] = stop.stop();
     if (stopPrice != null) body['stop_price'] = stopPrice;
     if (price != null) body['price'] = price;
     if (size != null) body['size'] = size;
     if (funds != null) body['funds'] = funds;
-    if (timeInForce != null) body['time_in_force'] = timeInForce;
-    if (cancelAfter != null) body['cancel_after'] = cancelAfter;
+    if (timeInForce != null) body['time_in_force'] = timeInForce.timeInForce();
+    if (cancelAfter != null) body['cancel_after'] = cancelAfter.cancelAfter();
     if (postOnly != null) body['post_only'] = postOnly;
     if (clientOid != null) body['client_oid'] = clientOid;
 

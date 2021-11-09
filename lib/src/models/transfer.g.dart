@@ -24,7 +24,9 @@ Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
       userNonce: json['user_nonce'] as String?,
       amount:
           const StringToDoubleConverter().fromJson(json['amount'] as String?),
-      details: json['details'] as Map<String, dynamic>?,
+      details: json['details'] == null
+          ? null
+          : TransferDetails.fromJson(json['details'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
@@ -36,7 +38,7 @@ Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
       'processed_at': instance.processedAt?.toIso8601String(),
       'user_nonce': instance.userNonce,
       'amount': const StringToDoubleConverter().toJson(instance.amount),
-      'details': instance.details,
+      'details': instance.details?.toJson(),
     };
 
 K _$enumDecode<K, V>(

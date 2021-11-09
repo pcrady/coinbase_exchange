@@ -16,9 +16,10 @@ LedgerEntry _$LedgerEntryFromJson(Map<String, dynamic> json) => LedgerEntry(
       balance:
           const StringToDoubleConverter().fromJson(json['balance'] as String?),
       type: json['type'] as String?,
-      details: (json['details'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as String),
-      ),
+      details: json['details'] == null
+          ? null
+          : LedgerEntryDetails.fromJson(
+              json['details'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$LedgerEntryToJson(LedgerEntry instance) =>
@@ -28,5 +29,5 @@ Map<String, dynamic> _$LedgerEntryToJson(LedgerEntry instance) =>
       'amount': const StringToDoubleConverter().toJson(instance.amount),
       'balance': const StringToDoubleConverter().toJson(instance.balance),
       'type': instance.type,
-      'details': instance.details,
+      'details': instance.details?.toJson(),
     };

@@ -16,7 +16,7 @@ class PickerDataBalance {
   });
 
   factory PickerDataBalance.fromJson(Map<String, dynamic> json) =>
-    _$PickerDataBalanceFromJson(json);
+      _$PickerDataBalanceFromJson(json);
 
   Map<String, dynamic> toJson() => _$PickerDataBalanceToJson(this);
 }

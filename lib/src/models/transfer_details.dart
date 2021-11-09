@@ -16,7 +16,7 @@ class TransferDetails {
   });
 
   factory TransferDetails.fromJson(Map<String, dynamic> json) =>
-    _$TransferDetailsFromJson(json);
+      _$TransferDetailsFromJson(json);
 
   Map<String, dynamic> toJson() => _$TransferDetailsToJson(this);
 }

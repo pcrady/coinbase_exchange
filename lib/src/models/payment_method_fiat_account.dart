@@ -9,14 +9,10 @@ class PaymentMethodFiatAccount {
   final String? resource;
   final String? resourcePath;
 
-  PaymentMethodFiatAccount({
-    this.id,
-    this.resource,
-    this.resourcePath
-  });
+  PaymentMethodFiatAccount({this.id, this.resource, this.resourcePath});
 
   factory PaymentMethodFiatAccount.fromJson(Map<String, dynamic> json) =>
-    _$PaymentMethodFiatAccountFromJson(json);
+      _$PaymentMethodFiatAccountFromJson(json);
 
   Map<String, dynamic> toJson() => _$PaymentMethodFiatAccountToJson(this);
 }

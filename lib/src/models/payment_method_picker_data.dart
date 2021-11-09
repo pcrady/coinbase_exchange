@@ -15,7 +15,7 @@ class PaymentMethodPickerData {
   });
 
   factory PaymentMethodPickerData.fromJson(Map<String, dynamic> json) =>
-    _$PaymentMethodPickerDataFromJson(json);
+      _$PaymentMethodPickerDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$PaymentMethodPickerDataToJson(this);
 }

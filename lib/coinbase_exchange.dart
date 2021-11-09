@@ -127,12 +127,12 @@ export 'package:coinbase_exchange/src/models/report.dart' show Report;
 export 'package:coinbase_exchange/src/models/websocket_error.dart'
     show WebsocketError;
 export 'package:coinbase_exchange/src/models/payment_method_fiat_account.dart'
-  show PaymentMethodFiatAccount;
+    show PaymentMethodFiatAccount;
 export 'package:coinbase_exchange/src/models/payment_method_limits.dart'
-  show PaymentMethodLimits;
+    show PaymentMethodLimits;
 export 'package:coinbase_exchange/src/models/payment_method_picker_data.dart'
-  show PaymentMethodPickerData;
+    show PaymentMethodPickerData;
 export 'package:coinbase_exchange/src/models/picker_data_balance.dart'
-  show PickerDataBalance;
+    show PickerDataBalance;
 export 'package:coinbase_exchange/src/models/transfer_details.dart'
-  show TransferDetails;
+    show TransferDetails;

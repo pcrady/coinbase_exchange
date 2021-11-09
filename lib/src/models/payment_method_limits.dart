@@ -14,7 +14,7 @@ class PaymentMethodLimits {
   });
 
   factory PaymentMethodLimits.fromJson(Map<String, dynamic> json) =>
-    _$PaymentMethodLimitsFromJson(json);
+      _$PaymentMethodLimitsFromJson(json);
 
   Map<String, dynamic> toJson() => _$PaymentMethodLimitsToJson(this);
 }

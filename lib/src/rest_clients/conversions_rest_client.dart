@@ -16,6 +16,13 @@ class ConversionsRestClient extends RestClient {
           passphrase: passphrase,
         );
 
+  /// Convert a currency
+  ///
+  /// Converts funds from from currency to to currency.
+  /// Funds are converted on the from account in the profile_id profile.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_postconversion
+  ///
   Future<http.Response> convertCurrency({
     String? profileId,
     required String from,
@@ -37,6 +44,12 @@ class ConversionsRestClient extends RestClient {
     );
   }
 
+  /// Get a conversion
+  ///
+  /// Gets a currency conversion by id (i.e. USD -> USDC).
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getconversion
+  ///
   Future<http.Response> getConversion({
     required String conversionId,
   }) async =>

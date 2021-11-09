@@ -104,6 +104,7 @@ abstract class RestClient {
     return headers;
   }
 
+  // queryParameters must be either String or Iterable<String> types.
   Map<String, dynamic> _convertQueryParametersTypes(
     Map<String, dynamic> queryParameters,
   ) {
@@ -127,6 +128,8 @@ abstract class RestClient {
     });
   }
 
+  /// A GET method for coinbase exchange which automatically manages signing
+  /// for authorization.
   Future<http.Response> get({
     required String path,
     Map<String, String>? headers,
@@ -159,6 +162,8 @@ abstract class RestClient {
     return response;
   }
 
+  /// A POST method for coinbase exchange which automatically manages signing
+  /// for authorization.
   Future<http.Response> post({
     required String path,
     Map<String, String>? headers,
@@ -188,6 +193,8 @@ abstract class RestClient {
     return response;
   }
 
+  /// A PUT method for coinbase exchange which automatically manages signing
+  /// for authorization.
   Future<http.Response> put({
     required String path,
     Map<String, String>? headers,
@@ -217,6 +224,8 @@ abstract class RestClient {
     return response;
   }
 
+  /// A DELETE method for coinbase exchange which automatically manages signing
+  /// for authorization.
   Future<http.Response> delete({
     required String path,
     Map<String, String>? headers,

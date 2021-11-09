@@ -16,8 +16,23 @@ class CurrenciesRestClient extends RestClient {
           passphrase: passphrase,
         );
 
+  /// Get all known currencies
+  ///
+  /// Gets a list of all known currencies.
+  /// Note: Not all currencies may be currently in use for trading.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getcurrencies
+  ///
   Future<http.Response> getAllCurrencies() async => get(path: '/currencies');
 
+  /// Get a currency
+  ///
+  /// Gets a single currency by id. Currency codes will conform to the ISO 4217 standard
+  /// where possible. Currencies which have or had no representation in ISO 4217
+  /// may use a custom code.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getcurrency
+  ///
   Future<http.Response> getCurrency({
     required String currencyId,
   }) async =>

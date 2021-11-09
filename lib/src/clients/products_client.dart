@@ -149,6 +149,7 @@ class ProductsClient extends Client {
   /// Gets a list the latest trades for a product.
   ///
   /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getproducttrades
+  ///
   Future<Paginator<Trade, DateTime>> getProductTrades({
     required String productId,
     int? limit,

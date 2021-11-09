@@ -16,6 +16,13 @@ class OrdersRestClient extends RestClient {
           passphrase: passphrase,
         );
 
+  /// Get all fills
+  ///
+  /// Get a list of fills. A fill is a partial or complete match on a specific order.
+  /// must contain either a productId or an orderId
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getfills
+  ///
   Future<http.Response> getAllFills({
     String? orderId,
     String? productId,
@@ -39,6 +46,16 @@ class OrdersRestClient extends RestClient {
     );
   }
 
+  /// Get all orders
+  ///
+  /// List your current open orders. Only open or un-settled orders are
+  /// returned by default. As soon as an order is no longer open and
+  /// settled, it will no longer appear in the default request. Open
+  /// orders may change state between the request and the response
+  /// depending on market conditions.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getorders
+  ///
   Future<http.Response> getAllOrders({
     String? profileId,
     String? productId,
@@ -73,6 +90,14 @@ class OrdersRestClient extends RestClient {
     );
   }
 
+  /// Cancel all orders
+  ///
+  /// With best effort, cancel all open orders. This may
+  /// require you to make the request multiple times until
+  /// all of the open orders are deleted.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_deleteorders
+  ///
   Future<http.Response> cancelAllOrders({
     String? profileId,
     String? productId,
@@ -87,6 +112,17 @@ class OrdersRestClient extends RestClient {
     );
   }
 
+  /// Create a new order
+  ///
+  /// Create an order. You can place two types of orders:
+  /// limit and market. Orders can only be placed if your
+  /// account has sufficient funds. Once an order is placed,
+  /// your account funds will be put on hold for the duration
+  /// of the order. How much and which funds are put on hold
+  /// depends on the order type and parameters specified.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_postorders
+  ///
   Future<http.Response> createNewOrder({
     String? profileId,
     //TODO make enum
@@ -132,11 +168,23 @@ class OrdersRestClient extends RestClient {
     );
   }
 
+  /// Get single order
+  ///
+  /// Get a single order by id.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getorder
+  ///
   Future<http.Response> getSingleOrder({
     String? orderId,
   }) async =>
       get(path: '/orders/$orderId');
 
+  /// Cancel an order
+  ///
+  /// Cancel a single open order by {id}.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_deleteorder
+  ///
   Future<http.Response> cancelOrder({
     required String orderId,
     String? profileId,

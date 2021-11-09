@@ -16,6 +16,12 @@ class TransfersRestClient extends RestClient {
           passphrase: passphrase,
         );
 
+  /// Deposit from Coinbase account
+  ///
+  /// Deposits funds from a www.coinbase.com wallet to the specified profile_id.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_postdepositcoinbaseaccount
+  ///
   Future<http.Response> depositFromCoinbaseAccount({
     String? profileId,
     required double amount,
@@ -35,6 +41,12 @@ class TransfersRestClient extends RestClient {
     );
   }
 
+  /// Deposit from payment method
+  ///
+  /// Deposits funds from a linked external payment method to the specified profile_id.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_postdepositpaymentmethod
+  ///
   Future<http.Response> depositFromPaymentMethod({
     String? profileId,
     required double amount,
@@ -54,16 +66,40 @@ class TransfersRestClient extends RestClient {
     );
   }
 
+  /// Get all payment methods
+  ///
+  /// Gets a list of the user's linked payment methods.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getpaymentmethods
+  ///
   Future<http.Response> getAllPaymentMethods() async =>
       get(path: '/deposits/payment-methods');
 
+  /// Get all transfers
+  ///
+  /// Gets a list of in-progress and completed transfers of funds in/out of any of the user's accounts.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_gettransfers
+  ///
   Future<http.Response> getAllTransfers() async => get(path: '/transfers');
 
+  /// Get a single transfer
+  ///
+  /// Get information on a single transfer.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_gettransfer
+  ///
   Future<http.Response> getTransfer({
     required String transferId,
   }) async =>
       get(path: '/transfers/$transferId');
 
+  /// Withdraw to Coinbase account
+  ///
+  /// Withdraws funds from the specified profile_id to a www.coinbase.com wallet.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_postwithdrawcoinbaseaccount
+  ///
   Future<http.Response> withdrawToCoinbaseAccount({
     String? profileId,
     required double amount,
@@ -83,6 +119,12 @@ class TransfersRestClient extends RestClient {
     );
   }
 
+  /// Withdraw to crypto address
+  ///
+  /// Withdraws funds from the specified profile_id to an external crypto address
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_postwithdrawcrypto
+  ///
   Future<http.Response> withdrawToCryptoAddress({
     String? profileId,
     required double amount,
@@ -112,6 +154,12 @@ class TransfersRestClient extends RestClient {
     );
   }
 
+  /// Get fee estimate for crypto withdrawal
+  ///
+  /// Gets the fee estimate for the crypto withdrawal to crypto address
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getwithdrawfeeestimate
+  ///
   Future<http.Response> getFeeEstimateForCryptoWithdrawal({
     String? currency,
     String? cryptoAddress,
@@ -127,6 +175,12 @@ class TransfersRestClient extends RestClient {
     );
   }
 
+  /// Withdraw to payment method
+  ///
+  /// Withdraws funds from the specified profile_id to a linked external payment method
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_postwithdrawpaymentmethod
+  ///
   Future<http.Response> withdrawToPaymentMethod({
     String? profileId,
     required double amount,

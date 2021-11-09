@@ -16,6 +16,12 @@ class ProfilesRestClient extends RestClient {
           passphrase: passphrase,
         );
 
+  /// Get profiles
+  ///
+  /// Gets a list of all of the current user's profiles.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getprofiles
+  ///
   Future<http.Response> getProfiles({
     bool? active,
   }) async {
@@ -28,6 +34,12 @@ class ProfilesRestClient extends RestClient {
     );
   }
 
+  /// Create a profile
+  ///
+  /// Create a new profile. Will fail if no name is provided or if user already has 10 profiles.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_postprofile
+  ///
   Future<http.Response> createProfile({
     String? name,
   }) async {
@@ -40,6 +52,12 @@ class ProfilesRestClient extends RestClient {
     );
   }
 
+  /// Transfer funds between profiles
+  ///
+  /// Transfer an amount of currency from one profile to another.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_postprofiletransfer
+  ///
   Future<http.Response> transferFundsBetweenProfiles({
     required String from,
     required String to,
@@ -59,6 +77,12 @@ class ProfilesRestClient extends RestClient {
     );
   }
 
+  /// Get profile by id
+  ///
+  /// Information for a single profile. Use this endpoint when you know the profile_id.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getprofile
+  ///
   Future<http.Response> getProfileById({
     required String profileId,
     bool? active,
@@ -72,6 +96,12 @@ class ProfilesRestClient extends RestClient {
     );
   }
 
+  /// Rename a profile
+  ///
+  /// Rename a profile. Names 'default' and 'margin' are reserved.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_putprofile
+  ///
   Future<http.Response> renameProfile({
     required String profileId,
     required String name,
@@ -87,6 +117,14 @@ class ProfilesRestClient extends RestClient {
     );
   }
 
+  /// Delete a profile
+  ///
+  /// Deletes the profile specified by profile_id and transfers all
+  /// funds to the profile specified by to. Fails if there are any
+  /// open orders on the profile to be deleted.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_putprofiledeactivate
+  ///
   Future<http.Response> deleteProfile({
     required String profileId,
     required String to,

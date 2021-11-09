@@ -16,6 +16,12 @@ class ReportsRestClient extends RestClient {
           passphrase: passphrase,
         );
 
+  /// Get all reports
+  ///
+  /// Gets a list of past fills/account reports.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getreports
+  ///
   Future<http.Response> getAllReports({
     String? portfolioId,
     DateTime? after,
@@ -38,6 +44,13 @@ class ReportsRestClient extends RestClient {
     );
   }
 
+  /// Create a report
+  ///
+  /// Generates a report. Reports are either for past account history
+  /// or past fills on either all accounts or one product's account.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_postreports
+  ///
   Future<http.Response> createReport({
     DateTime? startDate,
     DateTime? endDate,
@@ -67,6 +80,12 @@ class ReportsRestClient extends RestClient {
     );
   }
 
+  /// Get a report
+  ///
+  /// Get a specific report by report_id.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getreport
+  ///
   Future<http.Response> getReport({required String? reportId}) async =>
       get(path: '/reports/$reportId');
 }

@@ -15,6 +15,12 @@ class UsersRestClient extends RestClient {
           passphrase: passphrase,
         );
 
+  /// Get user exchange limits
+  ///
+  /// Gets exchange limits information for a single user.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getuserexchangelimits
+  ///
   Future<http.Response> getUserExchangeLimits({
     required String userId,
   }) async =>

@@ -18,13 +18,34 @@ class AccountsRestClient extends RestClient {
           passphrase: passphrase,
         );
 
+  /// Get a list of trading accounts from the profile of the API key.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getaccounts
+  ///
   Future<http.Response> listAccounts() async => get(path: '/accounts');
 
+  /// Get a single account by id
+  ///
+  /// Information for a single account. Use this endpoint when you know the account_id.
+  /// API key must belong to the same profile as the account.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getaccount
+  ///
   Future<http.Response> getAccount({
     required String accountId,
   }) async =>
       get(path: '/accounts/$accountId');
 
+  /// Get a single account's holds
+  ///
+  /// List the holds of an account that belong to the same profile as the API key.
+  /// Holds are placed on an account for any active orders or pending withdraw
+  /// requests. As an order is filled, the hold amount is updated. If an order
+  /// is canceled, any remaining hold is removed. For withdrawals, the hold is
+  /// removed after it is completed.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getaccountholds
+  ///
   Future<http.Response> getHolds({
     required String accountId,
     DateTime? before,
@@ -42,6 +63,13 @@ class AccountsRestClient extends RestClient {
     );
   }
 
+  /// Get a single account's ledger
+  ///
+  /// Lists ledger activity for an account. This includes anything that would
+  /// affect the accounts balance - transfers, trades, fees, etc.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getaccountledger
+  ///
   Future<http.Response> getAccountLedger({
     required String accountId,
     DateTime? startDate,
@@ -65,6 +93,11 @@ class AccountsRestClient extends RestClient {
     );
   }
 
+  /// Get a single account's transfers
+  ///
+  /// Lists past withdrawals and deposits for an account.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getaccounttransfers
   Future<http.Response> getAccountTransfers({
     required String accountId,
     DateTime? before,

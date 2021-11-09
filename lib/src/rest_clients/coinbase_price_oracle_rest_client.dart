@@ -16,5 +16,12 @@ class CoinbasePriceOracleRestClient extends RestClient {
           passphrase: passphrase,
         );
 
+  /// Get signed prices
+  ///
+  /// Get cryptographically signed prices ready to be posted on-chain using Compound's
+  /// Open Oracle smart contract.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getcoinbasepriceoracle
+  ///
   Future<http.Response> getSignedPrices() async => get(path: '/oracle');
 }

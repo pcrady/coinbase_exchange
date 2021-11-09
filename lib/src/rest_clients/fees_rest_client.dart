@@ -15,5 +15,11 @@ class FeesRestClient extends RestClient {
           passphrase: passphrase,
         );
 
+  /// Get fees
+  ///
+  /// Get fees rates and 30 days trailing volume.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getfees
+  ///
   Future<http.Response> getFees() async => get(path: '/fees');
 }

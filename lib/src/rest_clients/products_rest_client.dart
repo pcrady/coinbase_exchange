@@ -17,13 +17,32 @@ class ProductsRestClient extends RestClient {
           passphrase: passphrase,
         );
 
+  /// Get all known trading pairs
+  ///
+  /// Gets a list of available currency pairs for trading.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getproducts
+  ///
   Future<http.Response> getAllTradingPairs() async => get(path: '/products');
 
+  /// Get single product
+  ///
+  /// Get information on a single product.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getproduct
+  ///
   Future<http.Response> getProduct({
     required String productId,
   }) async =>
       get(path: '/products/$productId');
 
+  /// Get product book
+  ///
+  /// Get a list of open orders for a product. The
+  /// amount of detail shown can be customized with the level parameter.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getproductbook
+  ///
   Future<http.Response> getProductBook({
     required String productId,
     LevelEnum? level,
@@ -37,6 +56,14 @@ class ProductsRestClient extends RestClient {
     );
   }
 
+  /// Get product candles
+  ///
+  /// Historic rates for a product. Rates are returned in grouped buckets.
+  /// Candle schema is of the form \[timestamp, price_low, price_high,
+  /// price_open, price_close\]
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getproductcandles
+  ///
   Future<http.Response> getProductCandles({
     required String productId,
     GranularityEnum? granularity,
@@ -55,16 +82,34 @@ class ProductsRestClient extends RestClient {
     );
   }
 
+  /// Get product stats
+  ///
+  /// Gets 30day and 24hour stats for a product.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getproductstats
+  ///
   Future<http.Response> getProductStats({
     required String productId,
   }) async =>
       get(path: '/products/$productId/stats');
 
+  /// Get product ticker
+  ///
+  /// Gets snapshot information about the last trade (tick), best bid/ask and 24h volume.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getproductticker
+  ///
   Future<http.Response> getProductTicker({
     required String productId,
   }) async =>
       get(path: '/products/$productId/ticker');
 
+  /// Get product trades
+  ///
+  /// Gets a list the latest trades for a product.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getproducttrades
+  ///
   Future<http.Response> getProductTrades({
     required String productId,
     int? limit,

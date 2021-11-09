@@ -12,7 +12,7 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
-  coinbase_exchange: ^0.0.3
+  coinbase_exchange: ^1.0.0
   intl: ^0.17.0
   candlesticks: ^1.1.1
 

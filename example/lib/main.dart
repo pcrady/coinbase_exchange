@@ -90,16 +90,19 @@ class _HomePageState extends State<HomePage> {
                 future: productsClient.getProductCandles(
                   productId: 'BTC-USD',
                 ),
-                builder: (BuildContext context, AsyncSnapshot<List<cb.Candle>> snapshot) {
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<cb.Candle>> snapshot) {
                   if (snapshot.hasData) {
-                    List<graph.Candle> candles = snapshot.data!.map((e) => graph.Candle(
-                      date: e.time!,
-                      high: e.high!,
-                      low: e.low!,
-                      open: e.open!,
-                      close: e.close!,
-                      volume: e.volume!,
-                    )).toList();
+                    List<graph.Candle> candles = snapshot.data!
+                        .map((e) => graph.Candle(
+                              date: e.time!,
+                              high: e.high!,
+                              low: e.low!,
+                              open: e.open!,
+                              close: e.close!,
+                              volume: e.volume!,
+                            ))
+                        .toList();
                     return AspectRatio(
                       aspectRatio: 1.2,
                       child: graph.Candlesticks(
@@ -115,12 +118,15 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 28.0),
               StreamBuilder<dynamic>(
                 stream: _streamController.stream,
-                builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.none) {
                     return const Text('None');
-                  } else if (snapshot.connectionState == ConnectionState.waiting) {
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
                     return const Text('Waiting...');
-                  } else if (snapshot.connectionState == ConnectionState.active) {
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.active) {
                     var data = snapshot.data;
                     if (data is cb.StreamTicker) {
                       if (data.productId == 'ETH-USD') {

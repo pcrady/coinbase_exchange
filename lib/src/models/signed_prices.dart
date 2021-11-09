@@ -17,7 +17,7 @@ class SignedPrices {
   });
 
   factory SignedPrices.fromJson(Map<String, dynamic> json) =>
-    _$SignedPricesFromJson(json);
+      _$SignedPricesFromJson(json);
 
   Map<String, dynamic> toJson() => _$SignedPricesToJson(this);
 }

@@ -30,7 +30,6 @@ class PaymentMethod {
   final int? holdBusinessDays;
   final int? holdDays;
 
-
   PaymentMethod({
     this.id,
     this.type,
@@ -56,7 +55,8 @@ class PaymentMethod {
     this.holdDays,
   });
 
-  factory PaymentMethod.fromJson(Map<String, dynamic> json) => _$PaymentMethodFromJson(json);
+  factory PaymentMethod.fromJson(Map<String, dynamic> json) =>
+      _$PaymentMethodFromJson(json);
 
   Map<String, dynamic> toJson() => _$PaymentMethodToJson(this);
 }

@@ -39,12 +39,13 @@ cb.WebsocketClient wsClient = cb.WebsocketClient(sandbox: false);
 var stream = wsClient.subscribe(
   productIds: ['BTC-USD'],
   channels: [
-    cb.CoinbaseChannel.heartBeat,
+    cb.ChannelEnum.heartBeat,
   ],
 );
 
-// The first event is always a subscriptions event which tells you which channels you have subscribed to.
-// After the first event it is up to you to manually sort events from the stream.
+// The first event is always a subscriptions event which tells you which channels you 
+// have subscribed to. After the first event it is up to you to manually sort events 
+// from the stream.
 stream.listen((event) {
   print(event.toJson().toString());
   wsClient.close();

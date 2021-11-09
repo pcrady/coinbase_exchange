@@ -7,7 +7,8 @@ abstract class RestClient {
   static const String defaultProductId = 'BTC-USD';
   static const String defaultCurrencyId = 'BTC';
   static const String apiAuthority = 'api.exchange.coinbase.com';
-  static const String sandboxApiAuthority = 'api-public.sandbox.exchange.coinbase.com';
+  static const String sandboxApiAuthority =
+      'api-public.sandbox.exchange.coinbase.com';
   final bool sandbox;
   String? apiKey;
   String? secretKey;
@@ -77,10 +78,14 @@ abstract class RestClient {
       ...?additionalHeaders,
     };
 
-    if (apiKey == null || secretKey == null || passphrase == null || method == null || requestPath == null)
-      return headers;
+    if (apiKey == null ||
+        secretKey == null ||
+        passphrase == null ||
+        method == null ||
+        requestPath == null) return headers;
 
-    String timestamp = (DateTime.now().millisecondsSinceEpoch * 0.001).toString();
+    String timestamp =
+        (DateTime.now().millisecondsSinceEpoch * 0.001).toString();
     String signature = _calculateSignature(
       method: method,
       requestPath: requestPath,
@@ -103,18 +108,18 @@ abstract class RestClient {
     Map<String, dynamic> queryParameters,
   ) {
     return queryParameters.map((key, value) {
-      if (value is !String || value is !Iterable<String>) {
-        if (value is !Iterable) {
-          return MapEntry(key,
-            value is DateTime
-            ? value.toIso8601String()
-            : value.toString(),
+      if (value is! String || value is! Iterable<String>) {
+        if (value is! Iterable) {
+          return MapEntry(
+            key,
+            value is DateTime ? value.toIso8601String() : value.toString(),
           );
         } else {
-          return MapEntry(key,
+          return MapEntry(
+            key,
             value.map((element) => element is DateTime
-            ? element.toIso8601String()
-            : element.toString()),
+                ? element.toIso8601String()
+                : element.toString()),
           );
         }
       }
@@ -136,7 +141,8 @@ abstract class RestClient {
       url,
       headers: _addHeaders(
         method: 'GET',
-        requestPath: queryParameters != null ? '${url.path}?${url.query}' : url.path,
+        requestPath:
+            queryParameters != null ? '${url.path}?${url.query}' : url.path,
         additionalHeaders: headers,
       ),
     );
@@ -225,7 +231,8 @@ abstract class RestClient {
       url,
       headers: _addHeaders(
         method: 'DELETE',
-        requestPath: queryParameters != null ? '${url.path}?${url.query}' : url.path,
+        requestPath:
+            queryParameters != null ? '${url.path}?${url.query}' : url.path,
         additionalHeaders: headers,
       ),
     );

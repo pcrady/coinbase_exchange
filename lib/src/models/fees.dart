@@ -18,8 +18,7 @@ class Fees {
     this.usdVolume,
   });
 
-  factory Fees.fromJson(Map<String, dynamic> json) =>
-    _$FeesFromJson(json);
+  factory Fees.fromJson(Map<String, dynamic> json) => _$FeesFromJson(json);
 
   Map<String, dynamic> toJson() => _$FeesToJson(this);
 }

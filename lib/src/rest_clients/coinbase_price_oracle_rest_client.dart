@@ -8,12 +8,11 @@ class CoinbasePriceOracleRestClient extends RestClient {
     required String secretKey,
     required String passphrase,
   }) : super(
-    sandbox: sandbox,
-    apiKey: apiKey,
-    secretKey: secretKey,
-    passphrase: passphrase,
-  );
+          sandbox: sandbox,
+          apiKey: apiKey,
+          secretKey: secretKey,
+          passphrase: passphrase,
+        );
 
-  Future<http.Response> getSignedPrices() async =>
-    get(path: '/oracle');
+  Future<http.Response> getSignedPrices() async => get(path: '/oracle');
 }

@@ -8,12 +8,11 @@ class FeesRestClient extends RestClient {
     required String secretKey,
     required String passphrase,
   }) : super(
-    sandbox: sandbox,
-    apiKey: apiKey,
-    secretKey: secretKey,
-    passphrase: passphrase,
-  );
+          sandbox: sandbox,
+          apiKey: apiKey,
+          secretKey: secretKey,
+          passphrase: passphrase,
+        );
 
-  Future<http.Response> getFees() async =>
-    get(path: '/fees');
+  Future<http.Response> getFees() async => get(path: '/fees');
 }

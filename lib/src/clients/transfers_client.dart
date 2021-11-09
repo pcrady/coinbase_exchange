@@ -89,8 +89,8 @@ class TransfersClient extends Client {
     if (response.statusCode != 200) throw response;
 
     return listDecode(response.body)
-      .map((method) => PaymentMethod.fromJson(method))
-      .toList();
+        .map((method) => PaymentMethod.fromJson(method))
+        .toList();
   }
 
   /// Get all transfers
@@ -105,8 +105,8 @@ class TransfersClient extends Client {
     if (response.statusCode != 200) throw response;
 
     return listDecode(response.body)
-      .map((transfer) => Transfer.fromJson(transfer))
-      .toList();
+        .map((transfer) => Transfer.fromJson(transfer))
+        .toList();
   }
 
   /// Get a single transfer
@@ -118,7 +118,8 @@ class TransfersClient extends Client {
   Future<Transfer> getTransfer({
     required String transferId,
   }) async {
-    var response = await _transfersRestClient.getTransfer(transferId: transferId);
+    var response =
+        await _transfersRestClient.getTransfer(transferId: transferId);
 
     if (response.statusCode != 200) throw response;
 

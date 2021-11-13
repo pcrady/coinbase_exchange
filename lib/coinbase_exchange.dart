@@ -1,5 +1,7 @@
 library coinbase_exchange;
-
+// TODO /accounts/all
+// TODO /users/self
+// TODO /health
 export 'package:coinbase_exchange/src/lib/coinbase_enums.dart'
     show
         LevelEnum,

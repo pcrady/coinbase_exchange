@@ -17,6 +17,9 @@ class Stats {
   @StringToDoubleConverter()
   @JsonKey(name: 'volume_30day')
   final double? volume30Day;
+  /// Only available from /products/stats or getProductsStats
+  @StringToDoubleConverter()
+  final double? last;
 
   Stats({
     this.open,
@@ -24,6 +27,7 @@ class Stats {
     this.low,
     this.volume,
     this.volume30Day,
+    this.last,
   });
 
   factory Stats.fromJson(Map<String, dynamic> json) => _$StatsFromJson(json);

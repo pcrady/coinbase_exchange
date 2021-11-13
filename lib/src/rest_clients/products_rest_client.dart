@@ -36,6 +36,26 @@ class ProductsRestClient extends RestClient {
   }) async =>
       get(path: '/products/$productId');
 
+  /// Not a documented endpoint but returns pricing data for
+  /// all trading pairs at that point in time
+  ///
+  /// {
+  ///    "ETH-BTC":{
+  ///       "stats_30day":{
+  ///          "volume":"311024.55212641"
+  ///       },
+  ///       "stats_24hour":{
+  ///          "open":"0.0723",
+  ///          "high":"0.07455",
+  ///          "low":"0.07163",
+  ///          "volume":"62.43255831",
+  ///          "last":"0.0726"
+  ///       }
+  ///    },
+  /// }
+  Future<http.Response> getProductsStats() async =>
+    get(path: '/products/stats');
+
   /// Get product book
   ///
   /// Get a list of open orders for a product. The

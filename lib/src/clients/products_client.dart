@@ -1,4 +1,5 @@
 import 'package:coinbase_exchange/coinbase_exchange.dart';
+import 'package:coinbase_exchange/src/models/product_stats.dart';
 import '../clients/client.dart';
 import '../lib/paginator.dart';
 import '../rest_clients/products_rest_client.dart';
@@ -57,6 +58,26 @@ class ProductsClient extends Client {
     if (response.statusCode != 200) throw response;
 
     return Product.fromJson(json.decode(response.body));
+  }
+
+  /// Undocumented endpoint which gives the last price for trading pairs
+  ///
+  /// /products/stats
+  ///
+  Future<List<ProductStats>> getProductsStats() async {
+    var response = await _productsRestClient.getProductsStats();
+
+    if (response.statusCode != 200) throw response;
+
+    Map<String, dynamic> stats = json.decode(response.body);
+
+    var stuff = stats.entries.map((entry) => ProductStats(
+        tradingPair: entry.key,
+        stats30Day: Stats.fromJson(entry.value['stats_30day']),
+        stats24Hour: Stats.fromJson(entry.value['stats_24hour']),
+      )
+    ).toList();
+    return stuff;
   }
 
   /// Get product book

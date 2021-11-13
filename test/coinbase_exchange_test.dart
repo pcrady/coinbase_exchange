@@ -1,4 +1,5 @@
 import 'package:coinbase_exchange/coinbase_exchange.dart';
+import 'package:coinbase_exchange/src/models/product_stats.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
@@ -47,6 +48,13 @@ void main() {
   );
 
   OrdersClient ordersClient = OrdersClient(
+    sandbox: sandbox,
+    apiKey: Secrets.apiKey,
+    secretKey: Secrets.secretKey,
+    passphrase: Secrets.passphrase,
+  );
+
+  ProductsClient productsClient = ProductsClient(
     sandbox: sandbox,
     apiKey: Secrets.apiKey,
     secretKey: Secrets.secretKey,
@@ -268,7 +276,19 @@ void main() {
     });
   });
 
-  group('Products', () {});
+  group('Products', () {
+    test('getProductsStats', () async {
+      late List<ProductStats> productStats;
+      try {
+        productStats = await productsClient.getProductsStats();
+      } on http.Response catch (e) {
+        logResponse(e);
+      } finally {
+        expect(productStats.length > 1, true);
+      }
+    });
+  });
+
   group('Profiles', () {});
   group('Reports', () {});
   group('Users', () {});

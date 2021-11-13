@@ -54,7 +54,7 @@ class ProductsRestClient extends RestClient {
   ///    },
   /// }
   Future<http.Response> getProductsStats() async =>
-    get(path: '/products/stats');
+      get(path: '/products/stats');
 
   /// Get product book
   ///

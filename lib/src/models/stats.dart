@@ -17,6 +17,7 @@ class Stats {
   @StringToDoubleConverter()
   @JsonKey(name: 'volume_30day')
   final double? volume30Day;
+
   /// Only available from /products/stats or getProductsStats
   @StringToDoubleConverter()
   final double? last;

@@ -71,12 +71,13 @@ class ProductsClient extends Client {
 
     Map<String, dynamic> stats = json.decode(response.body);
 
-    var stuff = stats.entries.map((entry) => ProductStats(
-        tradingPair: entry.key,
-        stats30Day: Stats.fromJson(entry.value['stats_30day']),
-        stats24Hour: Stats.fromJson(entry.value['stats_24hour']),
-      )
-    ).toList();
+    var stuff = stats.entries
+        .map((entry) => ProductStats(
+              tradingPair: entry.key,
+              stats30Day: Stats.fromJson(entry.value['stats_30day']),
+              stats24Hour: Stats.fromJson(entry.value['stats_24hour']),
+            ))
+        .toList();
     return stuff;
   }
 

@@ -1,4 +1,5 @@
 library coinbase_exchange;
+
 // TODO /accounts/all
 // TODO /users/self
 // TODO /health

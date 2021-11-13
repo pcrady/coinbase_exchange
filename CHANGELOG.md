@@ -1,3 +1,6 @@
+## 2.0.1
+- add getProductsStats() to get trading pair data from rest api
+
 ## 2.0.0
 - Make everything that could be an enum an enum
 

@@ -120,6 +120,8 @@ export 'package:coinbase_exchange/src/models/subscribed_channel.dart'
     show SubscribedChannel;
 export 'package:coinbase_exchange/src/models/ledger_entry.dart'
     show LedgerEntry;
+export 'package:coinbase_exchange/src/models/product_stats.dart'
+  show ProductStats;
 export 'package:coinbase_exchange/src/models/open.dart' show Open;
 export 'package:coinbase_exchange/src/models/heartbeat.dart' show Heartbeat;
 export 'package:coinbase_exchange/src/models/received.dart' show Received;

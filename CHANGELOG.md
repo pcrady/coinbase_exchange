@@ -1,3 +1,6 @@
+## 2.0.2
+- export ProductStats object
+
 ## 2.0.1
 - add getProductsStats() to get trading pair data from rest api
 

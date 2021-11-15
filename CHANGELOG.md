@@ -1,3 +1,6 @@
+## 2.0.3
+- add last parameter to Stats
+
 ## 2.0.2
 - export ProductStats object
 

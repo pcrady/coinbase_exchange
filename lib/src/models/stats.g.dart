@@ -14,6 +14,7 @@ Stats _$StatsFromJson(Map<String, dynamic> json) => Stats(
           const StringToDoubleConverter().fromJson(json['volume'] as String?),
       volume30Day: const StringToDoubleConverter()
           .fromJson(json['volume_30day'] as String?),
+      last: const StringToDoubleConverter().fromJson(json['last'] as String?),
     );
 
 Map<String, dynamic> _$StatsToJson(Stats instance) => <String, dynamic>{
@@ -23,4 +24,5 @@ Map<String, dynamic> _$StatsToJson(Stats instance) => <String, dynamic>{
       'volume': const StringToDoubleConverter().toJson(instance.volume),
       'volume_30day':
           const StringToDoubleConverter().toJson(instance.volume30Day),
+      'last': const StringToDoubleConverter().toJson(instance.last),
     };

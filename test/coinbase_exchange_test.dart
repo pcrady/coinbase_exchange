@@ -277,8 +277,8 @@ void main() {
   });
 
   group('Products', () {
+    late List<ProductStats> productStats;
     test('getProductsStats', () async {
-      late List<ProductStats> productStats;
       try {
         productStats = await productsClient.getProductsStats();
       } on http.Response catch (e) {
@@ -286,6 +286,12 @@ void main() {
       } finally {
         expect(productStats.length > 1, true);
       }
+    });
+
+    test('getProductsStats last price', () {
+      expect(productStats.where(
+          (element) => element.stats24Hour?.last != null || element.stats24Hour?.last != 0.0
+      ).toList().length > 0, true);
     });
   });
 

@@ -289,9 +289,15 @@ void main() {
     });
 
     test('getProductsStats last price', () {
-      expect(productStats.where(
-          (element) => element.stats24Hour?.last != null || element.stats24Hour?.last != 0.0
-      ).toList().length > 0, true);
+      expect(
+          productStats
+                  .where((element) =>
+                      element.stats24Hour?.last != null ||
+                      element.stats24Hour?.last != 0.0)
+                  .toList()
+                  .length >
+              0,
+          true);
     });
   });
 

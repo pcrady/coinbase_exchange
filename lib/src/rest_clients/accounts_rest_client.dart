@@ -18,11 +18,12 @@ class AccountsRestClient extends RestClient {
           passphrase: passphrase,
         );
 
+  // TODO see if this can take profileIds /accounts/${profileID}
   /// Get a list of trading accounts from the profile of the API key.
   ///
   /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getaccounts
   ///
-  Future<http.Response> listAccounts() async => get(path: '/accounts');
+  Future<http.Response> listAccounts() async => get(path: '/accounts/all');
 
   /// Get a single account by id
   ///

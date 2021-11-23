@@ -1,3 +1,6 @@
+## 2.0.5
+- make listAccounts get all accounts not just default
+
 ## 2.0.4
 - update dependencies
 - add profileId to Account class

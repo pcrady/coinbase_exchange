@@ -18,7 +18,7 @@ Activate _$ActivateFromJson(Map<String, dynamic> json) => Activate(
           .fromJson(json['profile_id'] as String?),
       orderId: json['order_id'] as String?,
       stopType: json['stop_type'] as String?,
-      side: _$enumDecodeNullable(_$SideEnumEnumMap, json['side']),
+      side: $enumDecodeNullable(_$SideEnumEnumMap, json['side']),
       stopPrice: const StringToDoubleConverter()
           .fromJson(json['stop_price'] as String?),
       size: const StringToDoubleConverter().fromJson(json['size'] as String?),
@@ -40,43 +40,6 @@ Map<String, dynamic> _$ActivateToJson(Activate instance) => <String, dynamic>{
       'funds': const StringToDoubleConverter().toJson(instance.funds),
       'private': instance.private,
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-K? _$enumDecodeNullable<K, V>(
-  Map<K, V> enumValues,
-  dynamic source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
-}
 
 const _$SideEnumEnumMap = {
   SideEnum.buy: 'buy',

@@ -17,7 +17,7 @@ Match _$MatchFromJson(Map<String, dynamic> json) => Match(
       productId: json['product_id'] as String?,
       size: const StringToDoubleConverter().fromJson(json['size'] as String?),
       price: const StringToDoubleConverter().fromJson(json['price'] as String?),
-      side: _$enumDecodeNullable(_$SideEnumEnumMap, json['side']),
+      side: $enumDecodeNullable(_$SideEnumEnumMap, json['side']),
       takerUserId: json['taker_user_id'] as String?,
       userId: json['user_id'] as String?,
       takerProfileId: json['taker_profile_id'] as String?,
@@ -50,43 +50,6 @@ Map<String, dynamic> _$MatchToJson(Match instance) => <String, dynamic>{
       'maker_profile_id': instance.makerProfileId,
       'maker_fee_rate': instance.makerFeeRate,
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-K? _$enumDecodeNullable<K, V>(
-  Map<K, V> enumValues,
-  dynamic source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
-}
 
 const _$SideEnumEnumMap = {
   SideEnum.buy: 'buy',

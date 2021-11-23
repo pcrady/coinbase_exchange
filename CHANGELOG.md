@@ -1,3 +1,7 @@
+## 2.0.4
+- update dependencies
+- add profileId to Account class
+
 ## 2.0.3
 - add last parameter to Stats
 

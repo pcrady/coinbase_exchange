@@ -7,6 +7,7 @@ part 'account.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Account {
   String? id;
+  String? profileId;
   String? currency;
   @StringToDoubleConverter()
   double? balance;
@@ -18,6 +19,7 @@ class Account {
 
   Account({
     this.id,
+    this.profileId,
     this.currency,
     this.balance,
     this.available,

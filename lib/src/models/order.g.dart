@@ -12,8 +12,8 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       size: const StringToDoubleConverter().fromJson(json['size'] as String?),
       productId: json['product_id'] as String?,
       profileId: json['profile_id'] as String?,
-      side: _$enumDecodeNullable(_$SideEnumEnumMap, json['side']),
-      type: _$enumDecodeNullable(_$OrderEnumEnumMap, json['type']),
+      side: $enumDecodeNullable(_$SideEnumEnumMap, json['side']),
+      type: $enumDecodeNullable(_$OrderEnumEnumMap, json['type']),
       timeInForce: json['time_in_force'] as String?,
       postOnly: json['post_only'] as bool?,
       createdAt: json['created_at'] == null
@@ -45,43 +45,6 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'status': instance.status?.toJson(),
       'settled': instance.settled,
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-K? _$enumDecodeNullable<K, V>(
-  Map<K, V> enumValues,
-  dynamic source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
-}
 
 const _$SideEnumEnumMap = {
   SideEnum.buy: 'buy',

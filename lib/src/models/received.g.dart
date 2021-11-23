@@ -14,8 +14,8 @@ Received _$ReceivedFromJson(Map<String, dynamic> json) => Received(
       sequence: json['sequence'] as int?,
       orderId: json['order_id'] as String?,
       funds: const StringToDoubleConverter().fromJson(json['funds'] as String?),
-      side: _$enumDecodeNullable(_$SideEnumEnumMap, json['side']),
-      orderType: _$enumDecodeNullable(_$OrderEnumEnumMap, json['order_type']),
+      side: $enumDecodeNullable(_$SideEnumEnumMap, json['side']),
+      orderType: $enumDecodeNullable(_$OrderEnumEnumMap, json['order_type']),
     );
 
 Map<String, dynamic> _$ReceivedToJson(Received instance) => <String, dynamic>{
@@ -28,43 +28,6 @@ Map<String, dynamic> _$ReceivedToJson(Received instance) => <String, dynamic>{
       'side': _$SideEnumEnumMap[instance.side],
       'order_type': _$OrderEnumEnumMap[instance.orderType],
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-K? _$enumDecodeNullable<K, V>(
-  Map<K, V> enumValues,
-  dynamic source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
-}
 
 const _$SideEnumEnumMap = {
   SideEnum.buy: 'buy',

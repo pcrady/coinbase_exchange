@@ -1,3 +1,6 @@
+## 2.0.10
+- fix getFeesTotal
+
 ## 2.0.9
 - fix feeUsdTotal
 

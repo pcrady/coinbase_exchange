@@ -52,4 +52,5 @@ class FeesClient extends Client {
     if (response.statusCode != 200) throw response;
 
     return Fees.fromJson(json.decode(response.body));
+  }
 }

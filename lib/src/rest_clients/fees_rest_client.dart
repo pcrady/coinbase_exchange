@@ -22,4 +22,12 @@ class FeesRestClient extends RestClient {
   /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getfees
   ///
   Future<http.Response> getFees() async => get(path: '/fees');
+
+  /// Get fees with fee_usd_total
+  ///
+  /// Get fees rates and 30 days trailing volume.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getfees
+  ///
+  Future<http.Response> getFeesTotal() async => get(path: '/fee-rates/user');
 }

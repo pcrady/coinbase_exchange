@@ -39,4 +39,17 @@ class FeesClient extends Client {
 
     return Fees.fromJson(json.decode(response.body));
   }
+
+  /// Get fees with fees_usd_total
+  ///
+  /// Get fees rates and 30 days trailing volume.
+  ///
+  /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getfees
+  ///
+  Future<Fees> getFeesTotal() async {
+    var response = await _feesRestClient.getFeesTotal();
+
+    if (response.statusCode != 200) throw response;
+
+    return Fees.fromJson(json.decode(response.body));
 }

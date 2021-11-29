@@ -1,3 +1,6 @@
+## 2.0.9
+- fix feeUsdTotal
+
 ## 2.0.8
 - add feeUsdTotal
 

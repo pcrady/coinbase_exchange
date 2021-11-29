@@ -17,6 +17,8 @@ export 'package:coinbase_exchange/src/lib/coinbase_enums.dart'
         ChannelExtension,
         ReasonEnum,
         ReasonExtension,
+        StatusEnum,
+        StatusExtension,
         TransferEnum,
         TransferExtension;
 export 'package:coinbase_exchange/src/lib/websocket_response.dart'

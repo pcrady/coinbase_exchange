@@ -1,3 +1,6 @@
+## 2.0.6
+- export StatusEnum
+
 ## 2.0.5
 - make listAccounts get all accounts not just default
 

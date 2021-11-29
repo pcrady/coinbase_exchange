@@ -3,7 +3,7 @@ description: An unoffical coinbase exchange sdk to get real
   time pricing data and historical pricing data. The sdk also
   allows users to make trades on the coinbase platform.
 
-version: 2.0.6
+version: 2.0.7
 repository: https://github.com/pcrady/coinbase_exchange
 
 environment:

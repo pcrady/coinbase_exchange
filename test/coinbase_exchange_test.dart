@@ -251,18 +251,18 @@ void main() {
 
   group('Orders', () {
     test('getAllFills', () async {
-      late List<Fill> fills;
+      late Paginator<Fill, int> fills;
       try {
         fills = await ordersClient.getAllFills(productId: 'BTC-USD');
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(fills.isNotEmpty, true);
+        expect(fills.elements.isNotEmpty, true);
       }
     });
 
     test('getAllFills with limit', () async {
-      late List<Fill> fills;
+      late Paginator<Fill, int> fills;
       try {
         fills = await ordersClient.getAllFills(
           productId: 'BTC-USD',
@@ -271,7 +271,23 @@ void main() {
       } on http.Response catch (e) {
         logResponse(e);
       } finally {
-        expect(fills.length == 3, true);
+        expect(fills.before! - fills.after! == 2, true);
+        expect(fills.elements.length == 3, true);
+      }
+    });
+
+    test('getAllOrders', () async {
+      late Paginator<Order, DateTime> orders;
+      try {
+        orders =
+            await ordersClient.getAllOrders(limit: 3, status: [StatusEnum.all]);
+      } on http.Response catch (e) {
+        logResponse(e);
+      } catch (e) {
+        _logger.e(e);
+      } finally {
+        expect(orders.elements.length > 0, true);
+        expect(orders.after != null, true);
       }
     });
   });

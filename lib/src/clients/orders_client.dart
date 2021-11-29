@@ -1,5 +1,7 @@
 import 'package:coinbase_exchange/src/lib/coinbase_enums.dart';
+import 'package:logger/logger.dart';
 
+import '../../coinbase_exchange.dart';
 import '../clients/client.dart';
 import '../models/fill.dart';
 import '../models/order.dart';
@@ -36,7 +38,7 @@ class OrdersClient extends Client {
   ///
   /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getfills
   ///
-  Future<List<Fill>> getAllFills({
+  Future<Paginator<Fill, int>> getAllFills({
     String? orderId,
     String? productId,
     String? profileId,
@@ -56,9 +58,16 @@ class OrdersClient extends Client {
 
     if (response.statusCode != 200) throw response;
 
-    return listDecode(response.body)
-        .map((fill) => Fill.fromJson(fill))
-        .toList();
+    return Paginator(
+      before: response.headers.containsKey('cb-before')
+          ? int.parse(response.headers['cb-before']!)
+          : null,
+      after: response.headers.containsKey('cb-after')
+          ? int.parse(response.headers['cb-after']!)
+          : null,
+      elements:
+          listDecode(response.body).map((fill) => Fill.fromJson(fill)).toList(),
+    );
   }
 
   /// Get all orders
@@ -71,7 +80,7 @@ class OrdersClient extends Client {
   ///
   /// https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getorders
   ///
-  Future<List<Order>> getAllOrders({
+  Future<Paginator<Order, DateTime>> getAllOrders({
     String? profileId,
     String? productId,
     SortedByEnum? sortedBy,
@@ -98,9 +107,17 @@ class OrdersClient extends Client {
 
     if (response.statusCode != 200) throw response;
 
-    return listDecode(response.body)
-        .map((order) => Order.fromJson(order))
-        .toList();
+    return Paginator(
+      before: response.headers.containsKey('cb-before')
+          ? DateTime.parse(response.headers['cb-before']!)
+          : null,
+      after: response.headers.containsKey('cb-after')
+          ? DateTime.parse(response.headers['cb-after']!)
+          : null,
+      elements: listDecode(response.body)
+          .map((order) => Order.fromJson(order))
+          .toList(),
+    );
   }
 
   /// Cancel all orders

@@ -20,10 +20,13 @@ class Order {
   final String? timeInForce;
   final bool? postOnly;
   final DateTime? createdAt;
+  @StringToDoubleConverter()
   final double? fillFees;
+  @StringToDoubleConverter()
   final double? filledSize;
+  @StringToDoubleConverter()
   final double? executedValue;
-  final Status? status;
+  final StatusEnum? status;
   final bool? settled;
 
   Order({

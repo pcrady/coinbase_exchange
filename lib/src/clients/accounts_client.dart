@@ -85,11 +85,11 @@ class AccountsClient extends Client {
     if (response.statusCode != 200) throw response;
 
     return Paginator(
-      before: response.headers.containsKey('CB-BEFORE')
-          ? DateTime.parse(response.headers['CB-BEFORE']!)
+      before: response.headers.containsKey('cb-before')
+          ? DateTime.parse(response.headers['cb-before']!)
           : null,
-      after: response.headers.containsKey('CB-AFTER')
-          ? DateTime.parse(response.headers['CB-AFTER']!)
+      after: response.headers.containsKey('cb-after')
+          ? DateTime.parse(response.headers['cb-after']!)
           : null,
       elements:
           listDecode(response.body).map((hold) => Hold.fromJson(hold)).toList(),
@@ -123,11 +123,11 @@ class AccountsClient extends Client {
     if (response.statusCode != 200) throw response;
 
     return Paginator(
-      before: response.headers.containsKey('CB-BEFORE')
-          ? DateTime.parse(response.headers['CB-BEFORE']!)
+      before: response.headers.containsKey('cb-before')
+          ? DateTime.parse(response.headers['cb-before']!)
           : null,
-      after: response.headers.containsKey('CB-AFTER')
-          ? DateTime.parse(response.headers['CB-AFTER']!)
+      after: response.headers.containsKey('cb-after')
+          ? DateTime.parse(response.headers['cb-after']!)
           : null,
       elements: listDecode(response.body)
           .map((hold) => LedgerEntry.fromJson(hold))
@@ -158,11 +158,11 @@ class AccountsClient extends Client {
     if (response.statusCode != 200) throw response;
 
     return Paginator(
-      before: response.headers.containsKey('CB-BEFORE')
-          ? DateTime.parse(response.headers['CB-BEFORE']!)
+      before: response.headers.containsKey('cb-before')
+          ? DateTime.parse(response.headers['cb-before']!)
           : null,
-      after: response.headers.containsKey('CB-AFTER')
-          ? DateTime.parse(response.headers['CB-AFTER']!)
+      after: response.headers.containsKey('cb-after')
+          ? DateTime.parse(response.headers['cb-after']!)
           : null,
       elements: listDecode(response.body)
           .map((hold) => Transfer.fromJson(hold))

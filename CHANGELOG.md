@@ -1,3 +1,7 @@
+## 2.0.7
+- fix pagination
+- fix orders
+
 ## 2.0.6
 - export StatusEnum
 

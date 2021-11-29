@@ -12,11 +12,14 @@ class Fees {
   final double? takerFeeRate;
   @StringToDoubleConverter()
   final double? usdVolume;
+  @StringToDoubleConverter()
+  final double? feeUsdTotal;
 
   Fees({
     this.makerFeeRate,
     this.takerFeeRate,
     this.usdVolume,
+    this.feeUsdTotal,
   });
 
   factory Fees.fromJson(Map<String, dynamic> json) => _$FeesFromJson(json);

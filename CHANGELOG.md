@@ -1,3 +1,6 @@
+## 2.0.8
+- add feeUsdTotal
+
 ## 2.0.7
 - fix pagination
 - fix orders
